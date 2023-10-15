@@ -302,6 +302,8 @@ class _RequestPageState extends State<RequestPage> {
 
   @override
 Widget build(BuildContext context) {
+  final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
   return Scaffold(
     backgroundColor: startBackgroundBlack,
     body: Padding(
@@ -313,14 +315,16 @@ Widget build(BuildContext context) {
             children: [
               IconButton(
                 icon: Icon(Icons.arrow_back),
+                color: Colors.white,
                 onPressed: () {
                   Navigator.of(context).pop();
                 },
                 tooltip: 'Back',
               ),
+              SizedBox(height: 100.0,),
               Text(
                 'Register',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TextStyle(fontSize: 25, fontWeight: FontWeight.bold,color:Colors.white),
               ),
             ],
           ),
