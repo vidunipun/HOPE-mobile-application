@@ -301,6 +301,7 @@ class _RequestPageState extends State<RequestPage> {
   }
 
   @override
+
 Widget build(BuildContext context) {
   final screenWidth = MediaQuery.of(context).size.width;
   final screenHeight = MediaQuery.of(context).size.height;
@@ -349,34 +350,41 @@ Widget build(BuildContext context) {
                           }
                           return null;
                         },
-                      ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.info),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Caption Guidance'),
-                              content: Text('Enter a caption of the post.'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
-                      },
-                      tooltip: 'Caption Guidance',
-                    ),
-                  ],
-                ),
 
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a caption';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.info),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Caption Guidance'),
+                            content: Text('Enter a caption of the post.'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    tooltip: 'Caption Guidance',
+                  ),
+                ],
+              ),
 
               Row(
                 children: [
@@ -651,9 +659,7 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        ]
       ),
-    )
     );
   }
 }
