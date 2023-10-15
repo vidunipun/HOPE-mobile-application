@@ -1,3 +1,4 @@
+
 import 'package:auth/chat/chat_home.dart';
 import 'package:auth/components/drawer.dart';
 import 'package:auth/constants/colors.dart';
@@ -11,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -79,25 +81,14 @@ class _HomeState extends State<Home> {
     }
   }
 
-  Future<String?> fetchProfilePictureURL(String userId) async {
-    String? profilePictureURL = '';
-    DocumentSnapshot userSnapshot =
-        await FirebaseFirestore.instance.collection('users').doc(userId).get();
 
-    if (userSnapshot.exists) {
-      Map<String, dynamic> userData =
-          userSnapshot.data() as Map<String, dynamic>;
-      profilePictureURL = userData['profilePictureURL'];
-    }
-    return profilePictureURL;
-  }
 
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: startBackgroundBlack,
       appBar: AppBar(
         backgroundColor: startBackgroundBlack,
-        title: const Text("Home"),
+        title: const Text("Hope"),
         actions: [
           ElevatedButton(
             onPressed: () async {
@@ -107,7 +98,7 @@ class _HomeState extends State<Home> {
           )
         ],
       ),
-      drawer: const MyDrawer(),
+      //drawer: const MyDrawer(),
       body: Column(
         children: [
           Expanded(
@@ -129,36 +120,21 @@ class _HomeState extends State<Home> {
                           ? List<String>.from(post.data()?['Likes'])
                           : [];
 
-                      // Get the user's profile picture URL
-                      return FutureBuilder(
-                        future: fetchProfilePictureURL(post.data()?['userId']),
-                        builder: (context, profilePictureSnapshot) {
-                          if (profilePictureSnapshot.connectionState ==
-                              ConnectionState.done) {
-                            String? profilePictureURL =
-                                profilePictureSnapshot.data;
-
-                            return WallPost(
-                              caption: post.data()?['caption'],
-                              user: post.data()?['UserEmail'],
-                              uid: post.data()?['userId'],
-                              postid: post.id,
-                              amount: post.data()?['amount'],
-                              description: post.data()?['description'],
-                              location: post.data()?['location'],
-                              firstName: post.data()?['firstName'],
-                              likes: likes,
-                              imageUrls: (post.data()?['selectedImagesUrls']
-                                          as List<dynamic>?)
-                                      ?.map((dynamic url) => url.toString())
-                                      ?.toList() ??
-                                  [],
-                              profilePictureURL: profilePictureURL,
-                            );
-                          } else {
-                            return CircularProgressIndicator();
-                          }
-                        },
+                      return WallPost(
+                        caption: post.data()?['caption'],
+                        user: post.data()?['UserEmail'],
+                        uid: post.data()?['userId'],
+                        postid: post.id,
+                        amount: post.data()?['amount'],
+                        description: post.data()?['description'],
+                        location: post.data()?['location'],
+                        firstName: post.data()?['firstName'],
+                        likes: likes,
+                        imageUrls: (post.data()?['selectedImagesUrls']
+                                    as List<dynamic>?)
+                                ?.map((dynamic url) => url.toString())
+                                ?.toList() ??
+                            [],
                       );
                     },
                   );
@@ -176,81 +152,127 @@ class _HomeState extends State<Home> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 60,
-          color: Colors.white,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Handle Home button press
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Home(),
-                    ),
-                  );
-
-                  print(currentUser?.uid);
-                },
-                icon: const Icon(Icons.home),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle Chat button press
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => ChatHomePage(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.chat),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: IconButton(
-                  onPressed: () {
-                    // Handle Add post button press
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SelectionPage(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.post_add, size: 50),
+  child: Container(
+    height: 60,
+    color: startBackgroundBlack,
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        Expanded(
+  child: Container(
+    margin: const EdgeInsets.only(bottom: 12), // Adjust the margin as needed
+    child: IconButton(
+      onPressed: () {
+        // Handle Home button press
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => Home(),
+          ),
+        );
+        print(currentUser?.uid);
+      },
+      icon: Container(
+        width: 40,
+        height: 40,
+        color: startBackgroundBlack,
+        child: Image.asset("assets/Home.png"),
+      ),
+    ),
+  ),
+),
+        Expanded(
+          child: IconButton(
+            onPressed: () {
+              // Handle Chat button press
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => ChatHomePage(),
                 ),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle events button press
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => EventHome(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.calendar_today),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle Profile button press
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ProfilePage(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.person),
-              ),
-            ],
+              );
+            },
+            icon: Container(
+              width: 40,
+              height: 40,
+              color: startBackgroundBlack,
+              child: Image.asset("assets/Chat Round Dots.png"),
+            ),
           ),
         ),
-      ),
+        Flexible(
+          flex: 2,
+          child: Container(
+            margin: const EdgeInsets.all(0),
+            child: IconButton(
+              onPressed: () {
+                // Handle Add post button press
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => SelectionPage(),
+                  ),
+                );
+              },
+              iconSize: 70,
+              icon: CircleAvatar(
+                backgroundColor: Color(0xFF0BFFFF),
+                radius: 40,
+                child: ClipOval(
+                  child: Image.asset(
+                    'assets/Add Circle.png',
+                    width: 43,
+                    height: 43,
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ),
+        Expanded(
+          child: IconButton(
+            onPressed: () {
+              // Handle events button press
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => EventHome(),
+                ),
+              );
+            },
+            icon: Container(
+              width: 40,
+              height: 40,
+              color: startBackgroundBlack,
+              child: Image.asset("assets/Calendar Date.png"),
+            ),
+          ),
+        ),
+        Expanded(
+          child: IconButton(
+            onPressed: () {
+              // Handle Profile button press
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const ProfilePage(),
+                ),
+              );
+            },
+            icon: Container(
+              width: 40,
+              height: 40,
+              color: startBackgroundBlack,
+              child: Image.asset("assets/Combined-Shape.png"),
+            ),
+          ),
+        ),
+      ],
+    ),
+  ),
+),
+
     );
   }
 }

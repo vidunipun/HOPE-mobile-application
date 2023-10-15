@@ -82,6 +82,12 @@ flutter:
     - assets/facebook.jpg
     - assets/google.png
     - assets/register.png
+    - assets/Home.png
+    - assets/Chat Round Dots.png
+    - assets/Calendar Date.png
+    - assets/Combined-Shape.png
+    - assets/Add Circle.png
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
