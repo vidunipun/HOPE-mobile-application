@@ -16,7 +16,6 @@ class WallPost extends StatefulWidget {
   final List<String> imageUrls;
   final String uid;
   final String? amount;
-  final String? profilePictureURL;
 
   const WallPost({
     Key? key,
@@ -29,8 +28,7 @@ class WallPost extends StatefulWidget {
     required this.likes,
     required this.imageUrls,
     required this.uid,
-    this.amount, 
-    this.profilePictureURL,
+    this.amount,
   }) : super(key: key);
 
   @override
@@ -139,47 +137,32 @@ class _WallPostState extends State<WallPost> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+  final screenHeight = MediaQuery.of(context).size.height;
+
     return Container(
       padding: const EdgeInsets.all(16.0),
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 186, 220, 238),
-        borderRadius: BorderRadius.circular(8.0),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.grey.withOpacity(0.5),
-            spreadRadius: 2,
-            blurRadius: 4,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        color: Color.fromARGB(255, 255,255,255),
+        
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-Row(
-  children: [
-    // Display the user's profile picture 
-    if (widget.profilePictureURL != null && widget.profilePictureURL!.isNotEmpty)
-      CircleAvatar(
-        radius: 24, //   size  
-        backgroundImage: NetworkImage(widget.profilePictureURL!),
-      ),
-    if (widget.profilePictureURL != null && widget.profilePictureURL!.isNotEmpty)
-      const SizedBox(width: 8), 
-    Text(
-      widget.firstName,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 16.0,
-      ),
-    ),
-  ],
-)
-,
-          
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                widget.firstName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
           const SizedBox(height: 8.0),
-          
           Text(
             "Caption : ${widget.caption}",
             style: const TextStyle(fontSize: 16.0),
@@ -207,12 +190,12 @@ Row(
                 children: widget.imageUrls
                     .map(
                       (imageUrl) => Container(
-                        height: 200, // Set the desired height
-                        width: 200, // Set the desired width
+                        height: screenHeight*0.5, // Set the desired height
+                        width: screenWidth, // Set the desired width
                         child: Image.network(
                           imageUrl,
-                          height: 200, // Set the same height here
-                          width: 200, // Set the same width here
+                          height: screenHeight*0.5, // Set the desired height
+                          width: screenWidth, // Set the same width here
                           fit:
                               BoxFit.cover, // Adjust the fit property as needed
                         ),
@@ -223,74 +206,42 @@ Row(
             ),
           const SizedBox(height: 16.0),
           Text(likeCount.toString()), // Display the like count
-          Row(
-            children: [
-              LikeButton(isliked: isliked, onTap: toggleLike),
-              const SizedBox(width: 8.0),
-              const Text(
-                'Like',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(width: 100.0),
-              const Icon(
-                Icons.comment_outlined,
-                size: 24.0,
-              ),
-              const SizedBox(width: 8.0),
-              const Text(
-                'Comment',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              SizedBox(
-                width: 17,
-              ),
-              Visibility(
-                visible: widget.amount != null && toNow != null,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      final DocumentSnapshot<Map<String, dynamic>>
-                          documentSnapshot = await FirebaseFirestore.instance
-                              .collection('bank')
-                              .doc(widget.uid) // Use the provided UID
-                              .get();
-                      print(widget.uid);
-
-                      if (documentSnapshot.exists) {
-                        final String cardNo =
-                            documentSnapshot.data()?['card_number'] ?? '';
-
-                        if (cardNo.isNotEmpty) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => payment(
-                                postid: widget.postid,
-                                cardNo: cardNo,
-                                uid: widget.uid,
-                              ), // Pass cardNo to Payment
-                            ),
-                          );
-                        } else {
-                          // Handle the case when card_no is empty
-
-                          print('Card number is empty.');
-                        }
-                      } else {
-                        // Handle the case when the document does not exist
-                        print('Card document not found.');
-                      }
-                    } catch (e) {
-                      print('Error retrieving card details: $e');
-                    }
-                  },
-                  child: Text('Payment'),
-                ),
-              ),
-
-              // Display images if available
-            ],
+     Row(
+  crossAxisAlignment: CrossAxisAlignment.center,
+  children: [
+    LikeButton(isliked: isliked, onTap: toggleLike),
+    const SizedBox(width: 8.0),
+    const Text(
+      'Like',
+      style: TextStyle(fontSize: 16.0),
+    ),
+    Expanded(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          const Icon(
+            Icons.comment_outlined,
+            size: 24.0,
           ),
+          const SizedBox(width: 8.0),
+          const Text(
+            'Comment',
+            style: TextStyle(fontSize: 16.0),
+          ),
+          Visibility(
+            visible: widget.amount != null && toNow != null,
+            child: ElevatedButton(
+              onPressed: () async {
+                // ... existing code
+              },
+              child: Text('Payment'),
+            ),
+          ),
+        ],
+      ),
+    ),
+  ],
+),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Visibility(

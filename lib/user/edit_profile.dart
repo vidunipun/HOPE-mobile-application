@@ -20,13 +20,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   File? _imageFile; // Selected image file
   final ImagePicker _imagePicker = ImagePicker();
-  String? profilePictureURL;
-
-  @override
-  void initState() {
-    super.initState();
-    fetchUserData();
-  }
 
   Future<void> _selectImage() async {
     final XFile? pickedImage =
@@ -61,6 +54,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
           Navigator.pop(context);
         });
       } else {
+        
         updateProfileData();
         Navigator.pop(context);
       }
@@ -86,6 +80,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
     }
   }
 
+  @override
+  void initState() {
+    super.initState();
+    fetchUserData();
+  }
+
   Future<void> fetchUserData() async {
     final User? user = FirebaseAuth.instance.currentUser;
 
@@ -101,8 +101,6 @@ class _EditProfilePageState extends State<EditProfilePage> {
         _lnameController.text = userData['lastName'] ?? '';
         _mobileNumberController.text = userData['mobileNumber'] ?? '';
         _addressController.text = userData['address'] ?? '';
-        profilePictureURL = userData['profilePictureURL'];
-        setState(() {});
       }
     }
   }
@@ -129,26 +127,9 @@ class _EditProfilePageState extends State<EditProfilePage> {
             children: [
               GestureDetector(
                 onTap: _selectImage,
-                child: ClipOval(
-                  child: Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: profilePictureURL != null
-                            ? NetworkImage(profilePictureURL!)
-                                as ImageProvider<Object>
-                            : (_imageFile != null
-                                ? FileImage(_imageFile!)
-                                    as ImageProvider<Object>
-                                : AssetImage(
-                                    'assets/placeholder.png')), 
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                  ),
-                ),
+                child: _imageFile != null
+                    ? Image.file(_imageFile!, width: 120, height: 120)
+                    : const Icon(Icons.person, size: 120),
               ),
               const SizedBox(height: 16.0),
               TextFormField(
@@ -158,7 +139,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your first name',
                 ),
-              ),
+              ), 
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: _lnameController,
@@ -167,7 +148,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your last name',
                 ),
-              ),
+              ), 
               const SizedBox(height: 16.0),
               TextFormField(
                 controller: _mobileNumberController,
@@ -186,7 +167,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                   border: OutlineInputBorder(),
                   hintText: 'Enter your address',
                 ),
-              ),
+              ), 
               const SizedBox(height: 32.0),
               ElevatedButton(
                 onPressed: _uploadProfileImageAndSaveChanges,
