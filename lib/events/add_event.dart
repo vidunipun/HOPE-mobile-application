@@ -1,3 +1,4 @@
+import 'package:auth/constants/colors.dart';
 import 'package:auth/events/events_wall.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -49,18 +50,18 @@ class _AddEventsPageState extends State<AddEventsPage> {
 
     if (user != null) {
       String uid = user.uid;
-      CollectionReference users = FirebaseFirestore.instance.collection('users');
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
       DocumentSnapshot userSnapshot = await users.doc(uid).get();
       if (userSnapshot.exists) {
         Map<String, dynamic> userData =
-        userSnapshot.data() as Map<String, dynamic>;
+            userSnapshot.data() as Map<String, dynamic>;
         setState(() {
           _firstName = userData['firstName'] ?? '';
         });
       }
     }
   }
-
 
   Future<void> _submitRequest() async {
     if (_formKey.currentState!.validate()) {
@@ -69,7 +70,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
       String tags = _tagsController.text;
       String location = _locationController.text;
       //String confirmation = _confirmationController.text;
-
 
       if (!_isInformationCorrect) {
         // ignore: use_build_context_synchronously
@@ -104,7 +104,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
         if (user != null) {
           // Save data to Firestore with the user's ID
           DocumentReference requestDocRef =
-          FirebaseFirestore.instance.collection('Events').doc();
+              FirebaseFirestore.instance.collection('Events').doc();
           await requestDocRef.set({
             'userId': user.uid,
             'caption': caption,
@@ -115,7 +115,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
             //'timestamp': FieldValue.serverTimestamp(),
             'tick': tick,
             'UserEmail': currentUser?.email,
-            'firstName':_firstName,
+            'firstName': _firstName,
             'TimeStamp': Timestamp.now(),
             'Likes': [],
           });
@@ -156,7 +156,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
       }
     }
   }
-
 
   Future<void> _selectImage() async {
     final ImagePicker picker = ImagePicker();
@@ -257,120 +256,158 @@ class _AddEventsPageState extends State<AddEventsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Events'),
-      ),
+      backgroundColor: background,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: <Widget>[
-              TextFormField(
-                controller: _captionController,
-                decoration: const InputDecoration(labelText: 'Caption'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a caption';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              TextFormField(
-                controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              TextFormField(
-                controller: _tagsController,
-                decoration: const InputDecoration(labelText: 'Tags'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter tags';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              TextFormField(
-                controller: _locationController,
-                decoration: const InputDecoration(labelText: 'Location'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a location';
-                  }
-                  return null;
-                },
-                onTap: () {
-                  // Open the location model
-                  _openLocationModel();
-                },
-              ),
-
-
-              const SizedBox(height: 40),
-
-
-              ElevatedButton(
-                onPressed: _selectImage,
-                child: const Text('Select Images'),
-              ),
-              _selectedImages.isNotEmpty
-                  ? Column(
-                children: _selectedImages
-                    .map((image) => Image.file(image))
-                    .toList(),
-              )
-                  : Container(),
-
-              const SizedBox(height: 20),
-
-              ElevatedButton(
-                onPressed: _uploadImages,
-                child: const Text('Upload Images'),
-              ),
-              CheckboxListTile(
-                title:
-                const Text('I verify that all the information is correct'),
-                value: _isInformationCorrect,
-                onChanged: (value) {
-                  setState(() {
-                    _isInformationCorrect = value!;
-                  });
-                },
-              ),
-
-              const SizedBox(height: 60),
-
-              ElevatedButton(
-                onPressed: () async {
-                  await _submitRequest();
-
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const EventHome(),
+        child: ListView(
+          children: <Widget>[
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  tooltip: 'Back',
+                ),
+                Text(
+                  'Add Events',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ],
+            ),
+            SizedBox(height: 16.0),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  TextFormField(
+                    controller: _captionController,
+                    decoration: const InputDecoration(
+                        labelText: 'Caption',
+                        labelStyle: TextStyle(color: Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                    style: TextStyle(
+                      color: Colors.white,
                     ),
-                  );
-                },
-                child: const Text('Submit'),
-              ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a caption';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _descriptionController,
+                    decoration: const InputDecoration(
+                        labelText: 'Description',
+                        labelStyle: TextStyle(color: Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a description';
+                      }
+                      return null;
+                    },
+                  ),
+                  const SizedBox(height: 20),
+                  const SizedBox(height: 20),
+                  TextFormField(
+                    controller: _locationController,
+                    decoration: const InputDecoration(
+                        labelText: 'Location',
+                        labelStyle: TextStyle(color: Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white))),
+                    style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter a location';
+                      }
+                      return null;
+                    },
+                    onTap: () {
+                      // Open the location model
+                      _openLocationModel();
+                    },
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: _selectImage,
+                    child: const Text(
+                      'Add Post',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonbackground,
+                      side: BorderSide(color: buttonboarder, width: 2),
+                    ),
+                  ),
+                  _selectedImages.isNotEmpty
+                      ? Column(
+                          children: _selectedImages
+                              .map((image) => Image.file(image))
+                              .toList(),
+                        )
+                      : Container(),
+                  const SizedBox(height: 20),
+                  // ElevatedButton(
+                  //   onPressed: _uploadImages,
+                  //   child: const Text('Upload Images'),
+                  // ),
+Theme(
+  data: ThemeData(unselectedWidgetColor: Colors.white),
+  child: CheckboxListTile(
+    title: Text(
+      'I verify that all the information is correct',
+      style: TextStyle(color: Colors.white),
+    ),
+    value: _isInformationCorrect,
+    onChanged: (value) {
+      setState(() {
+        _isInformationCorrect = value!;
+      });
+    },
+   
+  ),
+),
 
-              const SizedBox(height: 20),
-            ],
-          ),
+                  const SizedBox(height: 25),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await _submitRequest();
+                      await _uploadImages();
+
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const EventHome(),
+                        ),
+                      );
+                    },
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: buttonbackground,
+                      side: BorderSide(color: buttonboarder, width: 2),
+                    ),
+                  )
+                ],
+              ),
+            ),
+          ],
         ),
       ),
     );

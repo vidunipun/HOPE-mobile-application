@@ -13,4 +13,6 @@ const Color emailPasswordFillBorder = Color.fromARGB(130, 178, 177, 181);
 const Color emailPasswordFillText = Color.fromARGB(149, 78, 78, 79);
 const Color drawerbackgroundcolor =  Colors.grey;
 
-
+const Color buttonbackground =  Color(0xFF164356);
+const Color buttonboarder =  Color(0xFF0BFFFF);
+const Color background =   Color(0xFF164356);
