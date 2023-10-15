@@ -1,10 +1,10 @@
-import 'package:auth/constants/colors.dart';
+import 'package:auth/get_started/get_started_page3.dart';
 import 'package:flutter/material.dart';
+import '../constants/colors.dart';
 import '../constants/styles.dart';
-import 'get_started_page2.dart';
 
-class GetStarted extends StatelessWidget {
-  const GetStarted({super.key});
+class GetStartedPage2 extends StatelessWidget {
+  const GetStartedPage2({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +26,7 @@ class GetStarted extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      flex: 1,
+                      flex: 2,
                       child: Container(
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(5),
@@ -35,7 +35,7 @@ class GetStarted extends StatelessWidget {
                       ),
                     ),
                     Expanded(
-                      flex: 4,
+                      flex: 3,
                       child: Container(),
                     ),
                   ],
@@ -43,7 +43,7 @@ class GetStarted extends StatelessWidget {
               ),
             ),
             Image.asset(
-              'assets/start2.png',
+              'assets/start1.png',
               height: 300,
               width: 300,
               fit: BoxFit.contain,
@@ -51,8 +51,8 @@ class GetStarted extends StatelessWidget {
             const SizedBox(height: 40),
             const Center(
               child: Text(
-                'CONNECTS PEOPLE IN NEED WITH GENEROUS DONORS',
-                style: (startText),
+                'ENABLE QUICK AND EASY DONATION',
+                style: startText,
                 maxLines: 3,
                 overflow: TextOverflow.ellipsis,
                 textAlign: TextAlign.center,
@@ -67,7 +67,7 @@ class GetStarted extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const GetStartedPage2(),
+                        builder: (context) => const GetStartedPage3(),
                       ),
                     );
                   },

@@ -301,78 +301,57 @@ class _RequestPageState extends State<RequestPage> {
   }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: startBackgroundBlack,
-    body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: [
-              IconButton(
-                icon: Icon(Icons.arrow_back),
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                tooltip: 'Back',
-              ),
-              Text(
-                'Register',
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
-              ),
-            ],
-          ),
-          SizedBox(height: 16.0),
-          Form(
-            key: _formKey,
-            child: ListView(
-              shrinkWrap: true,
-              children: <Widget>[
-                Row(
-                  children: [
-                    Expanded(
-                      child: TextFormField(
-                        controller: _captionController,
-                        decoration: InputDecoration(
-                          labelText: 'Caption',
-                          labelStyle: TextStyle(color: Colors.white),
-                        ),
-                        validator: (value) {
-                          if (value == null || value.isEmpty) {
-                            return 'Please enter a caption';
-                          }
-                          return null;
-                        },
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: startBackgroundBlack,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Form(
+          key: _formKey,
+          child: ListView(
+            children: <Widget>[
+              Row(
+                children: [
+                  Expanded(
+                    child: TextFormField(
+                      controller: _captionController,
+                      decoration: InputDecoration(
+                        labelText: 'Caption',
+                        labelStyle: TextStyle(color: Colors.white),
                       ),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.info),
-                      onPressed: () {
-                        showDialog(
-                          context: context,
-                          builder: (context) {
-                            return AlertDialog(
-                              title: Text('Caption Guidance'),
-                              content: Text('Enter a caption of the post.'),
-                              actions: <Widget>[
-                                ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.of(context).pop();
-                                  },
-                                  child: Text('OK'),
-                                ),
-                              ],
-                            );
-                          },
-                        );
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a caption';
+                        }
+                        return null;
                       },
-                      tooltip: 'Caption Guidance',
                     ),
-                  ],
-                ),
-
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.info),
+                    onPressed: () {
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: Text('Caption Guidance'),
+                            content: Text('Enter a caption of the post.'),
+                            actions: <Widget>[
+                              ElevatedButton(
+                                onPressed: () {
+                                  Navigator.of(context).pop();
+                                },
+                                child: Text('OK'),
+                              ),
+                            ],
+                          );
+                        },
+                      );
+                    },
+                    tooltip: 'Caption Guidance',
+                  ),
+                ],
+              ),
 
               Row(
                 children: [
@@ -647,9 +626,7 @@ Widget build(BuildContext context) {
             ],
           ),
         ),
-        ]
       ),
-    )
     );
   }
 }
