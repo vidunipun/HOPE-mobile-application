@@ -590,6 +590,7 @@ class _RequestPageState extends State<RequestPage> {
               //   child: const Text('Upload Images'),
               // ),
               CheckboxListTile(
+                
                 title: Text(
                   'I verify that all the information is correct',
                   style: TextStyle(color: Colors.white),
@@ -600,6 +601,8 @@ class _RequestPageState extends State<RequestPage> {
                     _isInformationCorrect = value!;
                   });
                 },
+                
+                
               ),
               const SizedBox(height: 10),
               ElevatedButton(

@@ -253,126 +253,126 @@ class _AddEventsPageState extends State<AddEventsPage> {
       },
     );
   }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Add Events'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Form(
-          key: _formKey,
-          child: ListView(
-            children: <Widget>[
-              TextFormField(
-                controller: _captionController,
-                decoration: const InputDecoration(labelText: 'Caption'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a caption';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              TextFormField(
-                controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a description';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              TextFormField(
-                controller: _tagsController,
-                decoration: const InputDecoration(labelText: 'Tags'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter tags';
-                  }
-                  return null;
-                },
-              ),
-
-              const SizedBox(height: 20),
-
-              TextFormField(
-                controller: _locationController,
-                decoration: const InputDecoration(labelText: 'Location'),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a location';
-                  }
-                  return null;
-                },
-                onTap: () {
-                  // Open the location model
-                  _openLocationModel();
-                },
-              ),
-
-
-              const SizedBox(height: 40),
-
-
-              ElevatedButton(
-                onPressed: _selectImage,
-                child: const Text('Select Images'),
-              ),
-              _selectedImages.isNotEmpty
-                  ? Column(
-                children: _selectedImages
-                    .map((image) => Image.file(image))
-                    .toList(),
-              )
-                  : Container(),
-
-              const SizedBox(height: 20),
-
-              ElevatedButton(
-                onPressed: _uploadImages,
-                child: const Text('Upload Images'),
-              ),
-              CheckboxListTile(
-                title:
-                const Text('I verify that all the information is correct'),
-                value: _isInformationCorrect,
-                onChanged: (value) {
-                  setState(() {
-                    _isInformationCorrect = value!;
-                  });
-                },
-              ),
-
-              const SizedBox(height: 60),
-
-              ElevatedButton(
-                onPressed: () async {
-                  await _submitRequest();
-
-                  Navigator.of(context).pushReplacement(
-                    MaterialPageRoute(
-                      builder: (context) => const EventHome(),
-                    ),
-                  );
-                },
-                child: const Text('Submit'),
-              ),
-
-              const SizedBox(height: 20),
-            ],
+@override
+Widget build(BuildContext context) {
+  return Scaffold(
+    appBar: AppBar(
+      title: const Text('Add Events'),
+    ),
+    body: Padding(
+      padding: const EdgeInsets.all(16.0),
+      child: ListView(
+        children: <Widget>[
+          // Add your buttons here
+          ElevatedButton(
+            onPressed: () {
+              // Handle button click
+            },
+            child: Text('Your Button Text'),
           ),
-        ),
+          // Add your text widget here
+          Text(
+            'Your Text Here',
+            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+          ),
+
+          // Now add the Form with your form fields
+          Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                TextFormField(
+                  controller: _captionController,
+                  decoration: const InputDecoration(labelText: 'Caption'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a caption';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _descriptionController,
+                  decoration: const InputDecoration(labelText: 'Description'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a description';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _tagsController,
+                  decoration: const InputDecoration(labelText: 'Tags'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter tags';
+                    }
+                    return null;
+                  },
+                ),
+                const SizedBox(height: 20),
+                TextFormField(
+                  controller: _locationController,
+                  decoration: const InputDecoration(labelText: 'Location'),
+                  validator: (value) {
+                    if (value == null || value.isEmpty) {
+                      return 'Please enter a location';
+                    }
+                    return null;
+                  },
+                  onTap: () {
+                    // Open the location model
+                    _openLocationModel();
+                  },
+                ),
+                const SizedBox(height: 40),
+                ElevatedButton(
+                  onPressed: _selectImage,
+                  child: const Text('Select Images'),
+                ),
+                _selectedImages.isNotEmpty
+                    ? Column(
+                        children: _selectedImages
+                            .map((image) => Image.file(image))
+                            .toList(),
+                      )
+                    : Container(),
+                const SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: _uploadImages,
+                  child: const Text('Upload Images'),
+                ),
+                CheckboxListTile(
+                  title: const Text('I verify that all the information is correct'),
+                  value: _isInformationCorrect,
+                  onChanged: (value) {
+                    setState(() {
+                      _isInformationCorrect = value!;
+                    });
+                  },
+                ),
+                const SizedBox(height: 60),
+                ElevatedButton(
+                  onPressed: () async {
+                    await _submitRequest();
+
+                    Navigator.of(context).pushReplacement(
+                      MaterialPageRoute(
+                        builder: (context) => const EventHome(),
+                      ),
+                    );
+                  },
+                  child: const Text('Submit'),
+                ),
+                const SizedBox(height: 20),
+              ],
+            ),
+          ),
+        ],
       ),
-    );
-  }
-}
+    ),
+  );
+}}
