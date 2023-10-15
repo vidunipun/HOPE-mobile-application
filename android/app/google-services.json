@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "940284789350",
+    "project_id": "testauth-3a75e",
+    "storage_bucket": "testauth-3a75e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:940284789350:android:efa69950b2e6c3bccfe3a7",
+        "android_client_info": {
+          "package_name": "com.example.auth"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "940284789350-6l1ksq0cr2c3pda4e50nl7u5eagjlbb6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtnIIWFCG_rv0RfVXdPc3VvTSukKhCq5Y"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "940284789350-6l1ksq0cr2c3pda4e50nl7u5eagjlbb6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
