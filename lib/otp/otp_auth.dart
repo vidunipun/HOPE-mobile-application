@@ -1,5 +1,4 @@
-import 'dart:ffi';
-import 'dart:math';
+// ignore_for_file: unused_local_variable, library_private_types_in_public_api, avoid_print
 
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,6 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:email_auth/email_auth.dart';
 
 class EmailOTPPage extends StatefulWidget {
+  const EmailOTPPage({super.key});
+
   @override
   _EmailOTPPageState createState() => _EmailOTPPageState();
 }
@@ -76,7 +77,7 @@ Future<void> sendOTP(String emailAddress) async {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Email OTP Verification'),
+        title: const Text('Email OTP Verification'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -90,7 +91,7 @@ Future<void> sendOTP(String emailAddress) async {
               decoration: InputDecoration(
                 labelText: 'Enter Email',
                 suffixIcon: IconButton(
-                  icon: Icon(Icons.send),
+                  icon: const Icon(Icons.send),
                   onPressed: () {
                     sendOTP("maneelakshan@gmail.com");
                   },
@@ -98,22 +99,22 @@ Future<void> sendOTP(String emailAddress) async {
               ),
               //readOnly: true,
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
               TextField(
                 controller: otpController,
                 keyboardType: TextInputType.number,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Enter OTP',
                 ),
               ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             if (otpSent)
               ElevatedButton(
                 onPressed: () {
                   verifyOTP();
                 },
-                child: Text('Verify OTP'),
+                child: const Text('Verify OTP'),
               ),
           ],
         ),

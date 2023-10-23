@@ -1,3 +1,5 @@
+// ignore_for_file: file_names, use_key_in_widget_constructors, deprecated_member_use
+
 import 'package:auth/request&donation/donation.dart';
 import 'package:auth/request&donation/request.dart';
 import 'package:flutter/material.dart';
@@ -32,7 +34,7 @@ class SelectionPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'What do you want to post?\n',
               style: TextStyle(
                 color: Colors.white,
@@ -42,21 +44,21 @@ class SelectionPage extends StatelessWidget {
                 height: 0,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Handle Request button press
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => RequestPage(),
+                    builder: (context) => const RequestPage(),
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF0BFFFF), // Set the button color to #0BFFFF
+                primary: const Color(0xFF0BFFFF), // Set the button color to #0BFFFF
               ),
-              child: Text(
+              child: const Text(
                 'Request ',
                 style: TextStyle(
                   color: Color(0xFF0D0D0D),
@@ -67,21 +69,21 @@ class SelectionPage extends StatelessWidget {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 //Handle Donation button press
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => DonationPage(),
+                    builder: (context) => const DonationPage(),
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: Color(0xFF0BFFFF), // Set the button color to #0BFFFF
+                primary: const Color(0xFF0BFFFF), // Set the button color to #0BFFFF
               ),
-              child: Text(
+              child: const Text(
                 ' Donation',
                 style: TextStyle(
                   color: Color(0xFF121312),

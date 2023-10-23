@@ -1,15 +1,14 @@
-import 'package:auth/components/drawer.dart';
+// ignore_for_file: unused_field, avoid_print
+
 import 'package:auth/constants/colors.dart';
 import 'package:auth/events/event_post.dart';
 import 'package:auth/events/search_events.dart';
-import 'package:auth/request&donation/request_donation%5B1%5D.dart';
-import 'package:auth/screens/home/wall/home.dart';
 import 'package:auth/services/auth.dart';
-import 'package:auth/user/edit_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'add_event.dart';
+
 
 class EventHome extends StatefulWidget {
   // Renamed Home to EventHome
@@ -20,11 +19,14 @@ class EventHome extends StatefulWidget {
 }
 
 class _EventHomeState extends State<EventHome> {
+ 
   // Renamed _HomeState to _EventHomeState
   final AuthServices _auth = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser;
   final textController = TextEditingController();
 
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: startBackgroundBlack,
@@ -41,7 +43,7 @@ class _EventHomeState extends State<EventHome> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => AddEventsPage(),
+                      builder: (context) => const AddEventsPage(),
                     ),
                   );
                   print('Add icon pressed!');
@@ -62,7 +64,7 @@ class _EventHomeState extends State<EventHome> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => SearchEventsPage(),
+                      builder: (context) => const SearchEventsPage(),
                     ),
                   );
                   print('Search icon pressed!');
@@ -98,22 +100,22 @@ class _EventHomeState extends State<EventHome> {
 
                       // Check if the 'Likes' field exists in the document data
                       List<String> likes = post.data().containsKey('Likes')
-                          ? List<String>.from(post.data()?['Likes'])
+                          ? List<String>.from(post.data()['Likes'])
                           : [];
 
                       return EventWallPost(
                         // Updated to EventWallPost
-                        caption: post.data()?['caption'],
-                        user: post.data()?['UserEmail'],
+                        caption: post.data()['caption'],
+                        user: post.data()['UserEmail'],
                         postid: post.id,
-                        description: post.data()?['description'],
-                        location: post.data()?['location'],
-                        firstName: post.data()?['firstName'],
+                        description: post.data()['description'],
+                        location: post.data()['location'],
+                        firstName: post.data()['firstName'],
                         likes: likes,
-                        imageUrls: (post.data()?['selectedImagesUrls']
+                        imageUrls: (post.data()['selectedImagesUrls']
                                     as List<dynamic>?)
                                 ?.map((dynamic url) => url.toString())
-                                ?.toList() ??
+                                .toList() ??
                             [],
                       );
                     },
@@ -129,71 +131,10 @@ class _EventHomeState extends State<EventHome> {
               },
             ),
           ),
+         
         ],
       ),
-      bottomNavigationBar: BottomAppBar(
-        child: Container(
-          height: 60,
-          color: Colors.white,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              IconButton(
-                onPressed: () {
-                  // Handle Home button press
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => Home(),
-                    ),
-                  );
-                  print(currentUser?.uid);
-                },
-                icon: const Icon(Icons.home),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle Chat button press
-                },
-                icon: const Icon(Icons.chat),
-              ),
-              Container(
-                margin: const EdgeInsets.only(bottom: 20),
-                child: IconButton(
-                  onPressed: () {
-                    // Handle Add post button press
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => SelectionPage(),
-                      ),
-                    );
-                  },
-                  icon: const Icon(Icons.post_add, size: 50),
-                ),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle event button press
-                },
-                icon: const Icon(Icons.calendar_today),
-              ),
-              IconButton(
-                onPressed: () {
-                  // Handle Profile button press
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const EditProfilePage(),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.person),
-              ),
-            ],
-          ),
-        ),
-      ),
+
     );
   }
 }

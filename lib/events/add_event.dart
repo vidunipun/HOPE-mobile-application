@@ -1,7 +1,7 @@
+// ignore_for_file: avoid_print, duplicate_ignore
 import 'package:auth/events/events_wall.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:auth/screens/home/wall/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -146,8 +146,10 @@ class _AddEventsPageState extends State<AddEventsPage> {
           print('Data saved to Firestore');
 
           // Reset the form or navigate to another page as needed
+        // ignore: duplicate_ignore
         } else {
           // User is not authenticated, handle this case
+          // ignore: avoid_print
           print('User is not authenticated');
         }
       } catch (e) {
@@ -238,6 +240,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
               ElevatedButton(
                 onPressed: () {
                   // Save the selected location from the model
+                  // ignore: non_constant_identifier_names
                   String? SelectedLocation =
                       '$selectedCountry, $selectedState, $selectedCity';
                   // Update the location controller in the main form
@@ -268,10 +271,10 @@ Widget build(BuildContext context) {
             onPressed: () {
               // Handle button click
             },
-            child: Text('Your Button Text'),
+            child: const Text('Your Button Text'),
           ),
           // Add your text widget here
-          Text(
+          const Text(
             'Your Text Here',
             style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
           ),
@@ -359,6 +362,7 @@ Widget build(BuildContext context) {
                   onPressed: () async {
                     await _submitRequest();
 
+                    // ignore: use_build_context_synchronously
                     Navigator.of(context).pushReplacement(
                       MaterialPageRoute(
                         builder: (context) => const EventHome(),
