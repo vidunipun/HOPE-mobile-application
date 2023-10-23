@@ -1,6 +1,5 @@
 
 import 'package:auth/models/UserModel.dart';
-import 'package:auth/otp/otp_auth.dart';
 import 'package:auth/screens/authentication/authenticate.dart';
 import 'package:auth/screens/home/wall/home.dart';
 
@@ -21,7 +20,7 @@ class Wrapper extends StatelessWidget {
     if (user == null) {
       return const Authenticate();
     } else {
-      return   Home();
+      return   const Home();
   
     }
   }

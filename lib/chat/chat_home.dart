@@ -1,5 +1,4 @@
 import 'package:auth/chat/chat_page.dart';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -14,13 +13,16 @@ class ChatHomePage extends StatefulWidget {
     // required this.recieverUserEmail,
   }) : super(key: key);
 
-  //@override
+
+  @override
+  // ignore: library_private_types_in_public_api
   _ChatHomePageState createState() => _ChatHomePageState();
 }
 
 class _ChatHomePageState extends State<ChatHomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(

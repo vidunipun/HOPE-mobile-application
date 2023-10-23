@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,6 +11,7 @@ class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
@@ -20,7 +23,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   File? _imageFile; // Selected image file
   final ImagePicker _imagePicker = ImagePicker();
-  String? profilePictureURL;
+    String? profilePictureURL;
 
   @override
   void initState() {
@@ -138,11 +141,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       image: DecorationImage(
                         image: profilePictureURL != null
                             ? NetworkImage(profilePictureURL!)
-                                as ImageProvider<Object>
                             : (_imageFile != null
                                 ? FileImage(_imageFile!)
                                     as ImageProvider<Object>
-                                : AssetImage(
+                                : const AssetImage(
                                     'assets/placeholder.png')), 
                         fit: BoxFit.cover,
                       ),

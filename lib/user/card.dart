@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, prefer_final_fields
+
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
@@ -40,10 +42,10 @@ void dispose() {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Card Details"),
+        title: const Text("Add Card Details"),
       ),
       body: Padding(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Form(
           key: _formKey,
           child: Column(
@@ -51,7 +53,7 @@ void dispose() {
             children: <Widget>[
               TextFormField(
                 controller: _cardNumberController,
-                decoration: InputDecoration(labelText: 'Card Number'),
+                decoration: const InputDecoration(labelText: 'Card Number'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the card number';
@@ -61,7 +63,7 @@ void dispose() {
               ),
               TextFormField(
                 controller: _expiryDateController,
-                decoration: InputDecoration(labelText: 'Expiry Date'),
+                decoration: const InputDecoration(labelText: 'Expiry Date'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the expiry date';
@@ -71,7 +73,7 @@ void dispose() {
               ),
               TextFormField(
                 controller: _cvvController,
-                decoration: InputDecoration(labelText: 'CVV'),
+                decoration: const InputDecoration(labelText: 'CVV'),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter the CVV';
@@ -79,7 +81,7 @@ void dispose() {
                   return null;
                 },
               ),
-              SizedBox(height: 20.0),
+              const SizedBox(height: 20.0),
               ElevatedButton(
                 onPressed: () async {
                   if (_formKey.currentState!.validate()) {
@@ -97,20 +99,22 @@ void dispose() {
                         _cardDetailsCorrect = true;
                       });
                       // Show a message indicating that card details are correct
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Card details are correct."),
                       ));
                     } else {
                       // Show a message indicating that card details are incorrect
-                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      // ignore: use_build_context_synchronously
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: Text("Card details are incorrect."),
                       ));
                     }
                   }
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
-              if (_cardDetailsCorrect) Text('Card details are correct.'),
+              if (_cardDetailsCorrect) const Text('Card details are correct.'),
             ],
           ),
         ),

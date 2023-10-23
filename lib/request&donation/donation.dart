@@ -1,4 +1,7 @@
+// ignore_for_file: unnecessary_new, avoid_print, non_constant_identifier_names, library_private_types_in_public_api, no_leading_underscores_for_local_identifiers, deprecated_member_use, use_build_context_synchronously, duplicate_ignore
+
 import 'dart:convert';
+import 'package:auth/constants/colors.dart';
 import 'package:auth/screens/home/wall/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -7,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'dart:io';
 import 'package:csc_picker/csc_picker.dart';
-import 'package:http/http.dart' as http;
 
 class DonationPage extends StatefulWidget {
   const DonationPage({Key? key}) : super(key: key);
@@ -216,23 +218,23 @@ class _DonationPageState extends State<DonationPage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              const Text(
                 'Select Location',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Your custom model content goes here
               // You can add buttons, text fields, or any other widgets to select the location
               // For example, you can use a TextFormField or a DropdownButtonFormField
               Container(
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: CSCPicker(
                   layout: Layout.vertical,
                   //flagState: CountryFlag.DISABLE,
@@ -254,7 +256,7 @@ class _DonationPageState extends State<DonationPage> {
                 ),
               ),
 
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   // Save the selected location from the model
@@ -265,7 +267,7 @@ class _DonationPageState extends State<DonationPage> {
                   // Close the model
                   Navigator.pop(context);
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
             ],
           ),
@@ -277,9 +279,10 @@ class _DonationPageState extends State<DonationPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Request Page'),
-      ),
+      backgroundColor: buttonbackground,
+      // appBar: AppBar(
+      //   title: const Text('Donation Page'),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -287,12 +290,36 @@ class _DonationPageState extends State<DonationPage> {
           child: ListView(
             children: <Widget>[
               Row(
+                 children: [
+                IconButton(
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  tooltip: 'Back',
+                ),
+                const Text(
+                  'Add Events',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ],
+              ),
+              Row(
+                
                 children: [
                   Expanded(
                     child: TextFormField(
                       controller: _captionController,
-                      decoration: InputDecoration(
-                        labelText: 'Caption',
+                      decoration: const InputDecoration(
+                          labelText: 'Caption',
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white))),
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -303,20 +330,23 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(
+                      Icons.info,
+                      color: buttonboarder,
+                    ),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Caption Guidance'),
-                            content: Text('Enter a caption of the post.'),
+                            title: const Text('Caption Guidance'),
+                            content: const Text('Enter a caption of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -333,8 +363,13 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(
-                        labelText: 'Description',
+                      decoration: const InputDecoration(
+                          labelText: 'Description',
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white))),
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -345,21 +380,24 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(
+                      Icons.info,
+                      color: buttonboarder,
+                    ),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Description Guidance'),
-                            content: Text(
+                            title: const Text('Description Guidance'),
+                            content: const Text(
                                 'Enter a detailed description of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -375,8 +413,13 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _contacController,
-                      decoration: InputDecoration(
-                        labelText: 'Contact',
+                      decoration: const InputDecoration(
+                          labelText: 'Contact',
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white))),
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -387,21 +430,24 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(
+                      Icons.info,
+                      color: buttonboarder,
+                    ),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Contact Guidance'),
-                            content: Text(
+                            title: const Text('Contact Guidance'),
+                            content: const Text(
                                 'Enter a valid contact number for inquiries.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -418,8 +464,13 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _locationController,
-                      decoration: InputDecoration(
-                        labelText: 'Location',
+                      decoration: const InputDecoration(
+                          labelText: 'Location',
+                          labelStyle: TextStyle(color: Colors.white),
+                          enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white))),
+                      style: const TextStyle(
+                        color: Colors.white,
                       ),
                       validator: (value) {
                         if (value == null || value.isEmpty) {
@@ -433,21 +484,24 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(
+                      Icons.info,
+                      color: buttonboarder,
+                    ),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Location Guidance'),
+                            title: const Text('Location Guidance'),
                             content:
-                                Text('Enter the related location of the post.'),
+                                const Text('Enter the related location of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -458,22 +512,42 @@ class _DonationPageState extends State<DonationPage> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 15,
+              ),
               imagepath != null
-                  ? Container(
+                  ? SizedBox(
                       width: 100,
                       height: 100,
                       child: Image.file(imagepath!),
                     )
-                  : Text("Image not chosen yet"),
-
+                  : const Text(
+                      "Image not chosen yet",
+                      style: TextStyle(color: Colors.white),
+                    ),
+              const SizedBox(
+                height: 15,
+              ),
               ElevatedButton(
                 onPressed: _selectImage,
-                child: const Text('Add post Images'),
+                style: ElevatedButton.styleFrom(
+                  primary: buttonboarder, // Set the button color to #0BFFFF
+                ),
+                child: const Text(
+                  ' Add Post Image',
+                  style: TextStyle(
+                    color: buttonbackground,
+                    fontSize: 20,
+                    fontFamily: 'Otomanopee One',
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
+                ),
               ),
               _selectedImages.isNotEmpty
                   ? Column(
                       children: _selectedImages
-                          .map((image) => Container(
+                          .map((image) => SizedBox(
                                 width: 100,
                                 height: 100,
                                 child: Image.file(image, fit: BoxFit.cover),
@@ -482,17 +556,22 @@ class _DonationPageState extends State<DonationPage> {
                     )
                   : Container(), // Optionally display a placeholder if there are no selected images
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
 
-              CheckboxListTile(
-                title:
-                    const Text('I verify that all the information is correct'),
-                value: _isInformationCorrect,
-                onChanged: (value) {
-                  setState(() {
-                    _isInformationCorrect = value!;
-                  });
-                },
+              Theme(
+                data: ThemeData(unselectedWidgetColor: Colors.white),
+                child: CheckboxListTile(
+                  title: const Text(
+                    'I verify that all the information is correct',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                  value: _isInformationCorrect,
+                  onChanged: (value) {
+                    setState(() {
+                      _isInformationCorrect = value!;
+                    });
+                  },
+                ),
               ),
               const SizedBox(height: 10),
               ElevatedButton(
@@ -505,7 +584,19 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   );
                 },
-                child: const Text('Submit'),
+                style: ElevatedButton.styleFrom(
+                  primary: buttonboarder, // Set the button color to #0BFFFF
+                ),
+                child: const Text(
+                  ' Submit',
+                  style: TextStyle(
+                    color: buttonbackground,
+                    fontSize: 20,
+                    fontFamily: 'Otomanopee One',
+                    fontWeight: FontWeight.w400,
+                    height: 0,
+                  ),
+                ),
               ),
               const SizedBox(height: 10),
             ],

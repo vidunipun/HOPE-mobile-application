@@ -1,7 +1,8 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api, unnecessary_new, no_leading_underscores_for_local_identifiers, non_constant_identifier_names
+
 import 'dart:convert';
 import 'package:auth/constants/colors.dart';
 import 'package:auth/screens/home/wall/home.dart';
-import 'package:auth/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -237,23 +238,23 @@ class _RequestPageState extends State<RequestPage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              const Text(
                 'Select Location',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                 ),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               // Your custom model content goes here
               // You can add buttons, text fields, or any other widgets to select the location
               // For example, you can use a TextFormField or a DropdownButtonFormField
               Container(
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: CSCPicker(
                   layout: Layout.vertical,
                   //flagState: CountryFlag.DISABLE,
@@ -280,7 +281,7 @@ class _RequestPageState extends State<RequestPage> {
                 ),
               ),
 
-              SizedBox(height: 16.0),
+             const  SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   // Save the selected location from the model
@@ -291,7 +292,7 @@ class _RequestPageState extends State<RequestPage> {
                   // Close the model
                   Navigator.pop(context);
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
             ],
           ),
@@ -315,7 +316,7 @@ class _RequestPageState extends State<RequestPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _captionController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Caption',
                         labelStyle: TextStyle(color: Colors.white),
                       ),
@@ -328,20 +329,20 @@ class _RequestPageState extends State<RequestPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(Icons.info),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Caption Guidance'),
-                            content: Text('Enter a caption of the post.'),
+                            title: const Text('Caption Guidance'),
+                            content: const Text('Enter a caption of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -358,7 +359,7 @@ class _RequestPageState extends State<RequestPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Description',
                         labelStyle: TextStyle(color: Colors.white),
                       ),
@@ -371,21 +372,21 @@ class _RequestPageState extends State<RequestPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(Icons.info),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Description Guidance'),
-                            content: Text(
+                            title: const Text('Description Guidance'),
+                            content:const  Text(
                                 'Enter a detailed description of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -401,7 +402,7 @@ class _RequestPageState extends State<RequestPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _contacController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Contact',
                         labelStyle: TextStyle(color: Colors.white),
                       ),
@@ -414,21 +415,21 @@ class _RequestPageState extends State<RequestPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon: const Icon(Icons.info),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Contact Guidance'),
-                            content: Text(
+                            title: const Text('Contact Guidance'),
+                            content: const Text(
                                 'Enter a valid contact number for inquiries.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -444,28 +445,28 @@ class _RequestPageState extends State<RequestPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _amountController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Amount',
                         labelStyle: TextStyle(color: Colors.white),
                       ),
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon:const  Icon(Icons.info),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Amount Guidance'),
-                            content: Text(
+                            title:const  Text('Amount Guidance'),
+                            content: const Text(
                                 'Enter the amount or leave it empty if not applicable.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child: const Text('OK'),
                               ),
                             ],
                           );
@@ -481,7 +482,7 @@ class _RequestPageState extends State<RequestPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _locationController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                         labelText: 'Location',
                         labelStyle: TextStyle(color: Colors.white),
                       ),
@@ -497,21 +498,21 @@ class _RequestPageState extends State<RequestPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.info),
+                    icon:const  Icon(Icons.info),
                     onPressed: () {
                       showDialog(
                         context: context,
                         builder: (context) {
                           return AlertDialog(
-                            title: Text('Location Guidance'),
+                            title:const  Text('Location Guidance'),
                             content:
-                                Text('Enter the related location of the post.'),
+                                const Text('Enter the related location of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pop();
                                 },
-                                child: Text('OK'),
+                                child:const  Text('OK'),
                               ),
                             ],
                           );
@@ -523,27 +524,27 @@ class _RequestPageState extends State<RequestPage> {
                 ],
               ),
               imagepath != null
-                  ? Container(
+                  ? SizedBox(
                       width: 100,
                       height: 100,
                       child: Image.file(imagepath!),
                     )
-                  : Text(
+                  : const Text(
                       "Image not chosen yet",
                       style: TextStyle(
                           color: Colors.white), // Set the text color to white
                     ),
               ElevatedButton(
                 onPressed: getImage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF164356),
+                  side: const BorderSide(
+                      color: Color(0xFF0BFFFF),
+                      width: 2), // Set the background color to 0xFF121312
+                ),
                 child: const Text(
                   "Add medical Image",
                   style: TextStyle(color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF164356),
-                  side: BorderSide(
-                      color: Color(0xFF0BFFFF),
-                      width: 2), // Set the background color to 0xFF121312
                 ),
               ),
 
@@ -561,21 +562,21 @@ class _RequestPageState extends State<RequestPage> {
               // ),
               ElevatedButton(
                 onPressed: _selectImage,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(0xFF164356),
+                  side: const BorderSide(
+                      color: Color(0xFF0BFFFF),
+                      width: 2), // Set the background color to 0xFF121312
+                ),
                 child: const Text(
                   'Add post Images',
                   style: TextStyle(color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(0xFF164356),
-                  side: BorderSide(
-                      color: Color(0xFF0BFFFF),
-                      width: 2), // Set the background color to 0xFF121312
                 ),
               ),
               _selectedImages.isNotEmpty
                   ? Column(
                       children: _selectedImages
-                          .map((image) => Container(
+                          .map((image) => SizedBox(
                                 width: 100,
                                 height: 100,
                                 child: Image.file(image, fit: BoxFit.cover),
@@ -584,14 +585,14 @@ class _RequestPageState extends State<RequestPage> {
                     )
                   : Container(), // Optionally display a placeholder if there are no selected images
 
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               // ElevatedButton(
               //   onPressed: _uploadImages,
               //   child: const Text('Upload Images'),
               // ),
               CheckboxListTile(
                 
-                title: Text(
+                title: const Text(
                   'I verify that all the information is correct',
                   style: TextStyle(color: Colors.white),
                 ),
@@ -609,20 +610,21 @@ class _RequestPageState extends State<RequestPage> {
                 onPressed: () async {
                   await _submitRequest();
 
+                  // ignore: use_build_context_synchronously
                   Navigator.of(context).pushReplacement(
                     MaterialPageRoute(
                       builder: (context) => const Home(),
                     ),
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: const Color(
+                      0xFF164356), // Set the background color to 0xFF164356
+                  side: const BorderSide(color: Color(0xFF0BFFFF), width: 2),
+                ),
                 child: const Text(
                   'Submit',
                   style: TextStyle(color: Colors.white),
-                ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Color(
-                      0xFF164356), // Set the background color to 0xFF164356
-                  side: BorderSide(color: Color(0xFF0BFFFF), width: 2),
                 ),
               ),
               const SizedBox(height: 10),

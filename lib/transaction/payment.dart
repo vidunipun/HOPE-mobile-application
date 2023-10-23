@@ -1,4 +1,4 @@
-import 'dart:math';
+// ignore_for_file: camel_case_types, avoid_print
 
 import 'package:auth/screens/home/wall/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,7 +10,7 @@ class payment extends StatefulWidget {
   final String uid;
   final String postid;
 
-  payment(
+  const payment(
       {required this.cardNo, Key? key, required this.uid, required this.postid, String? usercard})
       : super(key: key);
 
@@ -180,7 +180,7 @@ class _paymentState extends State<payment> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Payment'),
+        title: const Text('Payment'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -189,14 +189,14 @@ class _paymentState extends State<payment> {
           children: [
             TextField(
               controller: cardNumberController,
-              decoration: InputDecoration(labelText: 'Card Number'),
+              decoration: const InputDecoration(labelText: 'Card Number'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: amountController,
-              decoration: InputDecoration(labelText: 'Amount'),
+              decoration: const InputDecoration(labelText: 'Amount'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
                 await paycash();
@@ -212,7 +212,7 @@ class _paymentState extends State<payment> {
                       builder: (context) => const Home(),
                     ));
               },
-              child: Text("Pay"),
+              child: const Text("Pay"),
             )
           ],
         ),

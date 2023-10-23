@@ -1,6 +1,5 @@
-import 'dart:math';
+// ignore_for_file: unused_field
 
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../../constants/colors.dart';
 import '../../constants/styles.dart';
@@ -254,14 +253,6 @@ class _RegisterState extends State<Register> {
                         GestureDetector(
                           //method for register
                           onTap: () async {
-                            dynamic result =
-                                await _auth.registerWithEmailAndPassword(
-                                    email,
-                                    fname,
-                                    lname,
-                                    mobilenumber,
-                                    address,
-                                    password);
 
                           },
                           child: Container(

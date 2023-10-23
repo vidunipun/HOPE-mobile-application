@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, library_private_types_in_public_api
+
 import 'package:auth/components/my_texfield.dart';
 import 'package:auth/chat/chat_bubble.dart';
 import 'package:auth/chat/chat_service.dart';
@@ -64,7 +66,7 @@ class _ChatPageState extends State<ChatPage> {
         if (snapshot.hasError) {
           return Text('Error${snapshot.error}');
         } else if (snapshot.data == null) {
-          return Text('No messages available');
+          return const Text('No messages available');
         } else {
           // Print messages in the debug console
           for (var doc in snapshot.data!.docs) {
@@ -110,7 +112,7 @@ class _ChatPageState extends State<ChatPage> {
           children: [
             Text(
               data['senderEmail'],
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
             ),
             const SizedBox(height: 5),
             ChatBubble(message: data['message']),

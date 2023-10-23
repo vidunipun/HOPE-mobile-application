@@ -26,6 +26,7 @@ class EventWallPost extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _EventWallPostState createState() => _EventWallPostState();
 }
 
@@ -161,7 +162,7 @@ class _EventWallPostState extends State<EventWallPost> {
                 runSpacing: 8.0,
                 children: widget.imageUrls
                     .map(
-                      (imageUrl) => Container(
+                      (imageUrl) => SizedBox(
                         height: screenHeight * 0.5, // Adjust the height as needed
                         width: screenWidth, // Adjust the width as needed
                         child: Image.network(
