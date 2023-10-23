@@ -6,35 +6,17 @@ import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
 
-void main() {
-  runApp(MyApp());
-}
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Flutter App',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: SelectionPage(),
-    );
-  }
-}
-
 class SelectionPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor:
-          startBackgroundBlack, // Set the background color to black
+          buttonbackground, // Set the background color to black
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               'What do you want to post?\n',
               style: TextStyle(
                 color: Colors.white,
@@ -44,21 +26,21 @@ class SelectionPage extends StatelessWidget {
                 height: 0,
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // Handle Request button press
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const RequestPage(),
+                    builder: (context) => RequestPage(),
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF0BFFFF), // Set the button color to #0BFFFF
+                primary: Color(0xFF0BFFFF), // Set the button color to #0BFFFF
               ),
-              child: const Text(
+              child: Text(
                 'Request ',
                 style: TextStyle(
                   color: Color(0xFF0D0D0D),
@@ -69,21 +51,21 @@ class SelectionPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 //Handle Donation button press
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const DonationPage(),
+                    builder: (context) => DonationPage(),
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
-                primary: const Color(0xFF0BFFFF), // Set the button color to #0BFFFF
+                primary: Color(0xFF0BFFFF), // Set the button color to #0BFFFF
               ),
-              child: const Text(
+              child: Text(
                 ' Donation',
                 style: TextStyle(
                   color: Color(0xFF121312),
