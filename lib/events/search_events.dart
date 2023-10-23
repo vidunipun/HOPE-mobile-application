@@ -341,13 +341,13 @@ Widget _buildBottomAppBar(BuildContext context, List<String> markersInsideCircle
           fontWeight: FontWeight.bold,
         ),
       ),
-      Text(
-        markersInsideCircle.toString(),
-        style: TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
-        ),
-      ),
+      // Text(
+      //   markersInsideCircle.toString(),
+      //   style: TextStyle(
+      //     fontSize: 16.0,
+      //     fontWeight: FontWeight.bold,
+      //   ),
+      // ),
     ],
   ),
 )
