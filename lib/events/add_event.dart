@@ -145,8 +145,10 @@ class _AddEventsPageState extends State<AddEventsPage> {
           print('Data saved to Firestore');
 
           // Reset the form or navigate to another page as needed
+        // ignore: duplicate_ignore
         } else {
           // User is not authenticated, handle this case
+          // ignore: avoid_print
           print('User is not authenticated');
         }
       } catch (e) {
@@ -236,6 +238,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
               ElevatedButton(
                 onPressed: () {
                   // Save the selected location from the model
+                  // ignore: non_constant_identifier_names
                   String? SelectedLocation =
                       '$selectedCountry, $selectedState, $selectedCity';
                   // Update the location controller in the main form

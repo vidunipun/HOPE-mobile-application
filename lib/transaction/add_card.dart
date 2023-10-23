@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print, use_key_in_widget_constructors, library_private_types_in_public_api
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -148,7 +150,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Enter Card Details'),
+        title: const Text('Enter Card Details'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -157,26 +159,26 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
           children: [
             TextField(
               controller: cardNumberController,
-              decoration: InputDecoration(labelText: 'Card Number'),
+              decoration: const InputDecoration(labelText: 'Card Number'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: expDateController,
-              decoration: InputDecoration(labelText: 'Expiration Date (MM/YY)'),
+              decoration: const InputDecoration(labelText: 'Expiration Date (MM/YY)'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             TextField(
               controller: cvvController,
-              decoration: InputDecoration(labelText: 'CVV'),
+              decoration: const InputDecoration(labelText: 'CVV'),
             ),
-            SizedBox(height: 24.0),
+            const SizedBox(height: 24.0),
             ElevatedButton(
               onPressed: () {
                 checkCardDetails();
               },
-              child: Text('Submit'),
+              child: const Text('Submit'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Text(
               isCardValid == 1
                   ? 'Card details are added.'

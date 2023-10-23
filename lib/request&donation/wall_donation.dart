@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:async';
 
 import 'package:auth/components/like_button.dart';
@@ -33,6 +35,7 @@ class WallDonation extends StatefulWidget {
   }) : super(key: key);
 
   @override
+  // ignore: library_private_types_in_public_api
   _WallDonationState createState() => _WallDonationState();
 }
 
@@ -140,7 +143,7 @@ class _WallDonationState extends State<WallDonation> {
       padding: const EdgeInsets.all(16.0),
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: BoxDecoration(
-        color: Color.fromARGB(255, 186, 220, 238),
+        color: const Color.fromARGB(255, 186, 220, 238),
         borderRadius: BorderRadius.circular(8.0),
         boxShadow: [
           BoxShadow(
@@ -192,7 +195,7 @@ class _WallDonationState extends State<WallDonation> {
               child: Column(
                 children: widget.imageUrls
                     .map(
-                      (imageUrl) => Container(
+                      (imageUrl) => SizedBox(
                         height: 200, // Set the desired height
                         width: 200, // Set the desired width
                         child: Image.network(
@@ -226,7 +229,7 @@ class _WallDonationState extends State<WallDonation> {
                 'Comment',
                 style: TextStyle(fontSize: 16.0),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 17,
               ),
               Visibility(
@@ -242,6 +245,7 @@ class _WallDonationState extends State<WallDonation> {
                         final String cardNo = documentSnapshot.data()?['card_number'] ?? '';
 
                         if (cardNo.isNotEmpty) {
+                          // ignore: use_build_context_synchronously
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -264,7 +268,7 @@ class _WallDonationState extends State<WallDonation> {
                       print('Error retrieving card details: $e');
                     }
                   },
-                  child: Text('Payment'),
+                  child: const Text('Payment'),
                 ),
               ),
             ],
@@ -278,20 +282,20 @@ class _WallDonationState extends State<WallDonation> {
                 children: [
                   LinearProgressIndicator(
                     minHeight: 15,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                    borderRadius: const BorderRadius.all(Radius.circular(10)),
                     value: toNow != null && widget.amount != null ? toNow! / double.tryParse(widget.amount!)! : 0.0,
                   ),
-                  SizedBox(height: 10,),
+                 const  SizedBox(height: 10,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'To fill ${widget.amount != null && toNow != null ? (double.tryParse(widget.amount!)! - toNow!).toStringAsFixed(2) : '0.00'}',
-                        style: TextStyle(fontSize: 16.0),
+                        style:const  TextStyle(fontSize: 16.0),
                       ),
                       Text(
                         'Percentage: ${widget.amount != null && toNow != null ? ((toNow! / double.tryParse(widget.amount!)!) * 100).toStringAsFixed(2) : '0.00'}%',
-                        style: TextStyle(fontSize: 16.0),
+                        style:const  TextStyle(fontSize: 16.0),
                       ),
                     ],
                   ),
