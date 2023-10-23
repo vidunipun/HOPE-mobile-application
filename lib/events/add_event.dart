@@ -2,7 +2,6 @@ import 'package:auth/constants/colors.dart';
 import 'package:auth/events/events_wall.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:auth/screens/home/wall/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
@@ -345,13 +344,19 @@ class _AddEventsPageState extends State<AddEventsPage> {
                   const SizedBox(height: 40),
                   ElevatedButton(
                     onPressed: _selectImage,
-                    child: const Text(
-                      'Add Post',
-                      style: TextStyle(color: Colors.white),
+                    child: Text(
+                      ' Add Post',
+                      style: TextStyle(
+                        color: Color(0xFF121312),
+                        fontSize: 20,
+                        fontFamily: 'Otomanopee One',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
                     ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: buttonbackground,
-                      side: BorderSide(color: buttonboarder, width: 2),
+                      primary:
+                          Color(0xFF0BFFFF), // Set the button color to #0BFFFF
                     ),
                   ),
                   _selectedImages.isNotEmpty
@@ -361,29 +366,28 @@ class _AddEventsPageState extends State<AddEventsPage> {
                               .toList(),
                         )
                       : Container(),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 10),
                   // ElevatedButton(
                   //   onPressed: _uploadImages,
                   //   child: const Text('Upload Images'),
                   // ),
-Theme(
-  data: ThemeData(unselectedWidgetColor: Colors.white),
-  child: CheckboxListTile(
-    title: Text(
-      'I verify that all the information is correct',
-      style: TextStyle(color: Colors.white),
-    ),
-    value: _isInformationCorrect,
-    onChanged: (value) {
-      setState(() {
-        _isInformationCorrect = value!;
-      });
-    },
-   
-  ),
-),
+                  Theme(
+                    data: ThemeData(unselectedWidgetColor: Colors.white),
+                    child: CheckboxListTile(
+                      title: Text(
+                        'I verify that all the information is correct',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      value: _isInformationCorrect,
+                      onChanged: (value) {
+                        setState(() {
+                          _isInformationCorrect = value!;
+                        });
+                      },
+                    ),
+                  ),
 
-                  const SizedBox(height: 25),
+                  const SizedBox(height: 10),
                   ElevatedButton(
                     onPressed: () async {
                       await _submitRequest();
@@ -395,14 +399,23 @@ Theme(
                         ),
                       );
                     },
-                    child: const Text(
-                      'Submit',
-                      style: TextStyle(color: Colors.white),
-                    ),
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: buttonbackground,
-                      side: BorderSide(color: buttonboarder, width: 2),
+                      primary: buttonboarder, // Set the button color to #0BFFFF
                     ),
+                    child: Text(
+                      ' Submit',
+                      style: TextStyle(
+                        color: buttonbackground,
+                        fontSize: 20,
+                        fontFamily: 'Otomanopee One',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
+                    ),
+                    // style: ElevatedButton.styleFrom(
+                    //   backgroundColor: buttonbackground,
+                    //   side: BorderSide(color: buttonboarder, width: 2),
+                    // ),
                   )
                 ],
               ),

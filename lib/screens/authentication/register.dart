@@ -31,23 +31,23 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: startBackgroundBlack,
-      appBar: AppBar(
-        title: const Text("Register Here"),
-        backgroundColor: startBackgroundBlack,
-      ),
+      // appBar: AppBar(
+      //   title: const Text("Register Here"),
+      //   backgroundColor: startBackgroundBlack,
+      // ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Container(
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40),
-              color: Colors.white,
+              color: buttonbackground,
             ),
             child: Column(
               children: [
                 // Register text at the top
                 const Padding(
-                  padding: EdgeInsets.only(top: 8),
+                  padding: EdgeInsets.only(top: 29),
                   child: Text(
                     "Register",
                     style: signInRegisterText3,
@@ -55,15 +55,14 @@ class _RegisterState extends State<Register> {
                 ),
                 const SizedBox(height: 10),
                 //description
-                const Text(
-                  "description",
-                  style: descriptionStyle,
-                ),
+
                 Center(
-                  child: Image.asset(
-                    'assets/register.png',
-                    height: 100,
-                    width: 100,
+                  child: ClipOval(
+                    child: Image.asset(
+                      'assets/register.png',
+                      height: 100,
+                      width: 100,
+                    ),
                   ),
                 ),
                 const SizedBox(
@@ -77,8 +76,12 @@ class _RegisterState extends State<Register> {
                       children: [
                         //email
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
-                          decoration: textInputdecorataion,
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                              hintText: "Email",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
                           validator: (val) => val?.isEmpty == true
                               ? "Enter a valid email"
                               : null,
@@ -94,8 +97,11 @@ class _RegisterState extends State<Register> {
                         //first name
                         TextFormField(
                           style: const TextStyle(color: Colors.black),
-                          decoration: textInputdecorataion.copyWith(
-                              hintText: "First Name"),
+                          decoration: InputDecoration(
+                              hintText: "First Name",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
                           validator: (val) => val?.isEmpty == true
                               ? "Enter the first name"
                               : null,
@@ -112,8 +118,11 @@ class _RegisterState extends State<Register> {
                         //last name
                         TextFormField(
                           style: const TextStyle(color: Colors.black),
-                          decoration: textInputdecorataion.copyWith(
-                              hintText: "Last Name"),
+                          decoration: InputDecoration(
+                              hintText: "Last Name",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
                           validator: (val) => val?.isEmpty == true
                               ? "Enter the last name"
                               : null,
@@ -130,8 +139,11 @@ class _RegisterState extends State<Register> {
                         //mobile number
                         TextFormField(
                           style: const TextStyle(color: Colors.black),
-                          decoration: textInputdecorataion.copyWith(
-                              hintText: "Mobile Number"),
+                          decoration: InputDecoration(
+                              hintText: "Mobile Number",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
                           validator: (val) => val?.isEmpty == true
                               ? "Enter the mobile number"
                               : null,
@@ -148,8 +160,11 @@ class _RegisterState extends State<Register> {
                         //address
                         TextFormField(
                           style: const TextStyle(color: Colors.black),
-                          decoration: textInputdecorataion.copyWith(
-                              hintText: "Address"),
+                          decoration: InputDecoration(
+                              hintText: "Address",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
                           validator: (val) =>
                               val?.isEmpty == true ? "Enter the address" : null,
                           onChanged: (val) {
@@ -164,10 +179,13 @@ class _RegisterState extends State<Register> {
                         ),
                         //password
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
-                          decoration: textInputdecorataion.copyWith(
-                            hintText: "password",
-                          ),
+                          style: const TextStyle(color: Colors.white),
+                          decoration: InputDecoration(
+                              hintText: "Password",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
+                          obscureText: true,
                           validator: (val) =>
                               val!.length < 6 ? "Enter a valid password" : null,
                           onChanged: (val) {
@@ -177,9 +195,9 @@ class _RegisterState extends State<Register> {
                           },
                         ),
                         // Divider between password form and social media login
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 25),
                         const Divider(
-                          color: Colors.black,
+                          color: Colors.white,
                           height: 1,
                           thickness: 1,
                           indent: 40,
@@ -262,7 +280,6 @@ class _RegisterState extends State<Register> {
                                     mobilenumber,
                                     address,
                                     password);
-
                           },
                           child: Container(
                             height: 40,
