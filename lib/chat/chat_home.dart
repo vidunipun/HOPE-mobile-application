@@ -1,7 +1,11 @@
 import 'package:auth/chat/chat_page.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../constants/colors.dart';
+import '../screens/home/wall/home.dart';
 
 class ChatHomePage extends StatefulWidget {
   //final String recieverUserEmail;
@@ -13,22 +17,51 @@ class ChatHomePage extends StatefulWidget {
     // required this.recieverUserEmail,
   }) : super(key: key);
 
-
-  @override
-  // ignore: library_private_types_in_public_api
+  //@override
   _ChatHomePageState createState() => _ChatHomePageState();
 }
 
 class _ChatHomePageState extends State<ChatHomePage> {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Chats'),
+      backgroundColor:
+          startBackgroundBlack, // Set your desired background color
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Padding(
+            padding: const EdgeInsets.only(top: 40, left: 16, right: 16),
+            child: Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => Home(),
+                      ),
+                    );
+                  },
+                ),
+                Text(
+                  'Chats',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Expanded(
+            child: _buildUserList(),
+          ),
+        ],
       ),
-      body: _buildUserList(),
     );
   }
 
@@ -62,8 +95,12 @@ class _ChatHomePageState extends State<ChatHomePage> {
       //print(clickedEmail);
 
       return ListTile(
-        title: Text(data['email']?.toString() ??
-            ''), // Wrap the String in a Text widget
+        title: Text(
+          data['firstName']?.toString() ?? '',
+          style: TextStyle(
+            color: Colors.white,
+          ),
+        ), // Wrap the String in a Text widget
         onTap: () {
           //print(data['email']);
           //print('acbccc');
@@ -72,11 +109,12 @@ class _ChatHomePageState extends State<ChatHomePage> {
             context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
-                  recieverUserEmail: data['email'],
-                  //data['email']?.toString() ?? widget.recieverUserEmail,
-                  recieverUserID: data['uid']
-                  //data['uid']?.toString() ?? widget.recieverUserID,
-                  ),
+                recieverUserEmail: data['email'],
+                //data['email']?.toString() ?? widget.recieverUserEmail,
+                recieverUserID: data['uid'],
+                //data['uid']?.toString() ?? widget.recieverUserID,
+                firstName: data['firstName']?.toString() ?? '',
+              ),
             ),
           );
         },
