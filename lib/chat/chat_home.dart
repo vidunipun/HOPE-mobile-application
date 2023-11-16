@@ -8,16 +8,11 @@ import '../constants/colors.dart';
 import '../screens/home/wall/home.dart';
 
 class ChatHomePage extends StatefulWidget {
-  //final String recieverUserEmail;
-  //final String recieverUserID;
 
-  const ChatHomePage({
-    Key? key,
-    //required this.recieverUserID,
-    // required this.recieverUserEmail,
-  }) : super(key: key);
+  const ChatHomePage({Key? key}) : super(key: key);
 
-  //@override
+  @override
+
   _ChatHomePageState createState() => _ChatHomePageState();
 }
 
@@ -67,22 +62,23 @@ class _ChatHomePageState extends State<ChatHomePage> {
 
   Widget _buildUserList() {
     return StreamBuilder<QuerySnapshot>(
-        stream: FirebaseFirestore.instance.collection('users').snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            return const Text('error');
-          }
+      stream: FirebaseFirestore.instance.collection('users').snapshots(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          return const Text('error');
+        }
 
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Text('loading...');
-          }
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Text('loading...');
+        }
 
-          return ListView(
-            children: snapshot.data!.docs
-                .map<Widget>((doc) => _buildUserListItem(doc))
-                .toList(),
-          );
-        });
+        return ListView(
+          children: snapshot.data!.docs
+              .map<Widget>((doc) => _buildUserListItem(doc))
+              .toList(),
+        );
+      },
+    );
   }
 
   Widget _buildUserListItem(DocumentSnapshot document) {
@@ -90,30 +86,21 @@ class _ChatHomePageState extends State<ChatHomePage> {
 
     // Display all users except the current user
     if (_auth.currentUser!.email != data['email']) {
-      // print(data['email']);
-      //String clickedEmail = data['email']?.toString() ?? '';
-      //print(clickedEmail);
-
       return ListTile(
-        title: Text(
-          data['firstName']?.toString() ?? '',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ), // Wrap the String in a Text widget
+
+        leading: _buildProfilePicture(data['profilePictureURL']),
+        //title: Text(data['email']?.toString() ?? ''),
+        title: Text('${data['firstName']} ${data['lastName']}'),
+
         onTap: () {
-          //print(data['email']);
-          //print('acbccc');
-          //print(data['uid']?.toString() ?? widget.recieverUserID);
           Navigator.push(
             context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
                 recieverUserEmail: data['email'],
-                //data['email']?.toString() ?? widget.recieverUserEmail,
+
                 recieverUserID: data['uid'],
-                //data['uid']?.toString() ?? widget.recieverUserID,
-                firstName: data['firstName']?.toString() ?? '',
+
               ),
             ),
           );
@@ -123,4 +110,17 @@ class _ChatHomePageState extends State<ChatHomePage> {
       return Container();
     }
   }
+
+
+  Widget _buildProfilePicture(String? profilePictureURL) {
+    if (profilePictureURL != null && profilePictureURL.isNotEmpty) {
+      return CircleAvatar(
+        radius: 24,
+        backgroundImage: NetworkImage(profilePictureURL),
+      );
+    } else {
+      return const Icon(Icons.account_circle, size: 48, color: Colors.grey);
+    }
+  }
 }
+
