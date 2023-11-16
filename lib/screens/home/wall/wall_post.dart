@@ -30,7 +30,7 @@ class WallPost extends StatefulWidget {
     required this.likes,
     required this.imageUrls,
     required this.uid,
-    this.amount, 
+    this.amount,
     this.profilePictureURL,
   }) : super(key: key);
 
@@ -55,14 +55,19 @@ class _WallPostState extends State<WallPost> {
     //get to_now
     FirebaseFirestore.instance
         .collection('requests')
-        .doc(widget.postid) // Assuming postid uniquely identifies the post
+        .doc(widget.postid)
         .get()
         .then((postSnapshot) {
-      if (postSnapshot.exists) {
-
-        setState(() {
-          toNow = postSnapshot.data()?['to_now'];
-        });
+      if (mounted) {
+        // Check if the widget is still mounted
+        if (postSnapshot.exists) {
+          var data = postSnapshot.data();
+          if (data != null && data.containsKey('to_now')) {
+            setState(() {
+              toNow = data['to_now'];
+            });
+          }
+        }
       }
     });
 
@@ -75,9 +80,13 @@ class _WallPostState extends State<WallPost> {
         .doc(currentUser.uid)
         .snapshots()
         .listen((likeSnapshot) {
-      if (likeSnapshot.exists) {
+      if (likeSnapshot.data() != null) {
         setState(() {
           isliked = true;
+        });
+      } else {
+        setState(() {
+          isliked = false;
         });
       }
     });
@@ -106,83 +115,83 @@ class _WallPostState extends State<WallPost> {
     });
   }
 
-void toggleLike() {
-  if (mounted) {
-    setState(() {
-      isliked = !isliked;
+  void toggleLike() {
+    if (mounted) {
+      setState(() {
+        isliked = !isliked;
 
-      if (isliked) {
-        FirebaseFirestore.instance
-            .collection('likes')
-            .doc(widget.postid)
-            .collection('user_likes')
-            .doc(currentUser.uid)
-            .set({'liked': true});
-        likeCount++;
-      } else {
-        FirebaseFirestore.instance
-            .collection('likes')
-            .doc(widget.postid)
-            .collection('user_likes')
-            .doc(currentUser.uid)
-            .delete();
-        likeCount--;
-      }
-    });
+        if (isliked) {
+          FirebaseFirestore.instance
+              .collection('likes')
+              .doc(widget.postid)
+              .collection('user_likes')
+              .doc(currentUser.uid)
+              .set({'liked': true});
+          likeCount++;
+        } else {
+          FirebaseFirestore.instance
+              .collection('likes')
+              .doc(widget.postid)
+              .collection('user_likes')
+              .doc(currentUser.uid)
+              .delete();
+          likeCount--;
+        }
+      });
+    }
   }
-}
 
-
-@override
-void dispose() {
-  try {
-    likeSnapshotSubscription.cancel();
-    querySnapshotSubscription.cancel();
-  } catch (e) {
-    // Handle any exceptions thrown during cancellation
-    print('Error during disposal: $e');
+  @override
+  void dispose() {
+    try {
+      likeSnapshotSubscription.cancel();
+      querySnapshotSubscription.cancel();
+    } catch (e) {
+      // Handle any exceptions thrown during cancellation
+      print('Error during disposal: $e');
+    }
+    isDisposed = true;
+    super.dispose();
   }
-  isDisposed = true;
-  super.dispose();
-}
 
   @override
   Widget build(BuildContext context) {
-        final screenWidth = MediaQuery.of(context).size.width;
-  final screenHeight = MediaQuery.of(context).size.height;
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
 
     return Container(
       padding: const EdgeInsets.all(16.0),
       margin: const EdgeInsets.symmetric(vertical: 8.0),
       decoration: const BoxDecoration(
-                color: Color.fromARGB(255, 255,255,255),
-     
+        color: Color.fromARGB(255, 255, 255, 255),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-Row(
-  children: [
-    // Display the user's profile picture 
-    if (widget.profilePictureURL != null && widget.profilePictureURL!.isNotEmpty)
-      CircleAvatar(
-        radius: 24, //   size  
-        backgroundImage: NetworkImage(widget.profilePictureURL!),
-      ),
-    if (widget.profilePictureURL != null && widget.profilePictureURL!.isNotEmpty)
-      const SizedBox(width: 8), 
-    Text(
-      widget.firstName,
-      style: const TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 16.0,
-      ),
-    ),
-  ],
-),
-     
+          Row(
+            children: [
+              // Display the user's profile picture
+              if (widget.profilePictureURL != null &&
+                  widget.profilePictureURL!.isNotEmpty)
+                CircleAvatar(
+                  radius: 24, //   size
+                  backgroundImage: NetworkImage(widget.profilePictureURL!),
+                ),
+              if (widget.profilePictureURL != null &&
+                  widget.profilePictureURL!.isNotEmpty)
+                const SizedBox(width: 8),
+              Text(
+                widget.firstName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+            ],
+          ),
+
           const SizedBox(height: 8.0),
-          
+
           Text(
             "Caption : ${widget.caption}",
             style: const TextStyle(fontSize: 16.0),
@@ -210,12 +219,12 @@ Row(
                 children: widget.imageUrls
                     .map(
                       (imageUrl) => SizedBox(
-                                       height: screenHeight*0.5, // Set the desired height
-                        width: screenWidth,// Set the desired width
+                        height: screenHeight * 0.5, // Set the desired height
+                        width: screenWidth, // Set the desired width
                         child: Image.network(
                           imageUrl,
-                        height: screenHeight*0.5, // Set the desired height
-                        width: screenWidth,// Set the same width here
+                          height: screenHeight * 0.5, // Set the desired height
+                          width: screenWidth, // Set the same width here
                           fit:
                               BoxFit.cover, // Adjust the fit property as needed
                         ),
@@ -227,42 +236,42 @@ Row(
           const SizedBox(height: 16.0),
           Text(likeCount.toString()), // Display the like count
 
-  Row(
-  crossAxisAlignment: CrossAxisAlignment.center,
-  children: [
-    LikeButton(isliked: isliked, onTap: toggleLike),
-    const SizedBox(width: 8.0),
-    const Text(
-      'Like',
-      style: TextStyle(fontSize: 16.0),
-    ),
-    Expanded(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          const Icon(
-            Icons.comment_outlined,
-            size: 24.0,
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              LikeButton(isliked: isliked, onTap: toggleLike),
+              const SizedBox(width: 8.0),
+              const Text(
+                'Like',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    const Icon(
+                      Icons.comment_outlined,
+                      size: 24.0,
+                    ),
+                    const SizedBox(width: 8.0),
+                    const Text(
+                      'Comment',
+                      style: TextStyle(fontSize: 16.0),
+                    ),
+                    Visibility(
+                      visible: widget.amount != null && toNow != null,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          // ... existing code
+                        },
+                        child: const Text('Payment'),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
           ),
-          const SizedBox(width: 8.0),
-          const Text(
-            'Comment',
-            style: TextStyle(fontSize: 16.0),
-          ),
-          Visibility(
-            visible: widget.amount != null && toNow != null,
-            child: ElevatedButton(
-              onPressed: () async {
-                // ... existing code
-              },
-              child: const Text('Payment'),
-            ),
-          ),
-        ],
-      ),
-    ),
-  ],
-),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Visibility(
