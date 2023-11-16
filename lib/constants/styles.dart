@@ -29,13 +29,13 @@ const TextStyle signInRegisterText = TextStyle(
 );
 const TextStyle signInRegisterText2 = TextStyle(
   fontSize: 18,
-  color: Colors.black,
+ color: Colors.white,
   fontWeight: FontWeight.w300,
   
 );
 const TextStyle signInRegisterText3 = TextStyle(
   fontSize: 25,
-  color: Colors.black,
+   color: Colors.white,
   fontWeight: FontWeight.w500,
   
 );
