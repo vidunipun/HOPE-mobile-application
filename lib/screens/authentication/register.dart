@@ -96,7 +96,7 @@ class _RegisterState extends State<Register> {
                         ),
                         //first name
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               hintText: "First Name",
                               hintStyle: TextStyle(color: Colors.white),
@@ -117,7 +117,7 @@ class _RegisterState extends State<Register> {
                         ),
                         //last name
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               hintText: "Last Name",
                               hintStyle: TextStyle(color: Colors.white),
@@ -138,7 +138,7 @@ class _RegisterState extends State<Register> {
                         ),
                         //id number
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               hintText: "ID Number",
                               hintStyle: TextStyle(color: Colors.white),
@@ -155,7 +155,7 @@ class _RegisterState extends State<Register> {
                         ),
                         //mobile number
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               hintText: "Mobile Number",
                               hintStyle: TextStyle(color: Colors.white),
@@ -176,7 +176,7 @@ class _RegisterState extends State<Register> {
                         ),
                         //address
                         TextFormField(
-                          style: const TextStyle(color: Colors.black),
+                          style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
                               hintText: "Address",
                               hintStyle: TextStyle(color: Colors.white),
@@ -198,19 +198,31 @@ class _RegisterState extends State<Register> {
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
                           decoration: InputDecoration(
-                              hintText: "Password",
-                              hintStyle: TextStyle(color: Colors.white),
-                              enabledBorder: UnderlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.white))),
+                            hintText: "Password",
+                            hintStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
                           obscureText: true,
-                          validator: (val) =>
-                              val!.length < 6 ? "Enter a valid password" : null,
+                          validator: (val) {
+                            if (val!.length < 10) {
+                              return "Password should be at least 10 characters";
+                            }
+                            // Check if the password contains at least one number
+                            if (!val.contains(RegExp(r'\d'))) {
+                              return "Password must contain at least one number";
+                            }
+                            return null; // Password is valid
+                          },
                           onChanged: (val) {
                             setState(() {
                               password = val;
+                              print("Password: $password");
                             });
                           },
                         ),
+
                         // Divider between password form and social media login
                         const SizedBox(height: 25),
                         const Divider(

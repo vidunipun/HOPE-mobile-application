@@ -111,7 +111,7 @@ class _GetStartedState extends State<GetStarted> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => const Wrapper(),
+                        builder: (context) =>  Wrapper(),
                       ),
                     );
                   }
