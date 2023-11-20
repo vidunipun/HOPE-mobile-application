@@ -11,11 +11,7 @@ class payment extends StatefulWidget {
   final String postid;
 
   const payment(
-      {required this.cardNo,
-      Key? key,
-      required this.uid,
-      required this.postid,
-      String? usercard})
+      {required this.cardNo, Key? key, required this.uid, required this.postid, String? usercard})
       : super(key: key);
 
   @override
@@ -42,68 +38,44 @@ class _paymentState extends State<payment> {
   //paying //update sender
   Future<void> paycash() async {
     try {
-      // Get the current user
-      User? user = FirebaseAuth.instance.currentUser;
+      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+          await FirebaseFirestore.instance
+              .collection('Bank')
+              .doc(userUID)
+              .get();
 
-      if (user != null) {
-        final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-            await FirebaseFirestore.instance
-                .collection('users')
-                .doc(user.uid)
-                .get();
+      if (documentSnapshot.exists) {
+        final Map<String, dynamic>? userData = documentSnapshot.data();
+        if (userData != null) {
+          final String balance = userData['balance'];
+          print(balance);
+          int? intbalance = int.tryParse(balance);
+          int? intpay = int.tryParse(amountController.text);
+          int afterpay;
 
-        if (documentSnapshot.exists) {
-          final Map<String, dynamic>? userData = documentSnapshot.data();
-          if (userData != null) {
-            final String idNumber = userData['idnumber'];
+          if (intbalance != null) {
+            if (intpay != null) {
+              afterpay = intbalance - intpay;
+              print(afterpay);
 
-            final DocumentSnapshot<Map<String, dynamic>> bankSnapshot =
-                await FirebaseFirestore.instance
-                    .collection('Bank')
-                    .doc(idNumber)
-                    .get();
-
-            if (bankSnapshot.exists) {
-              final Map<String, dynamic>? bankData = bankSnapshot.data();
-              if (bankData != null) {
-                final String balance = bankData['balance'];
-                print(balance);
-
-                int? intbalance = int.tryParse(balance);
-                int? intpay = int.tryParse(amountController.text);
-                int afterpay;
-
-                if (intbalance != null && intpay != null) {
-                  afterpay = intbalance - intpay;
-                  print(afterpay);
-
-                  // Update sender bank
-                  DocumentReference<Map<String, dynamic>> documentReference =
-                      FirebaseFirestore.instance
-                          .collection('Bank')
-                          .doc(idNumber);
-                  documentReference.update({
-                    'balance': afterpay.toString(),
-                  }).then((value) {
-                    print('Field updated successfully.');
-                  }).catchError((error) {
-                    print('Error updating field: $error');
-                  });
-                }
-              }
-            } else {
-              print(
-                  'Bank details not found for user with id_number: $idNumber');
+              //update sender Bank
+              DocumentReference<Map<String, dynamic>> documentReference =
+                  FirebaseFirestore.instance.collection('Bank').doc(userUID);
+              documentReference.update({
+                'balance': afterpay.toString(),
+              }).then((value) {
+                print('Field updated successfully.');
+              }).catchError((error) {
+                print('Error updating field: $error');
+              });
             }
           }
-        } else {
-          print('User details not found.');
         }
       } else {
-        print('No current user.');
+        print('card details are nothing match.');
       }
     } catch (e) {
-      print('Error checking user and bank details: $e');
+      print('Error checking card details: $e');
     }
     print(widget.cardNo);
   }
@@ -113,56 +85,42 @@ class _paymentState extends State<payment> {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
-              .collection('users')
+              .collection('Bank')
               .doc(widget.uid)
               .get();
 
       if (documentSnapshot.exists) {
         final Map<String, dynamic>? userData = documentSnapshot.data();
         if (userData != null) {
-          final String idNumber = userData['idnumber'];
+          final String balance = userData['balance'];
+          print(balance);
+          int? rintbalance = int.tryParse(balance);
+          int? rintpay = int.tryParse(amountController.text);
+          int rafterpay;
 
-          final DocumentSnapshot<Map<String, dynamic>> bankSnapshot =
-              await FirebaseFirestore.instance
-                  .collection('Bank')
-                  .doc(idNumber)
-                  .get();
+          if (rintbalance != null) {
+            if (rintpay != null) {
+              rafterpay = rintbalance + rintpay;
+              print(rafterpay);
 
-          if (bankSnapshot.exists) {
-            final Map<String, dynamic>? bankData = bankSnapshot.data();
-            if (bankData != null) {
-              final String balance = bankData['balance'];
-              print(balance);
-
-              int? rintbalance = int.tryParse(balance);
-              int? rintpay = int.tryParse(amountController.text);
-              int rafterpay;
-
-              if (rintbalance != null && rintpay != null) {
-                rafterpay = rintbalance + rintpay;
-                print(rafterpay);
-
-                // Update receiver's bank
-                DocumentReference<Map<String, dynamic>> documentReference =
-                    FirebaseFirestore.instance.collection('Bank').doc(idNumber);
-                documentReference.update({
-                  'balance': rafterpay.toString(),
-                }).then((value) {
-                  print('Field updated successfully.');
-                }).catchError((error) {
-                  print('Error updating field: $error');
-                });
-              }
+              //update reciver Bank
+              DocumentReference<Map<String, dynamic>> documentReference =
+                  FirebaseFirestore.instance.collection('Bank').doc(widget.uid);
+              documentReference.update({
+                'balance': rafterpay.toString(),
+              }).then((value) {
+                print('Field updated successfully.');
+              }).catchError((error) {
+                print('Error updating field: $error');
+              });
             }
-          } else {
-            print('Bank details not found for user with id_number: $idNumber');
           }
         }
       } else {
-        print('User details not found.');
+        print('card details are nothing match.');
       }
     } catch (e) {
-      print('Error checking user and bank details: $e');
+      print('Error checking card details: $e');
     }
     print(widget.cardNo);
   }
