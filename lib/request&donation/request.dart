@@ -333,361 +333,366 @@ class _RequestPageState extends State<RequestPage> {
                     ),
                   ],
                 ),
-                Form(
-                  key: _formKey,
-                  child: ListView(
-                    shrinkWrap: true,
-                    children: <Widget>[
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _captionController,
-                              decoration: InputDecoration(
-                                  labelText: 'Caption',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a caption';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.info, color: buttonboarder),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Caption Guidance'),
-                                    content:
-                                        Text('Enter a caption of the post.'),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  );
+                Expanded(
+                  child: Form(
+                    key: _formKey,
+                    child: ListView(
+                      shrinkWrap: true,
+                      children: <Widget>[
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _captionController,
+                                decoration: InputDecoration(
+                                    labelText: 'Caption',
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.white))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a caption';
+                                  }
+                                  return null;
                                 },
-                              );
-                            },
-                            tooltip: 'Caption Guidance',
-                          ),
-                        ],
-                      ),
+                              ),
+                            ),
+                            IconButton(
+                              icon:
+                                  const Icon(Icons.info, color: buttonboarder),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Caption Guidance'),
+                                      content:
+                                          Text('Enter a caption of the post.'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              tooltip: 'Caption Guidance',
+                            ),
+                          ],
+                        ),
 
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _descriptionController,
-                              decoration: InputDecoration(
-                                  labelText: 'Description',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a description';
-                                }
-                                return null;
-                              },
-                            ),
-                          ),
-                          IconButton(
-                            icon: const Icon(Icons.info, color: buttonboarder),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Description Guidance'),
-                                    content: Text(
-                                        'Enter a detailed description of the post.'),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  );
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _descriptionController,
+                                decoration: InputDecoration(
+                                    labelText: 'Description',
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.white))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a description';
+                                  }
+                                  return null;
                                 },
-                              );
-                            },
-                            tooltip: 'Description Guidance',
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _contacController,
-                              decoration: InputDecoration(
-                                  labelText: 'Contact',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a valid contact number';
-                                }
-                                return null;
+                              ),
+                            ),
+                            IconButton(
+                              icon:
+                                  const Icon(Icons.info, color: buttonboarder),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Description Guidance'),
+                                      content: Text(
+                                          'Enter a detailed description of the post.'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
+                              tooltip: 'Description Guidance',
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.info, color: buttonboarder),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Contact Guidance'),
-                                    content: Text(
-                                        'Enter a valid contact number for inquiries.'),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  );
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _contacController,
+                                decoration: InputDecoration(
+                                    labelText: 'Contact',
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.white))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a valid contact number';
+                                  }
+                                  return null;
                                 },
-                              );
-                            },
-                            tooltip: 'Contact Guidance',
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _amountController,
-                              decoration: InputDecoration(
-                                  labelText: 'Amount',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white))),
+                              ),
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.info, color: buttonboarder),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Amount Guidance'),
-                                    content: Text(
-                                        'Enter the amount or leave it empty if not applicable.'),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  );
-                                },
-                              );
-                            },
-                            tooltip: 'Amount Guidance',
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Expanded(
-                            child: TextFormField(
-                              controller: _locationController,
-                              decoration: InputDecoration(
-                                  labelText: 'Location',
-                                  labelStyle: TextStyle(color: Colors.white),
-                                  enabledBorder: UnderlineInputBorder(
-                                      borderSide:
-                                          BorderSide(color: Colors.white))),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter a location';
-                                }
-                                return null;
+                            IconButton(
+                              icon: Icon(Icons.info, color: buttonboarder),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Contact Guidance'),
+                                      content: Text(
+                                          'Enter a valid contact number for inquiries.'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
-                              onTap: () {
-                                _openLocationModel();
+                              tooltip: 'Contact Guidance',
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _amountController,
+                                decoration: InputDecoration(
+                                    labelText: 'Amount',
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.white))),
+                              ),
+                            ),
+                            IconButton(
+                              icon: Icon(Icons.info, color: buttonboarder),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Amount Guidance'),
+                                      content: Text(
+                                          'Enter the amount or leave it empty if not applicable.'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
                               },
+                              tooltip: 'Amount Guidance',
                             ),
-                          ),
-                          IconButton(
-                            icon: Icon(Icons.info, color: buttonboarder),
-                            onPressed: () {
-                              showDialog(
-                                context: context,
-                                builder: (context) {
-                                  return AlertDialog(
-                                    title: Text('Location Guidance'),
-                                    content: Text(
-                                        'Enter the related location of the post.'),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: () {
-                                          Navigator.of(context).pop();
-                                        },
-                                        child: Text('OK'),
-                                      ),
-                                    ],
-                                  );
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Expanded(
+                              child: TextFormField(
+                                controller: _locationController,
+                                decoration: InputDecoration(
+                                    labelText: 'Location',
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    enabledBorder: UnderlineInputBorder(
+                                        borderSide:
+                                            BorderSide(color: Colors.white))),
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return 'Please enter a location';
+                                  }
+                                  return null;
                                 },
-                              );
-                            },
-                            tooltip: 'Location Guidance',
-                          ),
-                        ],
-                      ),
-                      imagepath != null
-                          ? Container(
-                              width: 100,
-                              height: 100,
-                              child: Image.file(imagepath!),
-                            )
-                          : Text(
-                              "Image not chosen yet",
-                              style: TextStyle(
-                                  color: Colors
-                                      .white), // Set the text color to white
+                                onTap: () {
+                                  _openLocationModel();
+                                },
+                              ),
                             ),
-                      ElevatedButton(
-                        onPressed: getImage,
-                        child: const Text(
-                          "Add medical Image",
-                          style: TextStyle(
-                            color: buttonbackground,
-                            fontSize: 20,
-                            fontFamily: 'Otomanopee One',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
+                            IconButton(
+                              icon: Icon(Icons.info, color: buttonboarder),
+                              onPressed: () {
+                                showDialog(
+                                  context: context,
+                                  builder: (context) {
+                                    return AlertDialog(
+                                      title: Text('Location Guidance'),
+                                      content: Text(
+                                          'Enter the related location of the post.'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                          child: Text('OK'),
+                                        ),
+                                      ],
+                                    );
+                                  },
+                                );
+                              },
+                              tooltip: 'Location Guidance',
+                            ),
+                          ],
+                        ),
+                        imagepath != null
+                            ? Container(
+                                width: 100,
+                                height: 100,
+                                child: Image.file(imagepath!),
+                              )
+                            : Text(
+                                "Image not chosen yet",
+                                style: TextStyle(
+                                    color: Colors
+                                        .white), // Set the text color to white
+                              ),
+                        ElevatedButton(
+                          onPressed: getImage,
+                          child: const Text(
+                            "Add medical Image",
+                            style: TextStyle(
+                              color: buttonbackground,
+                              fontSize: 20,
+                              fontFamily: 'Otomanopee One',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: startButtonGreen,
+                            side: BorderSide(
+                                color: Color(0xFF0BFFFF),
+                                width:
+                                    2), // Set the background color to 0xFF121312
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: startButtonGreen,
-                          side: BorderSide(
-                              color: Color(0xFF0BFFFF),
-                              width:
-                                  2), // Set the background color to 0xFF121312
-                        ),
-                      ),
 
-                      // ElevatedButton(
-                      //     onPressed: uploadimage, child: const Text("Upload")),
-                      // TextFormField(
-                      //   controller: _confirmationController,
-                      //   decoration: const InputDecoration(labelText: 'Confirmation'),
-                      //   validator: (value) {
-                      //     if (value == null || value.isEmpty) {
-                      //       return 'Please enter a confirmation';
-                      //     }
-                      //     return null;
-                      //   },
-                      // ),
-                      ElevatedButton(
-                        onPressed: _selectImage,
-                        child: const Text(
-                          'Add post Images',
-                          style: TextStyle(
-                            color: buttonbackground,
-                            fontSize: 20,
-                            fontFamily: 'Otomanopee One',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
+                        // ElevatedButton(
+                        //     onPressed: uploadimage, child: const Text("Upload")),
+                        // TextFormField(
+                        //   controller: _confirmationController,
+                        //   decoration: const InputDecoration(labelText: 'Confirmation'),
+                        //   validator: (value) {
+                        //     if (value == null || value.isEmpty) {
+                        //       return 'Please enter a confirmation';
+                        //     }
+                        //     return null;
+                        //   },
+                        // ),
+                        ElevatedButton(
+                          onPressed: _selectImage,
+                          child: const Text(
+                            'Add post Images',
+                            style: TextStyle(
+                              color: buttonbackground,
+                              fontSize: 20,
+                              fontFamily: 'Otomanopee One',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: startButtonGreen,
+                            side: BorderSide(
+                                color: Color(0xFF0BFFFF),
+                                width:
+                                    2), // Set the background color to 0xFF121312
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: startButtonGreen,
-                          side: BorderSide(
-                              color: Color(0xFF0BFFFF),
-                              width:
-                                  2), // Set the background color to 0xFF121312
-                        ),
-                      ),
-                      _selectedImages.isNotEmpty
-                          ? Column(
-                              children: _selectedImages
-                                  .map((image) => Container(
-                                        width: 100,
-                                        height: 100,
-                                        child: Image.file(image,
-                                            fit: BoxFit.cover),
-                                      ))
-                                  .toList(),
-                            )
-                          : Container(), // Optionally display a placeholder if there are no selected images
+                        _selectedImages.isNotEmpty
+                            ? Column(
+                                children: _selectedImages
+                                    .map((image) => Container(
+                                          width: 100,
+                                          height: 100,
+                                          child: Image.file(image,
+                                              fit: BoxFit.cover),
+                                        ))
+                                    .toList(),
+                              )
+                            : Container(), // Optionally display a placeholder if there are no selected images
 
-                      SizedBox(height: 10),
-                      // ElevatedButton(
-                      //   onPressed: _uploadImages,
-                      //   child: const Text('Upload Images'),
-                      // ),
-                      Theme(
-                        data: ThemeData(unselectedWidgetColor: Colors.white),
-                        child: CheckboxListTile(
-                          title: Text(
-                            'I verify that all the information is correct',
-                            style: TextStyle(color: Colors.white),
+                        SizedBox(height: 10),
+                        // ElevatedButton(
+                        //   onPressed: _uploadImages,
+                        //   child: const Text('Upload Images'),
+                        // ),
+                        Theme(
+                          data: ThemeData(unselectedWidgetColor: Colors.white),
+                          child: CheckboxListTile(
+                            title: Text(
+                              'I verify that all the information is correct',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            value: _isInformationCorrect,
+                            onChanged: (value) {
+                              setState(() {
+                                _isInformationCorrect = value!;
+                              });
+                            },
                           ),
-                          value: _isInformationCorrect,
-                          onChanged: (value) {
-                            setState(() {
-                              _isInformationCorrect = value!;
-                            });
+                        ),
+                        const SizedBox(height: 10),
+                        ElevatedButton(
+                          onPressed: () async {
+                            await _submitRequest();
+
+                            Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                builder: (context) => const Home(),
+                              ),
+                            );
                           },
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                      ElevatedButton(
-                        onPressed: () async {
-                          await _submitRequest();
-
-                          Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(
-                              builder: (context) => const Home(),
+                          child: const Text(
+                            'Submit',
+                            style: TextStyle(
+                              color: buttonbackground,
+                              fontSize: 20,
+                              fontFamily: 'Otomanopee One',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
                             ),
-                          );
-                        },
-                        child: const Text(
-                          'Submit',
-                          style: TextStyle(
-                            color: buttonbackground,
-                            fontSize: 20,
-                            fontFamily: 'Otomanopee One',
-                            fontWeight: FontWeight.w400,
-                            height: 0,
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor:
+                                startButtonGreen, // Set the background color to 0xFF164356
+                            side:
+                                BorderSide(color: Color(0xFF0BFFFF), width: 2),
                           ),
                         ),
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor:
-                              startButtonGreen, // Set the background color to 0xFF164356
-                          side: BorderSide(color: Color(0xFF0BFFFF), width: 2),
-                        ),
-                      ),
-                      const SizedBox(height: 10),
-                    ],
+                        const SizedBox(height: 10),
+                      ],
+                    ),
                   ),
                 ),
               ]),

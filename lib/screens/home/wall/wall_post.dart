@@ -186,60 +186,132 @@ class _WallPostState extends State<WallPost> {
               if (widget.profilePictureURL != null &&
                   widget.profilePictureURL!.isNotEmpty)
                 const SizedBox(width: 8),
-              Text(
-                widget.firstName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
                 ),
-              ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(
-                widget.lastName,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16.0,
+                child: Row(
+                  children: [
+                    Text(
+                      widget.firstName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Text(
+                      widget.lastName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
+                  ],
                 ),
-              ),
+              )
             ],
           ),
 
           const SizedBox(height: 8.0),
+          Container(
+            width: double.infinity,
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.0),
+                border: Border.all(
+                  //color: Colors.grey[300],
+                  width: 1.0,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // Align children to the left
+                children: [
+                  Text(
+                    " ${widget.caption}",
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "${widget.description}",
+                    style: const TextStyle(fontSize: 16.0),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Visibility(
+                    visible: widget.amount != null,
+                    child: Text(
+                      "Need Rs ${widget.amount}",
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
 
-          Text(
-            " ${widget.caption}",
-            style: const TextStyle(
-              fontSize: 18.0,
-              fontWeight: FontWeight.bold,
-            ),
-            textAlign: TextAlign.center, // Center the text
-          ),
           SizedBox(
             height: 5,
           ),
-          Text(
-            "${widget.description}",
-            style: const TextStyle(fontSize: 16.0),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.location_on,
+                color: Colors.blue,
+                size: 28, // Set your desired icon color
+              ),
+              SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Location:",
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "${widget.location}",
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ],
+              ),
+            ],
           ),
-          SizedBox(
-            height: 5,
-          ),
-          Visibility(
-            visible: widget.amount != null,
-            child: Text(
-              "Need Rs ${widget.amount}",
-              style: const TextStyle(fontSize: 16.0),
-            ),
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            "Location : ${widget.location}",
-            style: const TextStyle(fontSize: 16.0),
-          ),
+
           const SizedBox(height: 16.0),
           if (widget.imageUrls.isNotEmpty)
             Center(
