@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print
 
 import 'package:auth/components/like_button.dart';
+import 'package:auth/transaction/payment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -237,7 +238,6 @@ class _WallPostState extends State<WallPost> {
           Text(likeCount.toString()), // Display the like count
 
           Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               LikeButton(isliked: isliked, onTap: toggleLike),
               const SizedBox(width: 8.0),
@@ -245,31 +245,65 @@ class _WallPostState extends State<WallPost> {
                 'Like',
                 style: TextStyle(fontSize: 16.0),
               ),
-              Expanded(
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    const Icon(
-                      Icons.comment_outlined,
-                      size: 24.0,
-                    ),
-                    const SizedBox(width: 8.0),
-                    const Text(
-                      'Comment',
-                      style: TextStyle(fontSize: 16.0),
-                    ),
-                    Visibility(
-                      visible: widget.amount != null && toNow != null,
-                      child: ElevatedButton(
-                        onPressed: () async {
-                          // ... existing code
-                        },
-                        child: const Text('Payment'),
-                      ),
-                    ),
-                  ],
+              const SizedBox(width: 100.0),
+              const Icon(
+                Icons.comment_outlined,
+                size: 24.0,
+              ),
+              const SizedBox(width: 8.0),
+              const Text(
+                'Comment',
+                style: TextStyle(fontSize: 16.0),
+              ),
+              SizedBox(
+                width: 17,
+              ),
+              Visibility(
+                visible: widget.amount != null && toNow != null,
+                
+                child: ElevatedButton(
+                  onPressed: () async {
+                    try {
+                      final DocumentSnapshot<Map<String, dynamic>>
+                          documentSnapshot = await FirebaseFirestore.instance
+                              .collection('Bank')
+                              .doc(widget.uid) // Use the provided UID
+                              .get();
+                      print(widget.uid);
+              
+                      if (documentSnapshot.exists) {
+                        final String cardNo =
+                            documentSnapshot.data()?['card_number'] ?? '';
+              
+                        if (cardNo.isNotEmpty) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => payment(
+                                postid: widget.postid,
+                                cardNo: cardNo,
+                                uid: widget.uid,
+                              ), // Pass cardNo to Payment
+                            ),
+                          );
+                        } else {
+                          // Handle the case when card_no is empty
+              
+                          print('Card number is empty.');
+                        }
+                      } else {
+                        // Handle the case when the document does not exist
+                        print('Card document not found.');
+                      }
+                    } catch (e) {
+                      print('Error retrieving card details: $e');
+                    }
+                  },
+                  child: Text('Payment'),
                 ),
               ),
+
+              // Display images if available
             ],
           ),
           Padding(
@@ -281,6 +315,7 @@ class _WallPostState extends State<WallPost> {
                 children: [
                   LinearProgressIndicator(
                     minHeight: 15,
+                  
                     //borderRadius: const BorderRadius.all(Radius.circular(10)),
                     value: toNow != null && widget.amount != null
                         ? toNow! / double.tryParse(widget.amount!)!
@@ -299,7 +334,7 @@ class _WallPostState extends State<WallPost> {
                       Text(
                         'Percentage: ${widget.amount != null && toNow != null ? ((toNow! / double.tryParse(widget.amount!)!) * 100).toStringAsFixed(2) : '0.00'}%',
                         style: const TextStyle(fontSize: 16.0),
-                      ),
+                           ),
                     ],
                   ),
                 ],
