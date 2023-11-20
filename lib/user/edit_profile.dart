@@ -11,7 +11,6 @@ class EditProfilePage extends StatefulWidget {
   const EditProfilePage({Key? key}) : super(key: key);
 
   @override
-  // ignore: library_private_types_in_public_api
   _EditProfilePageState createState() => _EditProfilePageState();
 }
 
@@ -23,7 +22,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
 
   File? _imageFile; // Selected image file
   final ImagePicker _imagePicker = ImagePicker();
-    String? profilePictureURL;
+  String? profilePictureURL;
 
   @override
   void initState() {
@@ -144,10 +143,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                             : (_imageFile != null
                                 ? FileImage(_imageFile!)
                                     as ImageProvider<Object>
-                                : const AssetImage(
-                                    'assets/placeholder.png')), 
-                                : AssetImage(
-                                    'assets/placeholder.jpg')), 
+                                : const AssetImage('assets/placeholder.png')),
                         fit: BoxFit.cover,
                       ),
                     ),

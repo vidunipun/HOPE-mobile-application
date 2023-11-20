@@ -65,7 +65,8 @@ class _WallDonationState extends State<WallDonation> {
       }
     });
 
-    postRef = FirebaseFirestore.instance.collection('donations').doc(widget.uid);
+    postRef =
+        FirebaseFirestore.instance.collection('donations').doc(widget.uid);
 
     likeSnapshotSubscription = FirebaseFirestore.instance
         .collection('likes')
@@ -202,7 +203,8 @@ class _WallDonationState extends State<WallDonation> {
                           imageUrl,
                           height: 200, // Set the same height here
                           width: 200, // Set the same width here
-                          fit: BoxFit.cover, // Adjust the fit property as needed
+                          fit:
+                              BoxFit.cover, // Adjust the fit property as needed
                         ),
                       ),
                     )
@@ -237,12 +239,16 @@ class _WallDonationState extends State<WallDonation> {
                 child: ElevatedButton(
                   onPressed: () async {
                     try {
-                      final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
-                          await FirebaseFirestore.instance.collection('bank').doc(widget.uid).get();
+                      final DocumentSnapshot<Map<String, dynamic>>
+                          documentSnapshot = await FirebaseFirestore.instance
+                              .collection('bank')
+                              .doc(widget.uid)
+                              .get();
                       print(widget.uid);
 
                       if (documentSnapshot.exists) {
-                        final String cardNo = documentSnapshot.data()?['card_number'] ?? '';
+                        final String cardNo =
+                            documentSnapshot.data()?['card_number'] ?? '';
 
                         if (cardNo.isNotEmpty) {
                           // ignore: use_build_context_synchronously
@@ -282,20 +288,24 @@ class _WallDonationState extends State<WallDonation> {
                 children: [
                   LinearProgressIndicator(
                     minHeight: 15,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
-                    value: toNow != null && widget.amount != null ? toNow! / double.tryParse(widget.amount!)! : 0.0,
+                    //borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    value: toNow != null && widget.amount != null
+                        ? toNow! / double.tryParse(widget.amount!)!
+                        : 0.0,
                   ),
-                 const  SizedBox(height: 10,),
+                  const SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
                         'To fill ${widget.amount != null && toNow != null ? (double.tryParse(widget.amount!)! - toNow!).toStringAsFixed(2) : '0.00'}',
-                        style:const  TextStyle(fontSize: 16.0),
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                       Text(
                         'Percentage: ${widget.amount != null && toNow != null ? ((toNow! / double.tryParse(widget.amount!)!) * 100).toStringAsFixed(2) : '0.00'}%',
-                        style:const  TextStyle(fontSize: 16.0),
+                        style: const TextStyle(fontSize: 16.0),
                       ),
                     ],
                   ),
