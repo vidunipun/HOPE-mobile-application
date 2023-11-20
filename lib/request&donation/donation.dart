@@ -291,25 +291,24 @@ class _DonationPageState extends State<DonationPage> {
           child: ListView(
             children: <Widget>[
               Row(
-                 children: [
-                IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  tooltip: 'Back',
-                ),
-                Text(
-                  'Add Events',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ],
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    tooltip: 'Back',
+                  ),
+                  Text(
+                    'Donations',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ],
               ),
               Row(
-                
                 children: [
                   Expanded(
                     child: TextFormField(
@@ -495,8 +494,8 @@ class _DonationPageState extends State<DonationPage> {
                         builder: (context) {
                           return AlertDialog(
                             title: const Text('Location Guidance'),
-                            content:
-                                const Text('Enter the related location of the post.'),
+                            content: const Text(
+                                'Enter the related location of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {

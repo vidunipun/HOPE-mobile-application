@@ -93,13 +93,12 @@ class _HomeState extends State<Home> {
     return profilePictureURL;
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: startBackgroundBlack,
+      backgroundColor: buttonbackground,
       appBar: AppBar(
-        backgroundColor: startBackgroundBlack,
+        backgroundColor: buttonbackground,
         title: const Text("Home"),
         actions: [
           ElevatedButton(
@@ -132,7 +131,7 @@ class _HomeState extends State<Home> {
                           ? List<String>.from(post.data()['Likes'])
                           : [];
 
-                        // Get the user's profile picture URL
+                      // Get the user's profile picture URL
                       return FutureBuilder(
                         future: fetchProfilePictureURL(post.data()['userId']),
                         builder: (context, profilePictureSnapshot) {
@@ -162,8 +161,6 @@ class _HomeState extends State<Home> {
                             return const CircularProgressIndicator();
                           }
                         },
-                      
-
                       );
                     },
                   );
@@ -181,132 +178,127 @@ class _HomeState extends State<Home> {
         ],
       ),
       bottomNavigationBar: BottomAppBar(
-          child: Container(
-    height: 60,
-    color: startBackgroundBlack,
-    child: Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        Expanded(
-  child: Container(
-    margin: const EdgeInsets.only(bottom: 12), // Adjust the margin as needed
-    child: IconButton(
-      onPressed: () {
-        // Handle Home button press
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Home(),
-          ),
-        );
-        print(currentUser?.uid);
-      },
-      icon: Container(
-        width: 40,
-        height: 40,
-        color: startBackgroundBlack,
-        child: Image.asset("assets/Home.png"),
-      ),
-    ),
-  ),
-),
-        Expanded(
-          child: IconButton(
-            onPressed: () {
-              // Handle Chat button press
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ChatHomePage(),
-                ),
-              );
-            },
-            icon: Container(
-              width: 40,
-              height: 40,
-              color: startBackgroundBlack,
-              child: Image.asset("assets/Chat Round Dots.png"),
-            ),
-          ),
-        ),
-        Flexible(
-          flex: 2,
-          child: Container(
-            margin: const EdgeInsets.all(0),
-            child: IconButton(
-              onPressed: () {
-                // Handle Add post button press
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => SelectionPage(),
-                  ),
-                );
-              },
-              iconSize: 70,
-              icon: CircleAvatar(
-                backgroundColor: const Color(0xFF0BFFFF),
-                radius: 40,
-                child: ClipOval(
-                  child: Image.asset(
-                    'assets/Add Circle.png',
-                    width: 43,
-                    height: 43,
-                    fit: BoxFit.cover,
+        child: Container(
+          height: 60,
+          color: buttonbackground,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: Container(
+                  margin: const EdgeInsets.only(
+                      bottom: 12), // Adjust the margin as needed
+                  child: IconButton(
+                    onPressed: () {
+                      // Handle Home button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const Home(),
+                        ),
+                      );
+                      print(currentUser?.uid);
+                    },
+                    icon: Container(
+                      width: 40,
+                      height: 40,
+                      color: buttonbackground,
+                      child: Image.asset("assets/Home.png"),
+                    ),
                   ),
                 ),
-       
               ),
-               ),
-          ),
-        ),
-        Expanded(
-          child: IconButton(
-            onPressed: () {
-              // Handle events button press
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const EventHome(),
+              Expanded(
+                child: IconButton(
+                  onPressed: () {
+                    // Handle Chat button press
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ChatHomePage(),
+                      ),
+                    );
+                  },
+                  icon: Container(
+                    width: 40,
+                    height: 40,
+                    color: buttonbackground,
+                    child: Image.asset("assets/Chat Round Dots.png"),
+                  ),
                 ),
-              );
-            },
-            icon: Container(
-              width: 40,
-              height: 40,
-              color: startBackgroundBlack,
-              child: Image.asset("assets/Calendar Date.png"),
-            ),
-          ),
-        ),
-        Expanded(
-          child: IconButton(
-            onPressed: () {
-              // Handle Profile button press
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ProfilePage(),
+              ),
+              Flexible(
+                flex: 2,
+                child: Container(
+                  margin: const EdgeInsets.all(0),
+                  child: IconButton(
+                    onPressed: () {
+                      // Handle Add post button press
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => SelectionPage(),
+                        ),
+                      );
+                    },
+                    iconSize: 70,
+                    icon: CircleAvatar(
+                      backgroundColor: const Color(0xFF0BFFFF),
+                      radius: 40,
+                      child: ClipOval(
+                        child: Image.asset(
+                          'assets/Add Circle.png',
+                          width: 43,
+                          height: 43,
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
                 ),
-                 );
-            },
-            icon: Container(
-              width: 40,
-              height: 40,
-              color: startBackgroundBlack,
-              child: Image.asset("assets/Combined-Shape.png"),
-            ),
-
-
-            
+              ),
+              Expanded(
+                child: IconButton(
+                  onPressed: () {
+                    // Handle events button press
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const EventHome(),
+                      ),
+                    );
+                  },
+                  icon: Container(
+                    width: 40,
+                    height: 40,
+                    color: buttonbackground,
+                    child: Image.asset("assets/Calendar Date.png"),
+                  ),
+                ),
+              ),
+              Expanded(
+                child: IconButton(
+                  onPressed: () {
+                    // Handle Profile button press
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ProfilePage(),
+                      ),
+                    );
+                  },
+                  icon: Container(
+                    width: 40,
+                    height: 40,
+                    color: buttonbackground,
+                    child: Image.asset("assets/Combined-Shape.png"),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
-          ],
-    ),
-  ),
-),
-
-      
+      ),
     );
   }
 }
