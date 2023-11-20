@@ -33,6 +33,7 @@ class _RequestPageState extends State<RequestPage> {
   String? selectedState = '';
   String? selectedCity = '';
   String? _firstName;
+  String? _lastName;
 
   User? user;
 
@@ -99,6 +100,7 @@ class _RequestPageState extends State<RequestPage> {
             userSnapshot.data() as Map<String, dynamic>;
         setState(() {
           _firstName = userData['firstName'] ?? '';
+          _lastName = userData['lastName'] ?? '';
         });
       }
     }
@@ -160,6 +162,7 @@ class _RequestPageState extends State<RequestPage> {
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
+            'lastName': _firstName,
             'TimeStamp': FieldValue.serverTimestamp(),
             'amount': amount,
             'to_now': 0,

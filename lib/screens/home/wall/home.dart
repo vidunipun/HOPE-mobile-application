@@ -156,7 +156,7 @@ class _HomeState extends State<Home> {
                                       ?.map((dynamic url) => url.toString())
                                       .toList() ??
                                   [],
-                              profilePictureURL: profilePictureURL,
+                              profilePictureURL: profilePictureURL, lastName: post.data()['lastName'],
                             );
                           } else {
                             return const CircularProgressIndicator();
