@@ -25,6 +25,7 @@ class _RegisterState extends State<Register> {
   String lname = "";
   String mobilenumber = "";
   String address = "";
+  String idnumber = "";
 
   @override
   Widget build(BuildContext context) {
@@ -134,6 +135,23 @@ class _RegisterState extends State<Register> {
 
                         const SizedBox(
                           height: 7,
+                        ),
+                        //id number
+                        TextFormField(
+                          style: const TextStyle(color: Colors.black),
+                          decoration: InputDecoration(
+                              hintText: "ID Number",
+                              hintStyle: TextStyle(color: Colors.white),
+                              enabledBorder: UnderlineInputBorder(
+                                  borderSide: BorderSide(color: Colors.white))),
+                          validator: (val) => val?.isEmpty == true
+                              ? "Enter the Id number"
+                              : null,
+                          onChanged: (val) {
+                            setState(() {
+                              idnumber = val;
+                            });
+                          },
                         ),
                         //mobile number
                         TextFormField(
@@ -271,7 +289,6 @@ class _RegisterState extends State<Register> {
                         GestureDetector(
                           //method for register
                           onTap: () async {
-
                             dynamic result =
                                 await _auth.registerWithEmailAndPassword(
                                     email,
@@ -279,7 +296,8 @@ class _RegisterState extends State<Register> {
                                     lname,
                                     mobilenumber,
                                     address,
-                                    password);
+                                    password,
+                                    idnumber);
                           },
                           child: Container(
                             height: 40,

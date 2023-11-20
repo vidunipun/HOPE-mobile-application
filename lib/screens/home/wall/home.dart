@@ -31,6 +31,7 @@ class _HomeState extends State<Home> {
     super.initState();
     currentUser = FirebaseAuth.instance.currentUser;
     updatemysql();
+    print(currentUser!.uid);
   }
 
   Future<void> updatemysql() async {
