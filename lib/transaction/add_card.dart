@@ -72,6 +72,8 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
     String cvv = cvvController.text;
 
     try {
+      User? currentUser = FirebaseAuth.instance.currentUser;
+
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
               .collection('Bank')
@@ -96,7 +98,10 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
               });
 
               print('Card details are valid. Proceed with the transaction.');
-              await FirebaseFirestore.instance.collection('cards').add({
+              await FirebaseFirestore.instance
+                  .collection('cards')
+                  .doc(currentUser?.uid)
+                  .set({
                 'card_no': cardNumber,
                 'exp_date': expDate,
                 'cvv': cvv,
