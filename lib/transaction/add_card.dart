@@ -39,7 +39,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
-              .collection('bank')
+              .collection('Bank')
               .doc(userUID)
               .get();
 
@@ -74,14 +74,14 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
     try {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
-              .collection('bank')
+              .collection('Bank')
               .doc(userUID)
               .get();
 
       if (documentSnapshot.exists) {
         final Map<String, dynamic>? userData = documentSnapshot.data();
         if (userData != null) {
-          final String? storedCardNumber = userData['card_no'];
+          final String? storedCardNumber = userData['card_number'];
           final String? storedExpDate = userData['exp_date'];
           final String? storedCVV = userData['cvv'];
 
@@ -164,7 +164,8 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
             const SizedBox(height: 16.0),
             TextField(
               controller: expDateController,
-              decoration: const InputDecoration(labelText: 'Expiration Date (MM/YY)'),
+              decoration:
+                  const InputDecoration(labelText: 'Expiration Date (MM/YY)'),
             ),
             const SizedBox(height: 16.0),
             TextField(
