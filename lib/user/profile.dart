@@ -1,18 +1,21 @@
 // ignore_for_file: unused_local_variable, duplicate_ignore, use_key_in_widget_constructors
 
+import 'package:auth/services/auth.dart';
 import 'package:auth/transaction/add_card.dart';
 import 'package:auth/user/edit_profile.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 
 class ProfilePage extends StatelessWidget {
   const ProfilePage({Key? key});
 
   @override
   Widget build(BuildContext context) {
-  // ignore: unused_local_variable
-  final screenWidth = MediaQuery.of(context).size.width;
-  final screenHeight = MediaQuery.of(context).size.height;
+    // ignore: unused_local_variable
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+    final AuthServices _auth = AuthServices();
+    User? currentUser;
 
     return MaterialApp(
       home: Scaffold(
@@ -30,6 +33,8 @@ class ProfilePage extends StatelessWidget {
                     builder: (context) => const EditProfilePage(),
                   ),
                 );
+                print("object");
+                
               },
               child: const Card(
                 margin: EdgeInsets.all(16.0),
@@ -43,10 +48,8 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-
             GestureDetector(
               onTap: () {
-                
                 Navigator.push(
                   context,
                   MaterialPageRoute(
@@ -66,7 +69,6 @@ class ProfilePage extends StatelessWidget {
                 ),
               ),
             ),
-
             GestureDetector(
               onTap: () {
                 // Navigate to the Edit Profile page when clicked

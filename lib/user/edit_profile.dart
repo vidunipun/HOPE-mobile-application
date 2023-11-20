@@ -145,7 +145,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                                 ? FileImage(_imageFile!)
                                     as ImageProvider<Object>
                                 : const AssetImage(
-                                    'assets/placeholder.png')), 
+                                    'assets/register.png')), 
                         fit: BoxFit.cover,
                       ),
                     ),
