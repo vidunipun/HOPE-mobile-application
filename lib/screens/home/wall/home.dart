@@ -97,9 +97,9 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: startBackgroundBlack,
+      backgroundColor: buttonbackground,
       appBar: AppBar(
-        backgroundColor: startBackgroundBlack,
+        backgroundColor: buttonbackground,
         title: const Text("Home"),
         actions: [
           ElevatedButton(
@@ -181,7 +181,7 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 60,
-          color: startBackgroundBlack,
+          color: buttonbackground,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
@@ -203,7 +203,7 @@ class _HomeState extends State<Home> {
                     icon: Container(
                       width: 40,
                       height: 40,
-                      color: startBackgroundBlack,
+                      color: buttonbackground,
                       child: Image.asset("assets/Home.png"),
                     ),
                   ),
@@ -223,7 +223,7 @@ class _HomeState extends State<Home> {
                   icon: Container(
                     width: 40,
                     height: 40,
-                    color: startBackgroundBlack,
+                    color: buttonbackground,
                     child: Image.asset("assets/Chat Round Dots.png"),
                   ),
                 ),
@@ -272,7 +272,7 @@ class _HomeState extends State<Home> {
                   icon: Container(
                     width: 40,
                     height: 40,
-                    color: startBackgroundBlack,
+                    color: buttonbackground,
                     child: Image.asset("assets/Calendar Date.png"),
                   ),
                 ),
@@ -291,7 +291,7 @@ class _HomeState extends State<Home> {
                   icon: Container(
                     width: 40,
                     height: 40,
-                    color: startBackgroundBlack,
+                    color: buttonbackground,
                     child: Image.asset("assets/Combined-Shape.png"),
                   ),
                 ),

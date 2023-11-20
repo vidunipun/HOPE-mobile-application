@@ -9,7 +9,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'add_event.dart';
 
-
 class EventHome extends StatefulWidget {
   // Renamed Home to EventHome
   const EventHome({Key? key}) : super(key: key);
@@ -19,19 +18,17 @@ class EventHome extends StatefulWidget {
 }
 
 class _EventHomeState extends State<EventHome> {
- 
   // Renamed _HomeState to _EventHomeState
   final AuthServices _auth = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser;
   final textController = TextEditingController();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: startBackgroundBlack,
+      backgroundColor: buttonbackground,
       appBar: AppBar(
-        backgroundColor: startBackgroundBlack,
+        backgroundColor: buttonbackground,
         title: const Text("Events"),
         actions: [
           Row(
@@ -57,7 +54,6 @@ class _EventHomeState extends State<EventHome> {
                   ),
                 ),
               ),
-
               GestureDetector(
                 onTap: () {
                   // Add your logic for the search icon here
@@ -131,10 +127,8 @@ class _EventHomeState extends State<EventHome> {
               },
             ),
           ),
-         
         ],
       ),
-
     );
   }
 }

@@ -29,7 +29,7 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
     target: LatLng(0, 0), // Initial map center
     zoom: 12, // Initial zoom level
   );
-  
+
   @override
   void initState() {
     super.initState();
@@ -49,7 +49,8 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
       desiredAccuracy: LocationAccuracy.high,
     );
     setState(() {
-      currentLocation = LatLng(position.latitude.toDouble(), position.longitude.toDouble());
+      currentLocation =
+          LatLng(position.latitude.toDouble(), position.longitude.toDouble());
     });
     _mapController!.animateCamera(CameraUpdate.newLatLng(currentLocation!));
 
@@ -58,9 +59,10 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
   }
 
   Future<void> _getEventLocations() async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('Events').get();
+    QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('Events').get();
 
-    Set<Marker>_markers = {};
+    Set<Marker> _markers = {};
 
     for (QueryDocumentSnapshot doc in snapshot.docs) {
       String location = doc['location'];
@@ -74,7 +76,8 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
           Marker(
             markerId: MarkerId(doc.id),
             position: LatLng(eventLocation.latitude, eventLocation.longitude),
-            icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
+            icon:
+                BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueBlue),
             infoWindow: InfoWindow(
               title: eventCaption,
             ),
@@ -88,7 +91,7 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
     });
   }
 
-void _searchNearbyEvents() {
+  void _searchNearbyEvents() {
     String? selectedCountry = '';
     String? selectedState = '';
     String? selectedCity = '';
@@ -131,8 +134,8 @@ void _searchNearbyEvents() {
                 ),
               ),
               TextField(
-                decoration:
-                    const InputDecoration(labelText: 'Search Radius (in meters)'),
+                decoration: const InputDecoration(
+                    labelText: 'Search Radius (in meters)'),
                 keyboardType: TextInputType.number,
                 onChanged: (value) {
                   final radius = double.tryParse(value);
@@ -159,113 +162,113 @@ void _searchNearbyEvents() {
   }
 
   void _openBottomSheet() {
-  showModalBottomSheet(
-    context: context,
-    builder: (BuildContext context) {
-      return const Text('Bottom Sheet Content');
-    },
-  );
-}
+    showModalBottomSheet(
+      context: context,
+      builder: (BuildContext context) {
+        return const Text('Bottom Sheet Content');
+      },
+    );
+  }
 
-void _drawSearchCircle(
-  String? selectedCountry, String? selectedState, String? selectedCity) {
-  
-  String location = '$selectedCity, $selectedState, $selectedCountry';
+  void _drawSearchCircle(
+      String? selectedCountry, String? selectedState, String? selectedCity) {
+    String location = '$selectedCity, $selectedState, $selectedCountry';
 
-  locationFromAddress(location).then((locations) {
-    if (locations.isNotEmpty) {
-      Location searchLocation = locations.first;
-      setState(() {
-        searchCenter = LatLng(searchLocation.latitude, searchLocation.longitude);
-      });
+    locationFromAddress(location).then((locations) {
+      if (locations.isNotEmpty) {
+        Location searchLocation = locations.first;
+        setState(() {
+          searchCenter =
+              LatLng(searchLocation.latitude, searchLocation.longitude);
+        });
 
-      final circle = Circle(
-        circleId: const CircleId('searchCircle'),
-        center: searchCenter!,
-        radius: searchRadius,
-        strokeWidth: 2,
-        strokeColor: const Color.fromRGBO(33, 150, 243, 1),
-        fillColor: Colors.blue.withOpacity(0.2),
-      );
-
-      setState(() {
-        searchCircles = {circle};
-      });
-
-      // Get markers inside the circle
-      List<String> markersInsideCircle = [];
-      for (Marker marker in eventMarkers) {
-        double distance = Geolocator.distanceBetween(
-          searchCenter!.latitude,
-          searchCenter!.longitude,
-          marker.position.latitude,
-          marker.position.longitude,
+        final circle = Circle(
+          circleId: const CircleId('searchCircle'),
+          center: searchCenter!,
+          radius: searchRadius,
+          strokeWidth: 2,
+          strokeColor: const Color.fromRGBO(33, 150, 243, 1),
+          fillColor: Colors.blue.withOpacity(0.2),
         );
 
-        if (distance <= searchRadius) {
-          markersInsideCircle.add(marker.markerId.value);
-        }
-      }
+        setState(() {
+          searchCircles = {circle};
+        });
 
-      // Do something with the markers inside the circle (e.g., print their names)
-      print('Markers inside the circle 1: $markersInsideCircle');
-
-      //_buildBottomSheet: _buildBottomSheet();
-      // _buildBottomAppBar(context, markersInsideCircle);
-       //_buildBottomSheet(context,markersInsideCircle);
-    } else {
-      // Handle case when location is not found
-      showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return AlertDialog(
-            title: const Text('Location Not Found'),
-            content: const Text('The selected location was not found.'),
-            actions: [
-              TextButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child: const Text('OK'),
-              ),
-            ],
+        // Get markers inside the circle
+        List<String> markersInsideCircle = [];
+        for (Marker marker in eventMarkers) {
+          double distance = Geolocator.distanceBetween(
+            searchCenter!.latitude,
+            searchCenter!.longitude,
+            marker.position.latitude,
+            marker.position.longitude,
           );
-        },
-      );
-    }
-  });
-}
+
+          if (distance <= searchRadius) {
+            markersInsideCircle.add(marker.markerId.value);
+          }
+        }
+
+        // Do something with the markers inside the circle (e.g., print their names)
+        print('Markers inside the circle 1: $markersInsideCircle');
+
+        //_buildBottomSheet: _buildBottomSheet();
+        // _buildBottomAppBar(context, markersInsideCircle);
+        //_buildBottomSheet(context,markersInsideCircle);
+      } else {
+        // Handle case when location is not found
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Location Not Found'),
+              content: const Text('The selected location was not found.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: const Text('OK'),
+                ),
+              ],
+            );
+          },
+        );
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     print('come to dubai');
     print('Markers inside the circle 1: $markersInsideCircle');
     return Scaffold(
-        appBar: AppBar(
-          title: const Text('Search Events'),
-        ),
-        body: Stack(
-          children: [
-            GoogleMap(
-              initialCameraPosition: initialCameraPosition,
-              onMapCreated: (controller) {
-                setState(() {
-                  _mapController = controller;
-                });
-              },
-              markers: {
-                if (currentLocation != null)
-                  Marker(
-                    markerId: const MarkerId('currentLocation'),
-                    position: currentLocation!,
-                  ),
-                ...eventMarkers,
-              },
-                circles: searchCircles,
-                
-                myLocationEnabled: true, // Enable the "My Location" button
-                myLocationButtonEnabled: true, // Enable the "My Location" button
-            ),
+      appBar: AppBar(
+        title: const Text('Search Events'),
+      ),
+      body: Stack(
+        children: [
+          GoogleMap(
+            initialCameraPosition: initialCameraPosition,
+            onMapCreated: (controller) {
+              setState(() {
+                _mapController = controller;
+              });
+            },
+            markers: {
+              if (currentLocation != null)
+                Marker(
+                  markerId: const MarkerId('currentLocation'),
+                  position: currentLocation!,
+                ),
+              ...eventMarkers,
+            },
+            circles: searchCircles,
+
+            myLocationEnabled: true, // Enable the "My Location" button
+            myLocationButtonEnabled: true, // Enable the "My Location" button
+          ),
           Positioned(
             top: 5,
             right: 215,
@@ -274,83 +277,81 @@ void _drawSearchCircle(
               child: const Text('Search Nearby Events'),
             ),
           ),
-          
 
           // Bottom App Bar
-          _buildBottomSheet(context,markersInsideCircle),
-          
+          _buildBottomSheet(context, markersInsideCircle),
         ],
       ),
-      
     );
   }
 
-  Widget _buildBottomSheet(BuildContext context,markersInsideCircle) {
-  return Align(
-    alignment: Alignment.bottomCenter,
-    child: GestureDetector(
-      onTap: () {
-        // Check if the bottom sheet is already open
-        if (ModalRoute.of(context)?.isCurrent == false) {
-          // Bottom sheet is open, close it
-          Navigator.pop(context);
-        }
-      },
-      child: Container(
-        child: _buildBottomAppBar(context,markersInsideCircle),
-      ),
-    ),
-  );
-}
-
-Widget _buildBottomAppBar(BuildContext context, List<String> markersInsideCircle) {
-  return GestureDetector(
-    onTap: () {
-      showModalBottomSheet(
-        context: context,
-        builder: (BuildContext context) {
-          return FractionallySizedBox(
-            heightFactor: 0.5, // Adjust the height factor as desired
-            child: SingleChildScrollView(
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(10.0),
-                    topRight: Radius.circular(10.0),
-                  ),
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Container(
-                      height: 8.0,
-                      decoration: BoxDecoration(
-                        color: Colors.grey,
-                        borderRadius: BorderRadius.circular(4.0),
-                      ),
-                    ),
-                   const Padding(
-  padding: EdgeInsets.all(16.0),
-  child: Column(
-    children: [
-      Text(
-        'Your Nearby Events',
-        style: TextStyle(
-          fontSize: 16.0,
-          fontWeight: FontWeight.bold,
+  Widget _buildBottomSheet(BuildContext context, markersInsideCircle) {
+    return Align(
+      alignment: Alignment.bottomCenter,
+      child: GestureDetector(
+        onTap: () {
+          // Check if the bottom sheet is already open
+          if (ModalRoute.of(context)?.isCurrent == false) {
+            // Bottom sheet is open, close it
+            Navigator.pop(context);
+          }
+        },
+        child: Container(
+          child: _buildBottomAppBar(context, markersInsideCircle),
         ),
       ),
-      // Text(
-      //   markersInsideCircle.toString(),
-      //   style: TextStyle(
-      //     fontSize: 16.0,
-      //     fontWeight: FontWeight.bold,
-      //   ),
-      // ),
-    ],
-  ),
-)
+    );
+  }
+
+  Widget _buildBottomAppBar(
+      BuildContext context, List<String> markersInsideCircle) {
+    return GestureDetector(
+      onTap: () {
+        showModalBottomSheet(
+          context: context,
+          builder: (BuildContext context) {
+            return FractionallySizedBox(
+              heightFactor: 0.5, // Adjust the height factor as desired
+              child: SingleChildScrollView(
+                child: Container(
+                  decoration: const BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(10.0),
+                      topRight: Radius.circular(10.0),
+                    ),
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Container(
+                        height: 8.0,
+                        decoration: BoxDecoration(
+                          color: Colors.grey,
+                          borderRadius: BorderRadius.circular(4.0),
+                        ),
+                      ),
+                      const Padding(
+                        padding: EdgeInsets.all(16.0),
+                        child: Column(
+                          children: [
+                            Text(
+                              'Your Nearby Events',
+                              style: TextStyle(
+                                fontSize: 16.0,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            // Text(
+                            //   markersInsideCircle.toString(),
+                            //   style: TextStyle(
+                            //     fontSize: 16.0,
+                            //     fontWeight: FontWeight.bold,
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      )
 //                    ListView.builder(
 //   shrinkWrap: true,
 //   itemCount: markersInsideCircle.length,
@@ -368,49 +369,48 @@ Widget _buildBottomAppBar(BuildContext context, List<String> markersInsideCircle
 //     );
 //   },
 // ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
+            );
+          },
+        );
+      },
+      child: Container(
+        height: 45.0,
+        color: Colors.blue,
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Text(
+              'Your Nearby Events',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 4, 0, 0),
+              ),
             ),
-          );
-        },
-      );
-    },
-    child: Container(
-      height: 45.0,
-      color: Colors.blue,
-      child: const Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Your Nearby Events',
-            style: TextStyle(
-              fontSize: 16.0,
-              fontWeight: FontWeight.bold,
-              color: Color.fromARGB(255, 4, 0, 0),
-            ),
-          ),
-        ],
+          ],
+        ),
       ),
-    ),
-  );
-}
-   
+    );
+  }
 
-Widget _buildCaptionList(List<String> filteredCaptions) {
-  print('Your Nearby Events: $filteredCaptions');
-  return ListView.builder(
-    shrinkWrap: true,
-    physics: const NeverScrollableScrollPhysics(),
-    itemCount: filteredCaptions.length, 
-    itemBuilder: (context, index) {
-      return ListTile(
-        title: Text(filteredCaptions[index]),
-      );
-    },
-  );
-}
+  Widget _buildCaptionList(List<String> filteredCaptions) {
+    print('Your Nearby Events: $filteredCaptions');
+    return ListView.builder(
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      itemCount: filteredCaptions.length,
+      itemBuilder: (context, index) {
+        return ListTile(
+          title: Text(filteredCaptions[index]),
+        );
+      },
+    );
+  }
 } 
 
 

@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 import 'package:auth/constants/colors.dart';
+import 'package:auth/constants/colors.dart';
 import 'package:auth/screens/home/wall/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -290,35 +291,34 @@ class _DonationPageState extends State<DonationPage> {
           child: ListView(
             children: <Widget>[
               Row(
-                 children: [
-                IconButton(
-                  icon: const Icon(Icons.arrow_back, color: Colors.white),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                  tooltip: 'Back',
-                ),
-                const Text(
-                  'Add Events',
-                  style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white),
-                ),
-              ],
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    tooltip: 'Back',
+                  ),
+                  Text(
+                    'Donations',
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
+                  ),
+                ],
               ),
               Row(
-                
                 children: [
                   Expanded(
                     child: TextFormField(
                       controller: _captionController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           labelText: 'Caption',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -330,7 +330,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -363,12 +363,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _descriptionController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           labelText: 'Description',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -380,7 +380,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -413,12 +413,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _contacController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           labelText: 'Contact',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -430,7 +430,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -464,12 +464,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _locationController,
-                      decoration: const InputDecoration(
+                      decoration: InputDecoration(
                           labelText: 'Location',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: const TextStyle(
+                      style: TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -484,7 +484,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -494,8 +494,8 @@ class _DonationPageState extends State<DonationPage> {
                         builder: (context) {
                           return AlertDialog(
                             title: const Text('Location Guidance'),
-                            content:
-                                const Text('Enter the related location of the post.'),
+                            content: const Text(
+                                'Enter the related location of the post.'),
                             actions: <Widget>[
                               ElevatedButton(
                                 onPressed: () {
@@ -512,7 +512,7 @@ class _DonationPageState extends State<DonationPage> {
                   ),
                 ],
               ),
-              const SizedBox(
+              SizedBox(
                 height: 15,
               ),
               imagepath != null
@@ -521,7 +521,7 @@ class _DonationPageState extends State<DonationPage> {
                       height: 100,
                       child: Image.file(imagepath!),
                     )
-                  : const Text(
+                  : Text(
                       "Image not chosen yet",
                       style: TextStyle(color: Colors.white),
                     ),
@@ -533,7 +533,7 @@ class _DonationPageState extends State<DonationPage> {
                 style: ElevatedButton.styleFrom(
                   primary: buttonboarder, // Set the button color to #0BFFFF
                 ),
-                child: const Text(
+                child: Text(
                   ' Add Post Image',
                   style: TextStyle(
                     color: buttonbackground,
@@ -561,7 +561,7 @@ class _DonationPageState extends State<DonationPage> {
               Theme(
                 data: ThemeData(unselectedWidgetColor: Colors.white),
                 child: CheckboxListTile(
-                  title: const Text(
+                  title: Text(
                     'I verify that all the information is correct',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -587,7 +587,7 @@ class _DonationPageState extends State<DonationPage> {
                 style: ElevatedButton.styleFrom(
                   primary: buttonboarder, // Set the button color to #0BFFFF
                 ),
-                child: const Text(
+                child: Text(
                   ' Submit',
                   style: TextStyle(
                     color: buttonbackground,

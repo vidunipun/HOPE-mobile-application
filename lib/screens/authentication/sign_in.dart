@@ -26,13 +26,13 @@ class _SingInState extends State<SingIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: startBackgroundBlack,
-        appBar: AppBar(
-            title: const Text(
-              "Sign In Here",
-              style: TextStyle(color: signInRegisterbackgroundWhite),
-            ),
-            backgroundColor: startBackgroundBlack),
+        backgroundColor: buttonbackground,
+        // appBar: AppBar(
+        //     title: const Text(
+        //       "Sign In Here",
+        //       style: TextStyle(color: signInRegisterbackgroundWhite),
+        //     ),
+        //     backgroundColor: startBackgroundBlack),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -41,7 +41,7 @@ class _SingInState extends State<SingIn> {
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(40),
-                  color: signInRegisterbackgroundWhite,
+                  color: buttonbackground,
                 ),
                 child: Column(
                   children: [
@@ -53,10 +53,10 @@ class _SingInState extends State<SingIn> {
                       ),
                     ),
                     //description
-                    const Text(
-                      "Sign In",
-                      style: signInRegisterText,
-                    ),
+                    // const Text(
+                    //   "Sign In",
+                    //   style: signInRegisterText,
+                    // ),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Form(
@@ -65,8 +65,13 @@ class _SingInState extends State<SingIn> {
                           children: [
                             //email
                             TextFormField(
-                              style: const TextStyle(color: Colors.black),
-                              decoration: textInputdecorataion,
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  hintText: "email",
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
                               validator: (val) => val?.isEmpty == true
                                   ? "Enter a valid email"
                                   : null,
@@ -81,9 +86,14 @@ class _SingInState extends State<SingIn> {
                               height: 14,
                             ),
                             TextFormField(
-                              style: const TextStyle(color: Colors.black),
-                              decoration: textInputdecorataion.copyWith(
-                                  hintText: "password"),
+                              style: const TextStyle(color: Colors.white),
+                              decoration: InputDecoration(
+                                  hintText: 'password',
+                                  hintStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
+                              obscureText: true,
                               validator: (val) => val!.length < 6
                                   ? "Enter a valid password"
                                   : null,
@@ -108,7 +118,7 @@ class _SingInState extends State<SingIn> {
                               style: signInRegisterText,
                             ),
                             const Divider(
-                              color: Colors.black,
+                              color: Colors.white,
                               height: 20,
                               thickness: 1,
                               indent: 40,

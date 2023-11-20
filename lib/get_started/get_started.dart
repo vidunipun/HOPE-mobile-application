@@ -31,7 +31,7 @@ class _GetStartedState extends State<GetStarted> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: startBackgroundBlack,
+      backgroundColor: buttonbackground,
       body: Padding(
         padding: const EdgeInsets.all(25),
         child: Column(
@@ -53,16 +53,17 @@ class _GetStartedState extends State<GetStarted> {
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(5),
-                            color: i == currentIndex ? startButtonGreen : Colors.transparent,
+                            color: i == currentIndex
+                                ? startButtonGreen
+                                : Colors.transparent,
                           ),
-                          ),
-                          ),
+                        ),
+                      ),
                   ],
-                  ),
-                  ),
-                  ),
-
-                                      Expanded(
+                ),
+              ),
+            ),
+            Expanded(
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: imagePaths.length,
@@ -97,7 +98,7 @@ class _GetStartedState extends State<GetStarted> {
               ),
             ),
             const SizedBox(height: 90),
-             Align(
+            Align(
               alignment: Alignment.bottomCenter,
               child: GestureDetector(
                 onTap: () {
@@ -110,13 +111,11 @@ class _GetStartedState extends State<GetStarted> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                         builder: (context) => const Wrapper(),
-                       
+                        builder: (context) => const Wrapper(),
                       ),
                     );
-                            }
+                  }
                 },
-                  
                 child: Container(
                   height: 40,
                   width: double.infinity,
@@ -126,15 +125,15 @@ class _GetStartedState extends State<GetStarted> {
                   ),
                   child: Center(
                     child: Text(
-                      currentIndex < imagePaths.length - 1 ? 'Get Started' : 'Get Started',
+                      currentIndex < imagePaths.length - 1
+                          ? 'Get Started'
+                          : 'Get Started',
                       style: startButtonText,
-                  
                     ),
                   ),
                 ),
               ),
             ),
-            
           ],
         ),
       ),

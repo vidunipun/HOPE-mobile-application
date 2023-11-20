@@ -1,5 +1,6 @@
 // ignore_for_file: unused_local_variable, duplicate_ignore, use_key_in_widget_constructors
 
+import 'package:auth/constants/colors.dart';
 import 'package:auth/services/auth.dart';
 import 'package:auth/transaction/add_card.dart';
 import 'package:auth/user/edit_profile.dart';
@@ -14,12 +15,11 @@ class ProfilePage extends StatelessWidget {
     // ignore: unused_local_variable
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
-    final AuthServices _auth = AuthServices();
-    User? currentUser;
 
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: buttonbackground,
           title: const Text("Profile"),
         ),
         body: Column(

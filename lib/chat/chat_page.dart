@@ -1,8 +1,7 @@
-// ignore_for_file: avoid_print, library_private_types_in_public_api
-
-import 'package:auth/components/my_texfield.dart';
+//import 'package:auth/components/my_texfield.dart';
 import 'package:auth/chat/chat_bubble.dart';
 import 'package:auth/chat/chat_service.dart';
+import 'package:auth/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +9,13 @@ import 'package:flutter/material.dart';
 class ChatPage extends StatefulWidget {
   final String recieverUserEmail;
   final String recieverUserID;
+  final String firstName;
 
   const ChatPage({
     Key? key,
     required this.recieverUserEmail,
     required this.recieverUserID,
+    required this.firstName,
   }) : super(key: key);
 
   @override
@@ -34,14 +35,17 @@ class _ChatPageState extends State<ChatPage> {
       await _chatService.sendMessage(widget.recieverUserID,
           widget.recieverUserEmail, _messageController.text);
       //clear the text controller after sending the message
-      _messageController.clear();
+
+      // Clear the text field
+      _messageController.text = '';
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(widget.recieverUserEmail)),
+      appBar: AppBar(
+          title: Text(widget.firstName), backgroundColor: buttonbackground),
       body: Column(
         children: [
           //messages
@@ -66,7 +70,7 @@ class _ChatPageState extends State<ChatPage> {
         if (snapshot.hasError) {
           return Text('Error${snapshot.error}');
         } else if (snapshot.data == null) {
-          return const Text('No messages available');
+          return Text('No messages available');
         } else {
           // Print messages in the debug console
           for (var doc in snapshot.data!.docs) {
@@ -110,10 +114,10 @@ class _ChatPageState extends State<ChatPage> {
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,
           children: [
-            Text(
-              data['senderEmail'],
-              style: const TextStyle(color: Colors.black),
-            ),
+            // Text(
+            //   data['senderEmail'],
+            //   style: TextStyle(color: Colors.black),
+            // ),
             const SizedBox(height: 5),
             ChatBubble(message: data['message']),
           ],
@@ -129,21 +133,30 @@ class _ChatPageState extends State<ChatPage> {
       child: Row(
         children: [
           Expanded(
-            child: MyTextField(
-              controller: _messageController,
-              hintText: 'Enter message',
-              obscureText: false,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20.0),
+                color: Colors.grey[200],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: TextField(
+                  controller: _messageController,
+                  decoration: InputDecoration(
+                    hintText: 'Enter message',
+                    border: InputBorder.none,
+                  ),
+                ),
+              ),
             ),
           ),
-
-          //send button
           IconButton(
             onPressed: sendMessage,
             icon: const Icon(
-              Icons.arrow_upward,
-              size: 40,
+              Icons.send,
+              size: 30,
             ),
-          )
+          ),
         ],
       ),
     );
