@@ -1,4 +1,5 @@
 // ignore_for_file: avoid_print, duplicate_ignore
+import 'package:auth/constants/colors.dart';
 import 'package:auth/events/events_wall.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -50,18 +51,18 @@ class _AddEventsPageState extends State<AddEventsPage> {
 
     if (user != null) {
       String uid = user.uid;
-      CollectionReference users = FirebaseFirestore.instance.collection('users');
+      CollectionReference users =
+          FirebaseFirestore.instance.collection('users');
       DocumentSnapshot userSnapshot = await users.doc(uid).get();
       if (userSnapshot.exists) {
         Map<String, dynamic> userData =
-        userSnapshot.data() as Map<String, dynamic>;
+            userSnapshot.data() as Map<String, dynamic>;
         setState(() {
           _firstName = userData['firstName'] ?? '';
         });
       }
     }
   }
-
 
   Future<void> _submitRequest() async {
     if (_formKey.currentState!.validate()) {
@@ -70,7 +71,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
       String tags = _tagsController.text;
       String location = _locationController.text;
       //String confirmation = _confirmationController.text;
-
 
       if (!_isInformationCorrect) {
         // ignore: use_build_context_synchronously
@@ -105,7 +105,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
         if (user != null) {
           // Save data to Firestore with the user's ID
           DocumentReference requestDocRef =
-          FirebaseFirestore.instance.collection('Events').doc();
+              FirebaseFirestore.instance.collection('Events').doc();
           await requestDocRef.set({
             'userId': user.uid,
             'caption': caption,
@@ -116,7 +116,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
             //'timestamp': FieldValue.serverTimestamp(),
             'tick': tick,
             'UserEmail': currentUser?.email,
-            'firstName':_firstName,
+            'firstName': _firstName,
             'TimeStamp': Timestamp.now(),
             'Likes': [],
           });
@@ -157,7 +157,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
       }
     }
   }
-
 
   Future<void> _selectImage() async {
     final ImagePicker picker = ImagePicker();
@@ -204,9 +203,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                 ),
               ),
               const SizedBox(height: 16.0),
-              // Your custom model content goes here
-              // You can add buttons, text fields, or any other widgets to select the location
-              // For example, you can use a TextFormField or a DropdownButtonFormField
               Container(
                 margin: const EdgeInsets.all(20),
                 child: CSCPicker(
@@ -234,7 +230,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                   //searchBarRadius: 30,
                 ),
               ),
-
               const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
@@ -254,127 +249,344 @@ class _AddEventsPageState extends State<AddEventsPage> {
       },
     );
   }
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Add Events'),
-    ),
-    body: Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: ListView(
-        children: <Widget>[
-          // Add your buttons here
-          ElevatedButton(
-            onPressed: () {
-              // Handle button click
-            },
-            child: const Text('Your Button Text'),
-          ),
-          // Add your text widget here
-          const Text(
-            'Your Text Here',
-            style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-          ),
 
-          // Now add the Form with your form fields
-          Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                TextFormField(
-                  controller: _captionController,
-                  decoration: const InputDecoration(labelText: 'Caption'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a caption';
-                    }
-                    return null;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: buttonbackground,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: ListView(
+          children: <Widget>[
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
                   },
+                  tooltip: 'Back',
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _descriptionController,
-                  decoration: const InputDecoration(labelText: 'Description'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a description';
-                    }
-                    return null;
-                  },
+                Text(
+                  'ADD Events',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
                 ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _tagsController,
-                  decoration: const InputDecoration(labelText: 'Tags'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter tags';
-                    }
-                    return null;
-                  },
-                ),
-                const SizedBox(height: 20),
-                TextFormField(
-                  controller: _locationController,
-                  decoration: const InputDecoration(labelText: 'Location'),
-                  validator: (value) {
-                    if (value == null || value.isEmpty) {
-                      return 'Please enter a location';
-                    }
-                    return null;
-                  },
-                  onTap: () {
-                    // Open the location model
-                    _openLocationModel();
-                  },
-                ),
-                const SizedBox(height: 40),
-                ElevatedButton(
-                  onPressed: _selectImage,
-                  child: const Text('Select Images'),
-                ),
-                _selectedImages.isNotEmpty
-                    ? Column(
-                        children: _selectedImages
-                            .map((image) => Image.file(image))
-                            .toList(),
-                      )
-                    : Container(),
-                const SizedBox(height: 20),
-                ElevatedButton(
-                  onPressed: _uploadImages,
-                  child: const Text('Upload Images'),
-                ),
-                CheckboxListTile(
-                  title: const Text('I verify that all the information is correct'),
-                  value: _isInformationCorrect,
-                  onChanged: (value) {
-                    setState(() {
-                      _isInformationCorrect = value!;
-                    });
-                  },
-                ),
-                const SizedBox(height: 60),
-                ElevatedButton(
-                  onPressed: () async {
-                    await _submitRequest();
-
-                    // ignore: use_build_context_synchronously
-                    Navigator.of(context).pushReplacement(
-                      MaterialPageRoute(
-                        builder: (context) => const EventHome(),
-                      ),
-                    );
-                  },
-                  child: const Text('Submit'),
-                ),
-                const SizedBox(height: 20),
               ],
             ),
-          ),
-        ],
+            // // Add your buttons here
+            // ElevatedButton(
+            //   onPressed: () {
+            //     // Handle button click
+            //   },
+            //   child: const Text('Your Button Text'),
+            // ),
+            // // Add your text widget here
+            // const Text(
+            //   'Your Text Here',
+            //   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+            // ),
+
+            // Now add the Form with your form fields
+            Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _captionController,
+                          decoration: InputDecoration(
+                            labelText: 'Caption',
+                            labelStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a caption';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info,
+                          color: buttonboarder,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Caption Guidance'),
+                                content: const Text(
+                                    'Enter a caption for the event.'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        tooltip: 'Caption Guidance',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _descriptionController,
+                          decoration: InputDecoration(
+                            labelText: 'Description',
+                            labelStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a description';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info,
+                          color: buttonboarder,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Description Guidance'),
+                                content: const Text(
+                                    'Enter a description for the event.'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        tooltip: 'Description Guidance',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _tagsController,
+                          decoration: InputDecoration(
+                            labelText: 'Tags',
+                            labelStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter tags';
+                            }
+                            return null;
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info,
+                          color: buttonboarder,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Tags Guidance'),
+                                content:
+                                    const Text('Enter tags for the event.'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        tooltip: 'Tags Guidance',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 20),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextFormField(
+                          controller: _locationController,
+                          decoration: InputDecoration(
+                            labelText: 'Location',
+                            labelStyle: TextStyle(color: Colors.white),
+                            enabledBorder: UnderlineInputBorder(
+                              borderSide: BorderSide(color: Colors.white),
+                            ),
+                          ),
+                          style: TextStyle(
+                            color: Colors.white,
+                          ),
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter a location';
+                            }
+                            return null;
+                          },
+                          onTap: () {
+                            // Open the location model
+                            _openLocationModel();
+                          },
+                        ),
+                      ),
+                      IconButton(
+                        icon: Icon(
+                          Icons.info,
+                          color: buttonboarder,
+                        ),
+                        onPressed: () {
+                          showDialog(
+                            context: context,
+                            builder: (context) {
+                              return AlertDialog(
+                                title: const Text('Location Guidance'),
+                                content: const Text(
+                                    'Enter the location for the event.'),
+                                actions: <Widget>[
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.of(context).pop();
+                                    },
+                                    child: const Text('OK'),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
+                        },
+                        tooltip: 'Location Guidance',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 40),
+                  ElevatedButton(
+                    onPressed: _selectImage,
+                    style: ElevatedButton.styleFrom(
+                      primary: buttonboarder,
+                      onPrimary: buttonbackground, // Set the text color
+                    ),
+                    child: const Text(
+                      'Select Images',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Otomanopee One',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+
+                  _selectedImages.isNotEmpty
+                      ? Column(
+                          children: _selectedImages
+                              .map((image) => Image.file(image))
+                              .toList(),
+                        )
+                      : Container(),
+                  const SizedBox(height: 20),
+                  // ElevatedButton(
+                  //   onPressed: _uploadImages,
+                  //   child: const Text('Upload Images'),
+                  // ),
+                  Theme(
+                    data: ThemeData(unselectedWidgetColor: Colors.white),
+                    child: CheckboxListTile(
+                      title: Text(
+                        'I verify that all the information is correct',
+                        style: TextStyle(color: Colors.white),
+                      ),
+                      value: _isInformationCorrect,
+                      onChanged: (value) {
+                        setState(() {
+                          _isInformationCorrect = value!;
+                        });
+                      },
+                    ),
+                  ),
+                  const SizedBox(height: 60),
+                  ElevatedButton(
+                    onPressed: () async {
+                      await _submitRequest();
+                      await _uploadImages();
+
+                      // ignore: use_build_context_synchronously
+                      Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(
+                          builder: (context) => const EventHome(),
+                        ),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary: buttonboarder, // Set the button color to #0BFFFF
+                      onPrimary: buttonbackground, // Set the text color
+                    ),
+                    child: const Text(
+                      'Submit',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontFamily: 'Otomanopee One',
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
-    ),
-  );
-}}
+    );
+  }
+}
