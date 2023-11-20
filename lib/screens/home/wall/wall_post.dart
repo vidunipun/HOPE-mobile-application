@@ -58,7 +58,6 @@ class _WallPostState extends State<WallPost> {
         .doc(widget.postid)
         .get()
         .then((postSnapshot) {
-<<<<<<< Updated upstream
       if (mounted) {
         // Check if the widget is still mounted
         if (postSnapshot.exists) {
@@ -69,12 +68,6 @@ class _WallPostState extends State<WallPost> {
             });
           }
         }
-=======
-      if (postSnapshot.exists) {
-        setState(() {
-          toNow = postSnapshot.data()?['to_now'];
-        });
->>>>>>> Stashed changes
       }
     });
 

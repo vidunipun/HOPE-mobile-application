@@ -8,11 +8,9 @@ import '../constants/colors.dart';
 import '../screens/home/wall/home.dart';
 
 class ChatHomePage extends StatefulWidget {
-
   const ChatHomePage({Key? key}) : super(key: key);
 
   @override
-
   _ChatHomePageState createState() => _ChatHomePageState();
 }
 
@@ -86,7 +84,6 @@ class _ChatHomePageState extends State<ChatHomePage> {
     // Display all users except the current user
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
-
         leading: _buildProfilePicture(data['profilePictureURL']),
         //title: Text(data['email']?.toString() ?? ''),
         title: Text('${data['firstName']} ${data['lastName']}'),
@@ -96,11 +93,9 @@ class _ChatHomePageState extends State<ChatHomePage> {
             context,
             MaterialPageRoute(
               builder: (context) => ChatPage(
-                recieverUserEmail: data['email'],
-
-                recieverUserID: data['uid'],
-
-              ),
+                  recieverUserEmail: data['email'],
+                  recieverUserID: data['uid'],
+                  firstName: data['firstName']?.toString() ?? ''),
             ),
           );
         },
@@ -109,8 +104,6 @@ class _ChatHomePageState extends State<ChatHomePage> {
       return Container();
     }
   }
-<<<<<<< Updated upstream
-
 
   Widget _buildProfilePicture(String? profilePictureURL) {
     if (profilePictureURL != null && profilePictureURL.isNotEmpty) {
@@ -123,7 +116,3 @@ class _ChatHomePageState extends State<ChatHomePage> {
     }
   }
 }
-
-=======
-}
->>>>>>> Stashed changes

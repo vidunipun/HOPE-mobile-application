@@ -42,7 +42,7 @@ class AuthServices {
 
   // Register a user with email, password, and first name and save data to Firestore
   Future registerWithEmailAndPassword(String email, String fname, String lname,
-      String mobilenumber, String address, String password) async {
+      String mobilenumber, String address, String password,String idnumber) async {
     try {
       UserCredential result = await _auth.createUserWithEmailAndPassword(
         email: email,
@@ -60,6 +60,7 @@ class AuthServices {
         'mobileNumber': mobilenumber,
         'address': address,
         'uid': user?.uid,
+        'idnumber':idnumber,
       });
 
       return _userWithFirebaseUserUid(user);
