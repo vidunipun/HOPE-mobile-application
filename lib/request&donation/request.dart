@@ -303,7 +303,7 @@ class _RequestPageState extends State<RequestPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: startBackgroundBlack,
+        backgroundColor: buttonbackground,
         body: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -323,7 +323,7 @@ class _RequestPageState extends State<RequestPage> {
                     ),
                     const Text(
                       'Request',
-                      style:TextStyle(
+                      style: TextStyle(
                           fontSize: 20,
                           fontWeight: FontWeight.bold,
                           color: Colors.white),
@@ -341,9 +341,11 @@ class _RequestPageState extends State<RequestPage> {
                             child: TextFormField(
                               controller: _captionController,
                               decoration: InputDecoration(
-                                labelText: 'Caption',
-                                labelStyle: TextStyle(color: Colors.white),
-                              ),
+                                  labelText: 'Caption',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter a caption';
@@ -353,7 +355,7 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.info),
+                            icon: const Icon(Icons.info, color: buttonboarder),
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -397,7 +399,7 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.info),
+                            icon: const Icon(Icons.info, color: buttonboarder),
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -440,7 +442,7 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.info),
+                            icon: Icon(Icons.info, color: buttonboarder),
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -477,7 +479,7 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.info),
+                            icon: Icon(Icons.info, color: buttonboarder),
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -523,7 +525,7 @@ class _RequestPageState extends State<RequestPage> {
                             ),
                           ),
                           IconButton(
-                            icon: Icon(Icons.info),
+                            icon: Icon(Icons.info, color: buttonboarder),
                             onPressed: () {
                               showDialog(
                                 context: context,
@@ -597,10 +599,16 @@ class _RequestPageState extends State<RequestPage> {
                         onPressed: _selectImage,
                         child: const Text(
                           'Add post Images',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: buttonbackground,
+                            fontSize: 20,
+                            fontFamily: 'Otomanopee One',
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF164356),
+                          backgroundColor: startButtonGreen,
                           side: BorderSide(
                               color: Color(0xFF0BFFFF),
                               width:
@@ -625,17 +633,20 @@ class _RequestPageState extends State<RequestPage> {
                       //   onPressed: _uploadImages,
                       //   child: const Text('Upload Images'),
                       // ),
-                      CheckboxListTile(
-                        title: Text(
-                          'I verify that all the information is correct',
-                          style: TextStyle(color: Colors.white),
+                      Theme(
+                        data: ThemeData(unselectedWidgetColor: Colors.white),
+                        child: CheckboxListTile(
+                          title: Text(
+                            'I verify that all the information is correct',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                          value: _isInformationCorrect,
+                          onChanged: (value) {
+                            setState(() {
+                              _isInformationCorrect = value!;
+                            });
+                          },
                         ),
-                        value: _isInformationCorrect,
-                        onChanged: (value) {
-                          setState(() {
-                            _isInformationCorrect = value!;
-                          });
-                        },
                       ),
                       const SizedBox(height: 10),
                       ElevatedButton(
@@ -650,11 +661,17 @@ class _RequestPageState extends State<RequestPage> {
                         },
                         child: const Text(
                           'Submit',
-                          style: TextStyle(color: Colors.white),
+                          style: TextStyle(
+                            color: buttonbackground,
+                            fontSize: 20,
+                            fontFamily: 'Otomanopee One',
+                            fontWeight: FontWeight.w400,
+                            height: 0,
+                          ),
                         ),
                         style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(
-                              0xFF164356), // Set the background color to 0xFF164356
+                          backgroundColor:
+                              startButtonGreen, // Set the background color to 0xFF164356
                           side: BorderSide(color: Color(0xFF0BFFFF), width: 2),
                         ),
                       ),

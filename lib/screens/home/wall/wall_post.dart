@@ -58,6 +58,7 @@ class _WallPostState extends State<WallPost> {
         .doc(widget.postid)
         .get()
         .then((postSnapshot) {
+<<<<<<< Updated upstream
       if (mounted) {
         // Check if the widget is still mounted
         if (postSnapshot.exists) {
@@ -68,6 +69,12 @@ class _WallPostState extends State<WallPost> {
             });
           }
         }
+=======
+      if (postSnapshot.exists) {
+        setState(() {
+          toNow = postSnapshot.data()?['to_now'];
+        });
+>>>>>>> Stashed changes
       }
     });
 
@@ -281,7 +288,7 @@ class _WallPostState extends State<WallPost> {
                 children: [
                   LinearProgressIndicator(
                     minHeight: 15,
-                    borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    //borderRadius: const BorderRadius.all(Radius.circular(10)),
                     value: toNow != null && widget.amount != null
                         ? toNow! / double.tryParse(widget.amount!)!
                         : 0.0,

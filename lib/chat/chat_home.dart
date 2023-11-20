@@ -21,8 +21,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
 
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          startBackgroundBlack, // Set your desired background color
+      backgroundColor: buttonbackground, // Set your desired background color
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -110,6 +109,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
       return Container();
     }
   }
+<<<<<<< Updated upstream
 
 
   Widget _buildProfilePicture(String? profilePictureURL) {
@@ -124,3 +124,6 @@ class _ChatHomePageState extends State<ChatHomePage> {
   }
 }
 
+=======
+}
+>>>>>>> Stashed changes
