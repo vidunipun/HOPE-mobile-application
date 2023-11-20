@@ -11,7 +11,11 @@ class payment extends StatefulWidget {
   final String postid;
 
   const payment(
-      {required this.cardNo, Key? key, required this.uid, required this.postid, String? usercard})
+      {required this.cardNo,
+      Key? key,
+      required this.uid,
+      required this.postid,
+      String? usercard})
       : super(key: key);
 
   @override
@@ -199,18 +203,60 @@ class _paymentState extends State<payment> {
             const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () async {
-                await paycash();
+                try {
+                  // Get the current user
+                  User? currentUser = FirebaseAuth.instance.currentUser;
 
-                await rpaycash();
+                  if (currentUser != null) {
+                    // Retrieve the user's account balance
+                    DocumentSnapshot<Map<String, dynamic>>
+                        bankDocumentSnapshot = await FirebaseFirestore.instance
+                            .collection('Bank')
+                            .doc(currentUser.uid)
+                            .get();
 
-                await tonow();
+                    if (bankDocumentSnapshot.exists) {
+                      // Extract the balance from the document
+                      int? accountBalance =
+                          int.tryParse(bankDocumentSnapshot.data()?['balance']);
 
-                // ignore: use_build_context_synchronously
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Home(),
-                    ));
+                      // Convert the amountController.text to an integer
+                      int? enteredAmount = int.tryParse(amountController.text);
+
+                      if (accountBalance != null && enteredAmount != null) {
+                        // Check if the account balance is greater than the entered amount
+                        if (accountBalance >= enteredAmount) {
+                          // Execute the payment-related functions
+                          await paycash();
+                          await rpaycash();
+                          await tonow();
+
+                          // Navigate to the Home page
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const Home(),
+                            ),
+                          );
+                        } else {
+                          // Handle the case where the account balance is insufficient
+                          print('Insufficient account balance.');
+                        }
+                      } else {
+                        // Handle the case where balance or enteredAmount is null
+                        print('Error parsing balance or entered amount.');
+                      }
+                    } else {
+                      // Handle the case where the Bank document does not exist
+                      print('Bank document not found.');
+                    }
+                  } else {
+                    // Handle the case where there is no current user
+                    print('No current user.');
+                  }
+                } catch (e) {
+                  print('Error checking account balance: $e');
+                }
               },
               child: const Text("Pay"),
             )
