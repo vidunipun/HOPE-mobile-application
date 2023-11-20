@@ -19,6 +19,7 @@ class WallPost extends StatefulWidget {
   final String uid;
   final String? amount;
   final String? profilePictureURL;
+  final String lastName;
 
   const WallPost({
     Key? key,
@@ -33,6 +34,7 @@ class WallPost extends StatefulWidget {
     required this.uid,
     this.amount,
     this.profilePictureURL,
+    required this.lastName,
   }) : super(key: key);
 
   @override
@@ -191,27 +193,49 @@ class _WallPostState extends State<WallPost> {
                   fontSize: 16.0,
                 ),
               ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                widget.lastName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
             ],
           ),
 
           const SizedBox(height: 8.0),
 
           Text(
-            "Caption : ${widget.caption}",
-            style: const TextStyle(fontSize: 16.0),
+            " ${widget.caption}",
+            style: const TextStyle(
+              fontSize: 18.0,
+              fontWeight: FontWeight.bold,
+            ),
+            textAlign: TextAlign.center, // Center the text
+          ),
+          SizedBox(
+            height: 5,
           ),
           Text(
-            "Description : ${widget.description}",
+            "${widget.description}",
             style: const TextStyle(fontSize: 16.0),
+          ),
+          SizedBox(
+            height: 5,
           ),
           Visibility(
             visible: widget.amount != null,
             child: Text(
-              "amount : ${widget.amount}",
+              "Need Rs ${widget.amount}",
               style: const TextStyle(fontSize: 16.0),
             ),
           ),
-
+          SizedBox(
+            height: 5,
+          ),
           Text(
             "Location : ${widget.location}",
             style: const TextStyle(fontSize: 16.0),
@@ -237,7 +261,7 @@ class _WallPostState extends State<WallPost> {
                     .toList(),
               ),
             ),
-          const SizedBox(height: 16.0),
+          const SizedBox(height: 10.0),
           Text(likeCount.toString()), // Display the like count
 
           Row(
@@ -351,7 +375,7 @@ class _WallPostState extends State<WallPost> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'To fill ${widget.amount != null && toNow != null ? (double.tryParse(widget.amount!)! - toNow!).toStringAsFixed(2) : '0.00'}',
+                        'To fill Rs. ${widget.amount != null && toNow != null ? (double.tryParse(widget.amount!)! - toNow!).toStringAsFixed(2) : '0.00'}',
                         style: const TextStyle(fontSize: 16.0),
                       ),
                       Text(

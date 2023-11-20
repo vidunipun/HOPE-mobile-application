@@ -34,6 +34,7 @@ class _DonationPageState extends State<DonationPage> {
   String? selectedState = '';
   String? selectedCity = '';
   String? _firstName;
+  String? _lastName;
 
   User? user;
 
@@ -81,6 +82,7 @@ class _DonationPageState extends State<DonationPage> {
             userSnapshot.data() as Map<String, dynamic>;
         setState(() {
           _firstName = userData['firstName'] ?? '';
+          _lastName = userData['lastName'] ?? '';
         });
       }
     }
@@ -142,6 +144,7 @@ class _DonationPageState extends State<DonationPage> {
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
+            'lastName': _lastName,
             'TimeStamp': FieldValue.serverTimestamp(),
             'amount': amount,
             'to_now': 0,
