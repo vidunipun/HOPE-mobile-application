@@ -390,9 +390,11 @@ class _RequestPageState extends State<RequestPage> {
                             child: TextFormField(
                               controller: _descriptionController,
                               decoration: InputDecoration(
-                                labelText: 'Description',
-                                labelStyle: TextStyle(color: Colors.white),
-                              ),
+                                  labelText: 'Description',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter a description';
@@ -433,9 +435,11 @@ class _RequestPageState extends State<RequestPage> {
                             child: TextFormField(
                               controller: _contacController,
                               decoration: InputDecoration(
-                                labelText: 'Contact',
-                                labelStyle: TextStyle(color: Colors.white),
-                              ),
+                                  labelText: 'Contact',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter a valid contact number';
@@ -476,9 +480,11 @@ class _RequestPageState extends State<RequestPage> {
                             child: TextFormField(
                               controller: _amountController,
                               decoration: InputDecoration(
-                                labelText: 'Amount',
-                                labelStyle: TextStyle(color: Colors.white),
-                              ),
+                                  labelText: 'Amount',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
                             ),
                           ),
                           IconButton(
@@ -513,9 +519,11 @@ class _RequestPageState extends State<RequestPage> {
                             child: TextFormField(
                               controller: _locationController,
                               decoration: InputDecoration(
-                                labelText: 'Location',
-                                labelStyle: TextStyle(color: Colors.white),
-                              ),
+                                  labelText: 'Location',
+                                  labelStyle: TextStyle(color: Colors.white),
+                                  enabledBorder: UnderlineInputBorder(
+                                      borderSide:
+                                          BorderSide(color: Colors.white))),
                               validator: (value) {
                                 if (value == null || value.isEmpty) {
                                   return 'Please enter a location';
