@@ -15,8 +15,11 @@ class ProfilePage extends StatelessWidget {
     // ignore: unused_local_variable
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
+    final AuthServices _auth = AuthServices();
+    User? currentUser;
 
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: buttonbackground,
@@ -34,7 +37,6 @@ class ProfilePage extends StatelessWidget {
                   ),
                 );
                 print("object");
-                
               },
               child: const Card(
                 margin: EdgeInsets.all(16.0),
@@ -70,14 +72,9 @@ class ProfilePage extends StatelessWidget {
               ),
             ),
             GestureDetector(
-              onTap: () {
-                // Navigate to the Edit Profile page when clicked
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const EditProfilePage(),
-                  ),
-                );
+              onTap: () async {
+                await _auth.signOut();
+                // Optionally, you can perform additional actions after sign-out
               },
               child: const Card(
                 margin: EdgeInsets.all(16.0),
