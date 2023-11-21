@@ -113,47 +113,47 @@ class _SingInState extends State<SingIn> {
                               error,
                               style: const TextStyle(color: Colors.red),
                             ),
-                            const Text(
-                              "Login with socila accounts",
-                              style: signInRegisterText,
-                            ),
-                            const Divider(
-                              color: Colors.white,
-                              height: 20,
-                              thickness: 1,
-                              indent: 40,
-                              endIndent: 40,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                GestureDetector(
-                                  //sign in with google
-                                  onTap: () {},
-                                  child: Center(
-                                    child: Image.asset(
-                                      'assets/facebook.jpg',
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 15,
-                                ),
-                                GestureDetector(
-                                  //sign in with google
-                                  onTap: () {},
-                                  child: Center(
-                                    child: Image.asset(
-                                      'assets/google.png',
-                                      height: 50,
-                                      width: 50,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
+                            // const Text(
+                            //   "Login with socila accounts",
+                            //   style: signInRegisterText,
+                            // ),
+                            // const Divider(
+                            //   color: Colors.white,
+                            //   height: 20,
+                            //   thickness: 1,
+                            //   indent: 40,
+                            //   endIndent: 40,
+                            // ),
+                            // Row(
+                            //   mainAxisAlignment: MainAxisAlignment.center,
+                            //   children: [
+                            //     GestureDetector(
+                            //       //sign in with google
+                            //       onTap: () {},
+                            //       child: Center(
+                            //         child: Image.asset(
+                            //           'assets/facebook.jpg',
+                            //           height: 50,
+                            //           width: 50,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //     const SizedBox(
+                            //       width: 15,
+                            //     ),
+                            //     GestureDetector(
+                            //       //sign in with google
+                            //       onTap: () {},
+                            //       child: Center(
+                            //         child: Image.asset(
+                            //           'assets/google.png',
+                            //           height: 50,
+                            //           width: 50,
+                            //         ),
+                            //       ),
+                            //     ),
+                            //   ],
+                            // ),
 
                             //register page
                             const SizedBox(

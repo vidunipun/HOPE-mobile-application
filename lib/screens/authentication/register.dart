@@ -54,7 +54,7 @@ class _RegisterState extends State<Register> {
                     style: signInRegisterText3,
                   ),
                 ),
-                const SizedBox(height: 10),
+                const SizedBox(height: 2),
                 //description
 
                 Center(
@@ -226,51 +226,49 @@ class _RegisterState extends State<Register> {
 
                         // Divider between password form and social media login
                         const SizedBox(height: 25),
-                        const Divider(
-                          color: Colors.white,
-                          height: 1,
-                          thickness: 1,
-                          indent: 40,
-                          endIndent: 40,
-                        ),
+                        // const Divider(
+                        //   color: Colors.white,
+                        //   height: 1,
+                        //   thickness: 1,
+                        //   indent: 40,
+                        //   endIndent: 40,
+                        // ),
                         // Social Media Login
                         const SizedBox(height: 20),
-                        const Text(
-                          "Login with social accounts",
-                          style: signInRegisterText2,
-                        ),
-                        const SizedBox(height: 20),
+                        // const Text(
+                        //   "Login with social accounts",
+                        //   style: signInRegisterText2,
+                        // ),
+                        const SizedBox(height: 1),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            GestureDetector(
-                              //sign in with Facebook
-                              onTap: () {},
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/facebook.jpg',
-                                  height: 50,
-                                  width: 50,
-                                ),
-                              ),
-                            ),
-                            const SizedBox(width: 15),
-                            GestureDetector(
-                              //sign in with Google
-                              onTap: () {},
-                              child: Center(
-                                child: Image.asset(
-                                  'assets/google.png',
-                                  height: 50,
-                                  width: 50,
-                                ),
-                              ),
-                            ),
+                            // GestureDetector(
+                            //   //sign in with Facebook
+                            //   onTap: () {},
+                            //   child: Center(
+                            //     child: Image.asset(
+                            //       'assets/facebook.jpg',
+                            //       height: 50,
+                            //       width: 50,
+                            //     ),
+                            //   ),
+                            // ),
+                            // const SizedBox(width: 15),
+                            // GestureDetector(
+                            //   //sign in with Google
+                            //   onTap: () {},
+                            //   child: Center(
+                            //     child: Image.asset(
+                            //       'assets/google.png',
+                            //       height: 50,
+                            //       width: 50,
+                            //     ),
+                            //   ),
+                            // ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
+
                         // Do you have an account? LOGIN
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

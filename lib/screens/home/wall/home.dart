@@ -52,7 +52,7 @@ class _HomeState extends State<Home> {
           String address = userData['address'] ?? '';
 
           try {
-            String uri = "http://10.34.26.228/mysqlflutter/insert_record.php";
+            String uri = "http://10.34.26.97/mysqlflutter/insert_record.php";
             var res = await http.post(Uri.parse(uri), body: {
               "fname": firstName,
               "lname": lastName,
@@ -115,18 +115,34 @@ class _HomeState extends State<Home> {
     return Scaffold(
       backgroundColor: buttonbackground,
       appBar: AppBar(
-        backgroundColor: buttonbackground,
-        title: const Text("Home"),
+        backgroundColor: Colors.white,
+        elevation: 0, // Remove the elevation (box around AppBar)
+        automaticallyImplyLeading: false, // Remove the back button
         actions: [
           ElevatedButton(
             onPressed: () async {
               await _auth.signOut();
             },
             child: const Icon(Icons.logout),
-          )
+          ),
         ],
+        // "HOPE" text as a child of AppBar
+        title: Row(
+          children: [
+            Container(
+              padding: const EdgeInsets.all(16.0),
+              child: const Text(
+                "HOPE",
+                style: TextStyle(
+                  color: buttonbackground,
+                  fontSize: 24.0,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
-      //drawer: const MyDrawer(),
       body: Column(
         children: [
           Expanded(
@@ -149,48 +165,54 @@ class _HomeState extends State<Home> {
                           : [];
 
                       // Get the user's profile picture URL
-return FutureBuilder(
-  future: fetchProfilePictureURL(post.data()['userId']),
-  builder: (context, profilePictureSnapshot) {
-    if (profilePictureSnapshot.connectionState == ConnectionState.done) {
-      String? profilePictureURL = profilePictureSnapshot.data;
+                      return FutureBuilder(
+                        future: fetchProfilePictureURL(post.data()['userId']),
+                        builder: (context, profilePictureSnapshot) {
+                          if (profilePictureSnapshot.connectionState ==
+                              ConnectionState.done) {
+                            String? profilePictureURL =
+                                profilePictureSnapshot.data;
 
-      return FutureBuilder(
-        future: fetchUserRank(post.data()['userId']), // Use fetchUserRank
-        builder: (context, rankSnapshot) {
-          if (rankSnapshot.connectionState == ConnectionState.done) {
-            String? rank = rankSnapshot.data;
+                            return FutureBuilder(
+                              future: fetchUserRank(
+                                  post.data()['userId']), // Use fetchUserRank
+                              builder: (context, rankSnapshot) {
+                                if (rankSnapshot.connectionState ==
+                                    ConnectionState.done) {
+                                  String? rank = rankSnapshot.data;
 
-            return WallPost(
-              caption: post.data()['caption'],
-              user: post.data()['UserEmail'],
-              uid: post.data()['userId'],
-              postid: post.id,
-              amount: post.data()['amount'],
-              description: post.data()['description'],
-              location: post.data()['location'],
-              firstName: post.data()['firstName'],
-              likes: likes,
-              imageUrls: (post.data()['selectedImagesUrls'] as List<dynamic>?)
-                  ?.map((dynamic url) => url.toString())
-                  .toList() ??
-                  [],
-              profilePictureURL: profilePictureURL,
-              lastName: post.data()['lastName'],
-              points: post.data()['points'],
-              rank: rank,
-            );
-          } else {
-            return const CircularProgressIndicator();
-          }
-        },
-      );
-    } else {
-      return const CircularProgressIndicator();
-    }
-  },
-);
-
+                                  return WallPost(
+                                    caption: post.data()['caption'],
+                                    user: post.data()['UserEmail'],
+                                    uid: post.data()['userId'],
+                                    postid: post.id,
+                                    amount: post.data()['amount'],
+                                    description: post.data()['description'],
+                                    location: post.data()['location'],
+                                    firstName: post.data()['firstName'],
+                                    likes: likes,
+                                    imageUrls:
+                                        (post.data()['selectedImagesUrls']
+                                                    as List<dynamic>?)
+                                                ?.map((dynamic url) =>
+                                                    url.toString())
+                                                .toList() ??
+                                            [],
+                                    profilePictureURL: profilePictureURL,
+                                    lastName: post.data()['lastName'],
+                                    points: post.data()['points'],
+                                    rank: rank,
+                                  );
+                                } else {
+                                  return const CircularProgressIndicator();
+                                }
+                              },
+                            );
+                          } else {
+                            return const CircularProgressIndicator();
+                          }
+                        },
+                      );
                     },
                   );
                 } else if (snapshot.hasError) {

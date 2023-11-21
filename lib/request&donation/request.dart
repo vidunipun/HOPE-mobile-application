@@ -49,7 +49,7 @@ class _RequestPageState extends State<RequestPage> {
 //upload image
   Future<void> uploadimage() async {
     try {
-      String uri = "http://192.168.1.12/mysqlflutter/imageupload.php";
+      String uri = "http://10.34.26.97/mysqlflutter/imageupload.php";
       var res = await http.post(Uri.parse(uri), body: {
         "caption": _captionController.text,
         "data": imagedata,
