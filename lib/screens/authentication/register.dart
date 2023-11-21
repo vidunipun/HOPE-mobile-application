@@ -26,6 +26,7 @@ class _RegisterState extends State<Register> {
   String mobilenumber = "";
   String address = "";
   String idnumber = "";
+  int points = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -309,7 +310,8 @@ class _RegisterState extends State<Register> {
                                     mobilenumber,
                                     address,
                                     password,
-                                    idnumber);
+                                    idnumber,
+                                    points);
                           },
                           child: Container(
                             height: 40,

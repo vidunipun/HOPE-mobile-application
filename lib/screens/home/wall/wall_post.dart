@@ -20,6 +20,8 @@ class WallPost extends StatefulWidget {
   final String? amount;
   final String? profilePictureURL;
   final String lastName;
+  final String? points;
+  final String? rank;
 
   const WallPost({
     Key? key,
@@ -35,6 +37,8 @@ class WallPost extends StatefulWidget {
     this.amount,
     this.profilePictureURL,
     required this.lastName,
+    required this.points,
+    required this.rank,
   }) : super(key: key);
 
   @override
@@ -218,9 +222,23 @@ class _WallPostState extends State<WallPost> {
                         fontSize: 16.0,
                       ),
                     ),
+                    const SizedBox(width: 5), // Add some spacing
+                    Text(
+                      ' ${widget.rank ?? "No Rank"}',
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16.0,
+                      ),
+                    ),
                   ],
                 ),
-              )
+              ),
+              Builder(
+                builder: (BuildContext context) {
+                  print('Rank: ${widget.rank ?? "No Rank"}');
+                  return Container(); // Return an empty container to avoid UI issues
+                },
+              ),
             ],
           ),
 

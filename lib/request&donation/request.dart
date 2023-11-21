@@ -34,6 +34,7 @@ class _RequestPageState extends State<RequestPage> {
   String? selectedCity = '';
   String? _firstName;
   String? _lastName;
+  String? _rank;
 
   User? user;
 
@@ -101,6 +102,7 @@ class _RequestPageState extends State<RequestPage> {
         setState(() {
           _firstName = userData['firstName'] ?? '';
           _lastName = userData['lastName'] ?? '';
+          _rank = userData['rank'] ?? '';
         });
       }
     }
@@ -162,10 +164,11 @@ class _RequestPageState extends State<RequestPage> {
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
-            'lastName': _firstName,
+            'lastName': _lastName,
             'TimeStamp': FieldValue.serverTimestamp(),
             'amount': amount,
             'to_now': 0,
+            'rank': _rank,
             // 'Likes': [],
           });
           FirebaseFirestore.instance.collection('requests').add({'Likes': []});
