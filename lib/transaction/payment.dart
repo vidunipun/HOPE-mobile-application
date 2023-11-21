@@ -1,5 +1,6 @@
 // ignore_for_file: camel_case_types, avoid_print
 
+import 'package:auth/constants/colors.dart';
 import 'package:auth/screens/home/wall/home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -237,22 +238,72 @@ class _paymentState extends State<payment> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Payment'),
-      ),
+      backgroundColor: buttonbackground,
+      // appBar: AppBar(
+      //   title: const Text('Payment'),
+      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            Row(
+              children: [
+                SizedBox(
+                  height: 15,
+                ),
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  tooltip: 'Back',
+                ),
+                const Text(
+                  'Payment',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ],
+            ),
             TextField(
-              controller: cardNumberController,
-              decoration: const InputDecoration(labelText: 'Card Number'),
+              controller:
+                  cardNumberController, // Controller to control the text field's content.
+              decoration: InputDecoration(
+                labelText:
+                    'Card Number', // Label text displayed above the text field.
+                labelStyle:
+                    TextStyle(color: Colors.white), // Style for the label text.
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors
+                          .white), // Border color when the field is enabled.
+                ),
+              ),
+              style: TextStyle(
+                color: Colors.white, // Text color of the input.
+              ),
             ),
             const SizedBox(height: 16.0),
             TextField(
-              controller: amountController,
-              decoration: const InputDecoration(labelText: 'Amount'),
+              controller:
+                  amountController, // Controller to control the text field's content.
+              decoration: InputDecoration(
+                labelText:
+                    'Amount', // Label text displayed above the text field.
+                labelStyle:
+                    TextStyle(color: Colors.white), // Style for the label text.
+                enabledBorder: UnderlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors
+                          .white), // Border color when the field is enabled.
+                ),
+              ),
+              style: TextStyle(
+                color: Colors.white, // Text color of the input.
+              ),
             ),
             const SizedBox(height: 16.0),
             ElevatedButton(
