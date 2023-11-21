@@ -31,7 +31,7 @@ class _HomeState extends State<Home> {
     super.initState();
     currentUser = FirebaseAuth.instance.currentUser;
     updatemysql();
-    //print(currentUser!.uid);
+    print(currentUser!.uid);
   }
 
   Future<void> updatemysql() async {
@@ -94,6 +94,22 @@ class _HomeState extends State<Home> {
     return profilePictureURL;
   }
 
+  Future<String> fetchUserRank(String userId) async {
+    String rank = 'No Rank';
+
+    DocumentSnapshot userSnapshot =
+        await FirebaseFirestore.instance.collection('users').doc(userId).get();
+
+    if (userSnapshot.exists) {
+      var data = userSnapshot.data() as Map<String, dynamic>;
+      if (data != null && data.containsKey('rank')) {
+        rank = data['rank'];
+      }
+    }
+
+    return rank;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -133,36 +149,48 @@ class _HomeState extends State<Home> {
                           : [];
 
                       // Get the user's profile picture URL
-                      return FutureBuilder(
-                        future: fetchProfilePictureURL(post.data()['userId']),
-                        builder: (context, profilePictureSnapshot) {
-                          if (profilePictureSnapshot.connectionState ==
-                              ConnectionState.done) {
-                            String? profilePictureURL =
-                                profilePictureSnapshot.data;
+return FutureBuilder(
+  future: fetchProfilePictureURL(post.data()['userId']),
+  builder: (context, profilePictureSnapshot) {
+    if (profilePictureSnapshot.connectionState == ConnectionState.done) {
+      String? profilePictureURL = profilePictureSnapshot.data;
 
-                            return WallPost(
-                              caption: post.data()['caption'],
-                              user: post.data()['UserEmail'],
-                              uid: post.data()['userId'],
-                              postid: post.id,
-                              amount: post.data()['amount'],
-                              description: post.data()['description'],
-                              location: post.data()['location'],
-                              firstName: post.data()['firstName'],
-                              likes: likes,
-                              imageUrls: (post.data()['selectedImagesUrls']
-                                          as List<dynamic>?)
-                                      ?.map((dynamic url) => url.toString())
-                                      .toList() ??
-                                  [],
-                              profilePictureURL: profilePictureURL, lastName: post.data()['lastName'],
-                            );
-                          } else {
-                            return const CircularProgressIndicator();
-                          }
-                        },
-                      );
+      return FutureBuilder(
+        future: fetchUserRank(post.data()['userId']), // Use fetchUserRank
+        builder: (context, rankSnapshot) {
+          if (rankSnapshot.connectionState == ConnectionState.done) {
+            String? rank = rankSnapshot.data;
+
+            return WallPost(
+              caption: post.data()['caption'],
+              user: post.data()['UserEmail'],
+              uid: post.data()['userId'],
+              postid: post.id,
+              amount: post.data()['amount'],
+              description: post.data()['description'],
+              location: post.data()['location'],
+              firstName: post.data()['firstName'],
+              likes: likes,
+              imageUrls: (post.data()['selectedImagesUrls'] as List<dynamic>?)
+                  ?.map((dynamic url) => url.toString())
+                  .toList() ??
+                  [],
+              profilePictureURL: profilePictureURL,
+              lastName: post.data()['lastName'],
+              points: post.data()['points'],
+              rank: rank,
+            );
+          } else {
+            return const CircularProgressIndicator();
+          }
+        },
+      );
+    } else {
+      return const CircularProgressIndicator();
+    }
+  },
+);
+
                     },
                   );
                 } else if (snapshot.hasError) {

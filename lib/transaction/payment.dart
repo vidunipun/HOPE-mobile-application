@@ -55,31 +55,47 @@ class _paymentState extends State<payment> {
           print(balance);
           int? intbalance = int.tryParse(balance);
           int? intpay = int.tryParse(amountController.text);
-          int afterpay;
 
-          if (intbalance != null) {
-            if (intpay != null) {
-              afterpay = intbalance - intpay;
-              print(afterpay);
+          if (intbalance != null && intpay != null) {
+            // Calculate the updated balance after the payment
+            int afterpay = intbalance - intpay;
+            print(afterpay);
 
-              //update sender Bank
-              DocumentReference<Map<String, dynamic>> documentReference =
-                  FirebaseFirestore.instance.collection('Bank').doc(userUID);
-              documentReference.update({
-                'balance': afterpay.toString(),
-              }).then((value) {
-                print('Field updated successfully.');
-              }).catchError((error) {
-                print('Error updating field: $error');
-              });
-            }
+            // Calculate points to be incremented
+            double pointsIncrement = intpay * 0.001;
+
+            // Update sender's Bank balance
+            DocumentReference<Map<String, dynamic>> senderDocumentReference =
+                FirebaseFirestore.instance.collection('Bank').doc(userUID);
+            senderDocumentReference.update({
+              'balance': afterpay.toString(),
+            }).then((value) {
+              print('Balance updated successfully.');
+            }).catchError((error) {
+              print('Error updating balance: $error');
+            });
+
+            // Increment points in the users collection
+            DocumentReference<Map<String, dynamic>> userDocumentReference =
+                FirebaseFirestore.instance.collection('users').doc(userUID);
+            userDocumentReference.update({
+              'points': FieldValue.increment(pointsIncrement),
+            }).then((value) {
+              print('Points incremented successfully.');
+            }).catchError((error) {
+              print('Error incrementing points: $error');
+            });
+            // After updating points, assign ranks
+            print("before");
+            assignRanks(userUID);
+            print("after");
           }
         }
       } else {
-        print('card details are nothing match.');
+        print('User details not found.');
       }
     } catch (e) {
-      print('Error checking card details: $e');
+      print('Error checking details: $e');
     }
     print(widget.cardNo);
   }
@@ -127,6 +143,44 @@ class _paymentState extends State<payment> {
       print('Error checking card details: $e');
     }
     print(widget.cardNo);
+  }
+
+  Future<void> assignRanks(String userId) async {
+    // Fetch the user's document
+    DocumentReference<Map<String, dynamic>> userDocumentReference =
+        FirebaseFirestore.instance.collection('users').doc(userId);
+
+    try {
+      // Use a transaction to ensure atomicity
+      await FirebaseFirestore.instance.runTransaction((transaction) async {
+        DocumentSnapshot<Map<String, dynamic>> userSnapshot =
+            await userDocumentReference.get();
+
+        // Get the 'points' value from the user's document
+        int userPoints = (userSnapshot.data()?['points'] as num?)?.toInt() ?? 0;
+
+        // Implement your logic to assign ranks based on points
+        String rank;
+        if (userPoints > 100) {
+          rank = 'Gold';
+        } else if (userPoints > 50) {
+          rank = 'Silver';
+        } else {
+          rank = 'Bronze';
+        }
+
+        // Update or create the 'rank' field in the user's document
+        transaction.set(
+          userDocumentReference,
+          {'rank': rank},
+          SetOptions(merge: true), // Use merge option to update existing fields
+        );
+
+        print('Rank assigned or updated successfully: $rank');
+      });
+    } catch (error) {
+      print('Error assigning or updating rank: $error');
+    }
   }
 
   //update tonow
