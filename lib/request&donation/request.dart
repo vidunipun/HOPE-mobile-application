@@ -353,6 +353,9 @@ class _RequestPageState extends State<RequestPage> {
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter a caption';
@@ -400,6 +403,9 @@ class _RequestPageState extends State<RequestPage> {
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter a description';
@@ -446,6 +452,9 @@ class _RequestPageState extends State<RequestPage> {
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                                 validator: (value) {
                                   if (value == null || value.isEmpty) {
                                     return 'Please enter a valid contact number';
@@ -491,6 +500,9 @@ class _RequestPageState extends State<RequestPage> {
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
+                                style: TextStyle(
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             IconButton(
