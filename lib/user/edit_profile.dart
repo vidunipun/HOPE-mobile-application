@@ -1,6 +1,7 @@
 // ignore_for_file: use_build_context_synchronously
 
 import 'dart:io';
+import 'package:auth/constants/colors.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
@@ -121,79 +122,127 @@ class _EditProfilePageState extends State<EditProfilePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Edit Profile'),
-      ),
+      backgroundColor: buttonbackground,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Center(
-          child: Column(
-            children: [
-              GestureDetector(
-                onTap: _selectImage,
-                child: ClipOval(
-                  child: Container(
-                    width: 150,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      image: DecorationImage(
-                        image: profilePictureURL != null
-                            ? NetworkImage(profilePictureURL!)
-                            : (_imageFile != null
-                                ? FileImage(_imageFile!)
-                                    as ImageProvider<Object>
-                                : const AssetImage(
-                                    'assets/register.png')), 
-                        fit: BoxFit.cover,
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    IconButton(
+                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      tooltip: 'Back',
+                    ),
+                    Text(
+                      'Profile',
+                      style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.white),
+                    ),
+                  ],
+                ),
+                GestureDetector(
+                  onTap: _selectImage,
+                  child: ClipOval(
+                    child: Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        image: DecorationImage(
+                          image: profilePictureURL != null
+                              ? NetworkImage(profilePictureURL!)
+                              : (_imageFile != null
+                                  ? FileImage(_imageFile!)
+                                      as ImageProvider<Object>
+                                  : const AssetImage('assets/register.png')),
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _fnameController,
-                decoration: const InputDecoration(
-                  labelText: 'First Name',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your first name',
+                const SizedBox(height: 16.0),
+                TextFormField(
+                  controller: _fnameController,
+                  decoration: InputDecoration(
+                    labelText: 'First Name',
+                    labelStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    hintText: 'Enter your first name',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _lnameController,
-                decoration: const InputDecoration(
-                  labelText: 'Last Name',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your last name',
+                const SizedBox(height: 16.0),
+                TextFormField(
+                  controller: _lnameController,
+                  decoration: InputDecoration(
+                    labelText: 'Last Name',
+                    labelStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    hintText: 'Enter your last name',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _mobileNumberController,
-                decoration: const InputDecoration(
-                  labelText: 'Mobile Number',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your mobile number',
+                SizedBox(height: 16.0),
+                TextFormField(
+                  controller: _mobileNumberController,
+                  decoration: InputDecoration(
+                    labelText: 'Mobile Number',
+                    labelStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    hintText: 'Enter your mobile number',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              TextFormField(
-                controller: _addressController,
-                maxLines: 3,
-                decoration: const InputDecoration(
-                  labelText: 'Address',
-                  border: OutlineInputBorder(),
-                  hintText: 'Enter your address',
+                SizedBox(height: 16.0),
+                TextFormField(
+                  controller: _addressController,
+                  maxLines: 3,
+                  decoration: InputDecoration(
+                    labelText: 'Address',
+                    labelStyle: TextStyle(color: Colors.white),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    hintText: 'Enter your address',
+                    hintStyle: TextStyle(color: Colors.white),
+                  ),
+                  style: TextStyle(color: Colors.white),
                 ),
-              ),
-              const SizedBox(height: 32.0),
-              ElevatedButton(
-                onPressed: _uploadProfileImageAndSaveChanges,
-                child: const Text('Save Changes'),
-              ),
-            ],
+                const SizedBox(height: 32.0),
+                ElevatedButton(
+                    onPressed: _uploadProfileImageAndSaveChanges,
+                    style: ElevatedButton.styleFrom(
+                      primary: buttonboarder, // Set the button color to #0BFFFF
+                    ),
+                    child: const Text(
+                      'Save Changes',
+                      style: TextStyle(
+                        color: buttonbackground,
+                        fontSize: 20,
+                        fontFamily: 'Otomanopee One',
+                        fontWeight: FontWeight.w400,
+                        height: 0,
+                      ),
+                    )),
+              ],
+            ),
           ),
         ),
       ),

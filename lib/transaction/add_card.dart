@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, use_key_in_widget_constructors, library_private_types_in_public_api
 
+import 'package:auth/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -154,46 +155,116 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Enter Card Details'),
-      ),
+      backgroundColor: buttonbackground,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            TextField(
+            SizedBox(
+              height: 20,
+            ),
+            Row(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  tooltip: 'Back',
+                ),
+                Text(
+                  'Add Your Card',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ],
+            ),
+            SizedBox(
+              height: 20,
+            ),
+            TextFormField(
               controller: cardNumberController,
-              decoration: const InputDecoration(labelText: 'Card Number'),
+              decoration: InputDecoration(
+                labelText: 'Card Number',
+                labelStyle: TextStyle(color: Colors.white),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                hintText: 'Enter your card number',
+                hintStyle: TextStyle(color: Colors.white),
+              ),
+              style: TextStyle(color: Colors.white),
             ),
+
             const SizedBox(height: 16.0),
-            TextField(
+            TextFormField(
               controller: expDateController,
-              decoration:
-                  const InputDecoration(labelText: 'Expiration Date (MM/YY)'),
+              decoration: InputDecoration(
+                labelText: 'Expiration Date (MM/YY)',
+                labelStyle: TextStyle(color: Colors.white),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                hintText: 'Enter expiration date (MM/YY)',
+                hintStyle: TextStyle(color: Colors.white),
+              ),
+              style: TextStyle(color: Colors.white),
             ),
+
             const SizedBox(height: 16.0),
-            TextField(
+            TextFormField(
               controller: cvvController,
-              decoration: const InputDecoration(labelText: 'CVV'),
+              decoration: InputDecoration(
+                labelText: 'CVV',
+                labelStyle: TextStyle(color: Colors.white),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white),
+                ),
+                hintText: 'Enter CVV',
+                hintStyle: TextStyle(color: Colors.white),
+              ),
+              style: TextStyle(color: Colors.white),
             ),
+
             const SizedBox(height: 24.0),
-            ElevatedButton(
-              onPressed: () {
-                checkCardDetails();
-              },
-              child: const Text('Submit'),
+            Center(
+              child: ElevatedButton(
+                onPressed: () {
+                  checkCardDetails();
+                },
+                style: ElevatedButton.styleFrom(
+                  primary: buttonboarder,
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(8.0),
+                  ),
+                  padding: const EdgeInsets.symmetric(vertical: 16.0),
+                ),
+                child: const Text(
+                  'Submit',
+                  style: TextStyle(
+                    color: Colors.black, // Set text color
+                    fontSize: 18.0, // Set font size
+                    fontWeight: FontWeight.bold, // Set font weight
+                  ),
+                ),
+              ),
             ),
+
             const SizedBox(height: 16.0),
-            Text(
-              isCardValid == 1
-                  ? 'Card details are added.'
-                  : isCardValid == 2
-                      ? 'Card details do not match'
-                      : 'enter details',
-              style: TextStyle(
-                color: isCardValid == 1 ? Colors.green : Colors.red,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                isCardValid == 1
+                    ? 'Card details are added.'
+                    : isCardValid == 2
+                        ? 'Card details do not match'
+                        : 'Enter details',
+                style: TextStyle(
+                  color: isCardValid == 1 ? Colors.green : Colors.red,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
             // TextField(

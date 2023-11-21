@@ -587,8 +587,8 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   );
                 },
-                style: ElevatedButton.styleFrom(
-                  primary: buttonboarder, // Set the button color to #0BFFFF
+                 style: ElevatedButton.styleFrom(
+                 primary: buttonboarder, // Set the button color to #0BFFFF
                 ),
                 child: Text(
                   ' Submit',
