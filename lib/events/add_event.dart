@@ -31,6 +31,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
   String? selectedState = '';
   String? selectedCity = '';
   String? _firstName;
+  String? _lastName;
 
   User? user;
 
@@ -117,6 +118,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
+            'lastName': _lastName,
             'TimeStamp': Timestamp.now(),
             'Likes': [],
           });
