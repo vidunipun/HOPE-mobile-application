@@ -60,6 +60,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
             userSnapshot.data() as Map<String, dynamic>;
         setState(() {
           _firstName = userData['firstName'] ?? '';
+          _lastName = userData['lastName'] ?? '';
         });
       }
     }

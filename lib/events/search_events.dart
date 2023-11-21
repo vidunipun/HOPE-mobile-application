@@ -1,5 +1,6 @@
 // ignore_for_file: avoid_print, unused_local_variable, no_leading_underscores_for_local_identifiers, unused_element
 
+import 'package:auth/constants/colors.dart';
 import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
@@ -103,50 +104,52 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Search Nearby Events'),
-          content: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Text(
-                'Select Location',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 20.0,
+          content: SingleChildScrollView(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text(
+                  'Select Location',
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontSize: 20.0,
+                  ),
                 ),
-              ),
-              const SizedBox(height: 16.0),
-              Container(
-                margin: const EdgeInsets.all(20),
-                child: CSCPicker(
-                  layout: Layout.vertical,
-                  onCountryChanged: (country) {
+                const SizedBox(height: 16.0),
+                Container(
+                  margin: const EdgeInsets.all(20),
+                  child: CSCPicker(
+                    layout: Layout.vertical,
+                    onCountryChanged: (country) {
+                      setState(() {
+                        selectedCountry = country;
+                      });
+                    },
+                    onStateChanged: (state) {
+                      setState(() {
+                        selectedState = state;
+                      });
+                    },
+                    onCityChanged: (city) {
+                      setState(() {
+                        selectedCity = city;
+                      });
+                    },
+                  ),
+                ),
+                TextField(
+                  decoration: const InputDecoration(
+                      labelText: 'Search Radius (in meters)'),
+                  keyboardType: TextInputType.number,
+                  onChanged: (value) {
+                    final radius = double.tryParse(value);
                     setState(() {
-                      selectedCountry = country;
-                    });
-                  },
-                  onStateChanged: (state) {
-                    setState(() {
-                      selectedState = state;
-                    });
-                  },
-                  onCityChanged: (city) {
-                    setState(() {
-                      selectedCity = city;
+                      searchRadius = radius ?? 0;
                     });
                   },
                 ),
-              ),
-              TextField(
-                decoration: const InputDecoration(
-                    labelText: 'Search Radius (in meters)'),
-                keyboardType: TextInputType.number,
-                onChanged: (value) {
-                  final radius = double.tryParse(value);
-                  setState(() {
-                    searchRadius = radius ?? 0;
-                  });
-                },
-              ),
-            ],
+              ],
+            ),
           ),
           actions: [
             TextButton(
@@ -237,8 +240,11 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final mediaQuery = MediaQuery.of(context);
+    final screenHeight = mediaQuery.size.height;
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: buttonbackground,
         title: const Text('Search Events'),
       ),
       body: Stack(
@@ -268,6 +274,9 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
             right: 215,
             child: ElevatedButton(
               onPressed: _searchNearbyEvents,
+              style: ElevatedButton.styleFrom(
+                primary: buttonbackground, // Set your desired background color
+              ),
               child: const Text('Search Nearby Events'),
             ),
           ),

@@ -244,21 +244,23 @@ class _EventWallPostState extends State<EventWallPost> {
                 size: 28, // Set your desired icon color
               ),
               SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Location:",
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Location:",
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
-                  ),
-                  Text(
-                    "${widget.location}",
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                ],
+                    Text(
+                      "${widget.location}",
+                      style: const TextStyle(fontSize: 16.0),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),

@@ -1,6 +1,7 @@
 // ignore_for_file: library_private_types_in_public_api, avoid_print
 
 import 'package:auth/components/like_button.dart';
+import 'package:auth/constants/colors.dart';
 import 'package:auth/transaction/payment.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -454,6 +455,9 @@ class _WallPostState extends State<WallPost> {
                       print('Error retrieving card details: $e');
                     }
                   },
+                  style: ElevatedButton.styleFrom(
+                    primary: buttonbackground, // Set your desired button color
+                  ),
                   child: Text('Payment'),
                 ),
               ),
@@ -469,15 +473,17 @@ class _WallPostState extends State<WallPost> {
                 crossAxisAlignment: CrossAxisAlignment.end,
                 children: [
                   LinearProgressIndicator(
+                    backgroundColor:
+                        buttonbackground, // Set the background color
+                    valueColor: AlwaysStoppedAnimation<Color>(startButtonGreen),
                     minHeight: 15,
-
-                    //borderRadius: const BorderRadius.all(Radius.circular(10)),
+                    borderRadius: const BorderRadius.all(Radius.circular(5)),
                     value: toNow != null && widget.amount != null
                         ? toNow! / double.tryParse(widget.amount!)!
                         : 0.0,
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 1.0,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

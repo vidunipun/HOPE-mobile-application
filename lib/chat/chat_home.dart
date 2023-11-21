@@ -87,6 +87,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
         leading: _buildProfilePicture(data['profilePictureURL']),
         //title: Text(data['email']?.toString() ?? ''),
         title: Text('${data['firstName']} ${data['lastName']}'),
+        textColor: Colors.white,
 
         onTap: () {
           Navigator.push(
