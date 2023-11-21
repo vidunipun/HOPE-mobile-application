@@ -10,8 +10,10 @@ class EventWallPost extends StatefulWidget {
   final String location;
   final String postid;
   final String firstName;
+  final String lastName;
   final List<String> likes;
   final List<String> imageUrls;
+  final String? profilePictureURL;
 
   const EventWallPost({
     Key? key,
@@ -23,6 +25,8 @@ class EventWallPost extends StatefulWidget {
     required this.firstName,
     required this.likes,
     required this.imageUrls,
+    required this.lastName,
+    this.profilePictureURL,
   }) : super(key: key);
 
   @override
@@ -40,7 +44,8 @@ class _EventWallPostState extends State<EventWallPost> {
   @override
   void initState() {
     super.initState();
-    postRef = FirebaseFirestore.instance.collection('request').doc(widget.postid);
+    postRef =
+        FirebaseFirestore.instance.collection('request').doc(widget.postid);
 
     FirebaseFirestore.instance
         .collection('likes')
@@ -67,7 +72,11 @@ class _EventWallPostState extends State<EventWallPost> {
       });
     });
 
-    FirebaseFirestore.instance.collection('users').doc(widget.user).get().then((userSnapshot) {
+    FirebaseFirestore.instance
+        .collection('users')
+        .doc(widget.user)
+        .get()
+        .then((userSnapshot) {
       if (userSnapshot.exists) {
         setState(() {
           username = userSnapshot.data()?['firstName'];
@@ -130,10 +139,42 @@ class _EventWallPostState extends State<EventWallPost> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              if (widget.profilePictureURL != null &&
+                  widget.profilePictureURL!.isNotEmpty)
+                CircleAvatar(
+                  radius: 24, //   size
+                  backgroundImage: NetworkImage(widget.profilePictureURL!),
+                ),
+              if (widget.profilePictureURL != null &&
+                  widget.profilePictureURL!.isNotEmpty)
+                const SizedBox(width: 8),
+              Container(
+                decoration: BoxDecoration(
+                  color: Colors.grey[200],
+                  borderRadius: BorderRadius.circular(8.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.5),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 4),
+                    ),
+                  ],
+                ),
+              ),
               Text(
                 widget.firstName,
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16.0,
+                ),
+              ),
+              SizedBox(
+                width: 5,
+              ),
+              Text(
+                widget.lastName,
                 style: const TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 16.0,
@@ -142,19 +183,85 @@ class _EventWallPostState extends State<EventWallPost> {
             ],
           ),
           const SizedBox(height: 8.0),
-          Text(
-            "Caption : ${widget.caption}",
-            style: const TextStyle(fontSize: 16.0),
+          const SizedBox(height: 8.0),
+          Container(
+            width: double.infinity,
+            child: Container(
+              padding: EdgeInsets.all(16.0),
+              margin: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(12.0),
+                border: Border.all(
+                  //color: Colors.grey[300],
+                  width: 1.0,
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 3),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment:
+                    CrossAxisAlignment.start, // Align children to the left
+                children: [
+                  Text(
+                    " ${widget.caption}",
+                    style: const TextStyle(
+                      fontSize: 18.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  Text(
+                    "${widget.description}",
+                    style: const TextStyle(fontSize: 16.0),
+                    textAlign: TextAlign.left,
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                ],
+              ),
+            ),
           ),
-          Text(
-            "Description : ${widget.description}",
-            style: const TextStyle(fontSize: 16.0),
+          SizedBox(
+            height: 5,
           ),
-          Text(
-            "Location : ${widget.location}",
-            style: const TextStyle(fontSize: 16.0),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Icon(
+                Icons.location_on,
+                color: Colors.blue,
+                size: 28, // Set your desired icon color
+              ),
+              SizedBox(width: 10),
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    "Location:",
+                    style: const TextStyle(
+                      fontSize: 16.0,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    "${widget.location}",
+                    style: const TextStyle(fontSize: 16.0),
+                  ),
+                ],
+              ),
+            ],
           ),
-          const SizedBox(height: 16.0),
           if (widget.imageUrls.isNotEmpty)
             Center(
               child: Wrap(
@@ -163,7 +270,8 @@ class _EventWallPostState extends State<EventWallPost> {
                 children: widget.imageUrls
                     .map(
                       (imageUrl) => SizedBox(
-                        height: screenHeight * 0.5, // Adjust the height as needed
+                        height:
+                            screenHeight * 0.5, // Adjust the height as needed
                         width: screenWidth, // Adjust the width as needed
                         child: Image.network(
                           imageUrl,

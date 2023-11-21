@@ -112,7 +112,7 @@ class _EventHomeState extends State<EventHome> {
                                     as List<dynamic>?)
                                 ?.map((dynamic url) => url.toString())
                                 .toList() ??
-                            [],
+                            [], lastName: post.data()['lastName'],
                       );
                     },
                   );
