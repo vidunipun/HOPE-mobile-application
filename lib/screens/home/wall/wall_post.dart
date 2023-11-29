@@ -207,7 +207,7 @@ class _WallPostState extends State<WallPost> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(0, 4),
+                            offset: const Offset(0, 4),
                           ),
                         ],
                       ),
@@ -220,7 +220,7 @@ class _WallPostState extends State<WallPost> {
                               fontSize: 16.0,
                             ),
                           ),
-                          SizedBox(width: 5),
+                          const SizedBox(width: 5),
                           Text(
                             widget.lastName,
                             style: const TextStyle(
@@ -231,7 +231,7 @@ class _WallPostState extends State<WallPost> {
                         ],
                       ),
                     ),
-                    SizedBox(height: 10), // Add some vertical spacing
+                    const SizedBox(height: 10), // Add  vertical spacing
                     Container(
                       decoration: BoxDecoration(
                         color: Colors.grey[200],
@@ -241,7 +241,7 @@ class _WallPostState extends State<WallPost> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(0, 4),
+                            offset: const Offset(0, 4),
                           ),
                         ],
                       ),
@@ -269,13 +269,12 @@ class _WallPostState extends State<WallPost> {
             Container(
               width: double.infinity,
               child: Container(
-                padding: EdgeInsets.all(16.0),
-                margin: EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(16.0),
+                margin: const EdgeInsets.all(8.0),
                 decoration: BoxDecoration(
                   color: Colors.white,
                   borderRadius: BorderRadius.circular(12.0),
                   border: Border.all(
-                    //color: Colors.grey[300],
                     width: 1.0,
                   ),
                   boxShadow: [
@@ -283,7 +282,7 @@ class _WallPostState extends State<WallPost> {
                       color: Colors.grey.withOpacity(0.3),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 3),
+                      offset: const Offset(0, 3),
                     ),
                   ],
                 ),
@@ -299,15 +298,15 @@ class _WallPostState extends State<WallPost> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Text(
-                      "${widget.description}",
+                      widget.description,
                       style: const TextStyle(fontSize: 16.0),
                       textAlign: TextAlign.left,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 10,
                     ),
                     Visibility(
@@ -322,30 +321,30 @@ class _WallPostState extends State<WallPost> {
               ),
             ),
 
-            SizedBox(
+            const SizedBox(
               height: 5,
             ),
             Row(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
-                Icon(
+                const Icon(
                   Icons.location_on,
                   color: Colors.blue,
-                  size: 28, // Set your desired icon color
+                  size: 28, // Set  icon color
                 ),
-                SizedBox(width: 10),
+                const SizedBox(width: 10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Location:",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      "${widget.location}",
+                      widget.location,
                       style: const TextStyle(fontSize: 16.0),
                     ),
                   ],
@@ -360,15 +359,13 @@ class _WallPostState extends State<WallPost> {
                   children: widget.imageUrls
                       .map(
                         (imageUrl) => SizedBox(
-                          height: screenHeight * 0.5, // Set the desired height
-                          width: screenWidth, // Set the desired width
+                          height: screenHeight * 0.5, // Set the  height
+                          width: screenWidth, // Set the  width
                           child: Image.network(
                             imageUrl,
-                            height:
-                                screenHeight * 0.5, // Set the desired height
-                            width: screenWidth, // Set the same width here
-                            fit: BoxFit
-                                .cover, // Adjust the fit property as needed
+                            height: screenHeight * 0.5,
+                            width: screenWidth,
+                            fit: BoxFit.cover, // Adjust the fit property
                           ),
                         ),
                       )
@@ -396,7 +393,7 @@ class _WallPostState extends State<WallPost> {
                   'Comment',
                   style: TextStyle(fontSize: 16.0),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 17,
                 ),
                 Visibility(
@@ -441,19 +438,19 @@ class _WallPostState extends State<WallPost> {
                                   ),
                                 );
                               } else {
-                                // Handle the case when card_no is empty
+                                // if card_no is empty
                                 print('Card number is empty.');
                               }
                             } else {
-                              // Handle the case when the document does not exist
+                              //if document does not exist
                               print('Card document not found.');
                             }
                           } else {
-                            // Handle the case when the card document does not exist
+                            // if card document does not exist
                             print('Card document not found.');
                           }
                         } else {
-                          // Handle the case when there is no current user
+                          // if there is no current user
                           print('No current user.');
                         }
                       } catch (e) {
@@ -461,10 +458,9 @@ class _WallPostState extends State<WallPost> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      primary:
-                          buttonbackground, // Set your desired button color
+                      primary: buttonbackground, // Set  button color
                     ),
-                    child: Text('Payment'),
+                    child: const Text('Payment'),
                   ),
                 ),
 
@@ -482,7 +478,7 @@ class _WallPostState extends State<WallPost> {
                       backgroundColor:
                           buttonbackground, // Set the background color
                       valueColor:
-                          AlwaysStoppedAnimation<Color>(startButtonGreen),
+                          const AlwaysStoppedAnimation<Color>(startButtonGreen),
                       minHeight: 15,
                       borderRadius: const BorderRadius.all(Radius.circular(5)),
                       value: toNow != null && widget.amount != null

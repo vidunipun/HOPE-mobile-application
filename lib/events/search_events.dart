@@ -275,13 +275,11 @@ class _SearchEventsPageState extends State<SearchEventsPage> {
             child: ElevatedButton(
               onPressed: _searchNearbyEvents,
               style: ElevatedButton.styleFrom(
-                primary: buttonbackground, // Set your desired background color
+                primary: buttonbackground, // Set background color
               ),
               child: const Text('Search Nearby Events'),
             ),
           ),
-
-          // Bottom App Bar
         ],
       ),
     );

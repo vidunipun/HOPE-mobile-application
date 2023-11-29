@@ -10,7 +10,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'add_event.dart';
 
 class EventHome extends StatefulWidget {
-  // Renamed Home to EventHome
+ 
   const EventHome({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +18,7 @@ class EventHome extends StatefulWidget {
 }
 
 class _EventHomeState extends State<EventHome> {
-  // Renamed _HomeState to _EventHomeState
+
   final AuthServices _auth = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser;
   final textController = TextEditingController();
@@ -36,7 +36,7 @@ class _EventHomeState extends State<EventHome> {
             children: <Widget>[
               GestureDetector(
                 onTap: () {
-                  // Add your logic for the add icon here
+                 
                   Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -56,7 +56,7 @@ class _EventHomeState extends State<EventHome> {
               ),
               GestureDetector(
                 onTap: () {
-                  // Add your logic for the search icon here
+                 
                   Navigator.push(
                     context,
                     MaterialPageRoute(

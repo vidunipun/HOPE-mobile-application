@@ -132,13 +132,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
                       tooltip: 'Back',
                     ),
-                    Text(
+                    const Text(
                       'Profile',
                       style: TextStyle(
                           fontSize: 20,
@@ -171,7 +171,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _fnameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'First Name',
                     labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
@@ -180,12 +180,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     hintText: 'Enter your first name',
                     hintStyle: TextStyle(color: Colors.white),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _lnameController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Last Name',
                     labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
@@ -194,12 +194,12 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     hintText: 'Enter your last name',
                     hintStyle: TextStyle(color: Colors.white),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _mobileNumberController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Mobile Number',
                     labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
@@ -208,13 +208,13 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     hintText: 'Enter your mobile number',
                     hintStyle: TextStyle(color: Colors.white),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 TextFormField(
                   controller: _addressController,
                   maxLines: 3,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     labelText: 'Address',
                     labelStyle: TextStyle(color: Colors.white),
                     border: OutlineInputBorder(
@@ -223,7 +223,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                     hintText: 'Enter your address',
                     hintStyle: TextStyle(color: Colors.white),
                   ),
-                  style: TextStyle(color: Colors.white),
+                  style: const TextStyle(color: Colors.white),
                 ),
                 const SizedBox(height: 32.0),
                 ElevatedButton(

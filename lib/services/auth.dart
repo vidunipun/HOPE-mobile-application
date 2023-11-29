@@ -61,7 +61,7 @@ class AuthServices {
 
       // Save user data to Firestore using UID as document ID
       await FirebaseFirestore.instance.collection('users').doc(user?.uid).set({
-        'firstName': fname, // Add the first name here
+        'firstName': fname,
         'email': email,
         'lastName': lname,
         'mobileNumber': mobilenumber,

@@ -1,7 +1,6 @@
 import 'dart:convert';
 import 'package:auth/constants/colors.dart';
 import 'package:auth/screens/home/wall/home.dart';
-import 'package:auth/services/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,9 +23,7 @@ class _RequestPageState extends State<RequestPage> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _contacController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  //final TextEditingController _confirmationController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  //final AuthServices _auth = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser;
 
   String? selectedCountry = '';
@@ -51,7 +48,8 @@ class _RequestPageState extends State<RequestPage> {
 //upload image
   Future<void> uploadimage() async {
     try {
-      String uri = "http://10.34.26.97/mysqlflutter/imageupload.php";
+      String uri =
+          "http://10.34.26.97/mysqlflutter/imageupload.php"; //replace with current ip
       var res = await http.post(Uri.parse(uri), body: {
         "caption": _captionController.text,
         "data": imagedata,
@@ -116,7 +114,6 @@ class _RequestPageState extends State<RequestPage> {
       String description = _descriptionController.text;
       String contact = _contacController.text;
       String location = _locationController.text;
-      //String confirmation = _confirmationController.text;
       String? amount =
           _amountController.text.isNotEmpty ? _amountController.text : null;
 
@@ -162,8 +159,6 @@ class _RequestPageState extends State<RequestPage> {
             'description': description,
             'conatct': contact,
             'location': location,
-            //'confirmation': confirmation,
-            //'timestamp': FieldValue.serverTimestamp(),
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
@@ -173,7 +168,6 @@ class _RequestPageState extends State<RequestPage> {
             'to_now': 0,
             'rank': _rank,
             'verified': _verified,
-            // 'Likes': [],
           });
           FirebaseFirestore.instance.collection('requests').add({'Likes': []});
 
@@ -202,7 +196,7 @@ class _RequestPageState extends State<RequestPage> {
           // Data saved successfully
           print('Data saved to Firestore');
 
-          // Reset the form or navigate to another page as needed
+          // Reset the form or navigate to another page
         } else {
           // User is not authenticated, handle this case
           print('User is not authenticated');
@@ -284,23 +278,20 @@ class _RequestPageState extends State<RequestPage> {
       context: context,
       builder: (BuildContext context) {
         return Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              Text(
+              const Text(
                 'Select Location',
                 style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 20.0,
                 ),
               ),
-              SizedBox(height: 16.0),
-              // Your custom model content goes here
-              // You can add buttons, text fields, or any other widgets to select the location
-              // For example, you can use a TextFormField or a DropdownButtonFormField
+              const SizedBox(height: 16.0),
               Container(
-                margin: EdgeInsets.all(20),
+                margin: const EdgeInsets.all(20),
                 child: CSCPicker(
                   layout: Layout.vertical,
                   //flagState: CountryFlag.DISABLE,
@@ -319,15 +310,9 @@ class _RequestPageState extends State<RequestPage> {
                       selectedCity = city;
                     });
                   },
-                  /* countryDropdownLabel: "*Country",
-          stateDropdownLabel: "*State",
-          cityDropdownLabel: "*City",*/
-                  //dropdownDialogRadius: 30,
-                  //searchBarRadius: 30,
                 ),
               ),
-
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               ElevatedButton(
                 onPressed: () {
                   // Save the selected location from the model
@@ -338,7 +323,7 @@ class _RequestPageState extends State<RequestPage> {
                   // Close the model
                   Navigator.pop(context);
                 },
-                child: Text('Save'),
+                child: const Text('Save'),
               ),
             ],
           ),
@@ -362,7 +347,7 @@ class _RequestPageState extends State<RequestPage> {
                 Row(
                   children: [
                     IconButton(
-                      icon: Icon(Icons.arrow_back, color: Colors.white),
+                      icon: const Icon(Icons.arrow_back, color: Colors.white),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
@@ -388,13 +373,13 @@ class _RequestPageState extends State<RequestPage> {
                             Expanded(
                               child: TextFormField(
                                 controller: _captionController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Caption',
                                     labelStyle: TextStyle(color: Colors.white),
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                                 validator: (value) {
@@ -413,15 +398,15 @@ class _RequestPageState extends State<RequestPage> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Caption Guidance'),
-                                      content:
-                                          Text('Enter a caption of the post.'),
+                                      title: const Text('Caption Guidance'),
+                                      content: const Text(
+                                          'Enter a caption of the post.'),
                                       actions: <Widget>[
                                         ElevatedButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text('OK'),
+                                          child: const Text('OK'),
                                         ),
                                       ],
                                     );
@@ -438,13 +423,13 @@ class _RequestPageState extends State<RequestPage> {
                             Expanded(
                               child: TextFormField(
                                 controller: _descriptionController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Description',
                                     labelStyle: TextStyle(color: Colors.white),
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                                 validator: (value) {
@@ -463,15 +448,15 @@ class _RequestPageState extends State<RequestPage> {
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Description Guidance'),
-                                      content: Text(
+                                      title: const Text('Description Guidance'),
+                                      content: const Text(
                                           'Enter a detailed description of the post.'),
                                       actions: <Widget>[
                                         ElevatedButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text('OK'),
+                                          child: const Text('OK'),
                                         ),
                                       ],
                                     );
@@ -487,13 +472,13 @@ class _RequestPageState extends State<RequestPage> {
                             Expanded(
                               child: TextFormField(
                                 controller: _contacController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Contact',
                                     labelStyle: TextStyle(color: Colors.white),
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                                 validator: (value) {
@@ -505,21 +490,22 @@ class _RequestPageState extends State<RequestPage> {
                               ),
                             ),
                             IconButton(
-                              icon: Icon(Icons.info, color: buttonboarder),
+                              icon:
+                                  const Icon(Icons.info, color: buttonboarder),
                               onPressed: () {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Contact Guidance'),
-                                      content: Text(
+                                      title: const Text('Contact Guidance'),
+                                      content: const Text(
                                           'Enter a valid contact number for inquiries.'),
                                       actions: <Widget>[
                                         ElevatedButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text('OK'),
+                                          child: const Text('OK'),
                                         ),
                                       ],
                                     );
@@ -535,33 +521,34 @@ class _RequestPageState extends State<RequestPage> {
                             Expanded(
                               child: TextFormField(
                                 controller: _amountController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Amount',
                                     labelStyle: TextStyle(color: Colors.white),
                                     enabledBorder: UnderlineInputBorder(
                                         borderSide:
                                             BorderSide(color: Colors.white))),
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: Colors.white,
                                 ),
                               ),
                             ),
                             IconButton(
-                              icon: Icon(Icons.info, color: buttonboarder),
+                              icon:
+                                  const Icon(Icons.info, color: buttonboarder),
                               onPressed: () {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Amount Guidance'),
-                                      content: Text(
+                                      title: const Text('Amount Guidance'),
+                                      content: const Text(
                                           'Enter the amount or leave it empty if not applicable.'),
                                       actions: <Widget>[
                                         ElevatedButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text('OK'),
+                                          child: const Text('OK'),
                                         ),
                                       ],
                                     );
@@ -577,7 +564,7 @@ class _RequestPageState extends State<RequestPage> {
                             Expanded(
                               child: TextFormField(
                                 controller: _locationController,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                     labelText: 'Location',
                                     labelStyle: TextStyle(color: Colors.white),
                                     enabledBorder: UnderlineInputBorder(
@@ -595,21 +582,22 @@ class _RequestPageState extends State<RequestPage> {
                               ),
                             ),
                             IconButton(
-                              icon: Icon(Icons.info, color: buttonboarder),
+                              icon:
+                                  const Icon(Icons.info, color: buttonboarder),
                               onPressed: () {
                                 showDialog(
                                   context: context,
                                   builder: (context) {
                                     return AlertDialog(
-                                      title: Text('Location Guidance'),
-                                      content: Text(
+                                      title: const Text('Location Guidance'),
+                                      content: const Text(
                                           'Enter the related location of the post.'),
                                       actions: <Widget>[
                                         ElevatedButton(
                                           onPressed: () {
                                             Navigator.of(context).pop();
                                           },
-                                          child: Text('OK'),
+                                          child: const Text('OK'),
                                         ),
                                       ],
                                     );
@@ -626,7 +614,7 @@ class _RequestPageState extends State<RequestPage> {
                                 height: 100,
                                 child: Image.file(imagepath!),
                               )
-                            : Text(
+                            : const Text(
                                 "Image not chosen yet",
                                 style: TextStyle(
                                     color: Colors
@@ -646,25 +634,13 @@ class _RequestPageState extends State<RequestPage> {
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: startButtonGreen,
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: Color(0xFF0BFFFF),
                                 width:
                                     2), // Set the background color to 0xFF121312
                           ),
                         ),
 
-                        // ElevatedButton(
-                        //     onPressed: uploadimage, child: const Text("Upload")),
-                        // TextFormField(
-                        //   controller: _confirmationController,
-                        //   decoration: const InputDecoration(labelText: 'Confirmation'),
-                        //   validator: (value) {
-                        //     if (value == null || value.isEmpty) {
-                        //       return 'Please enter a confirmation';
-                        //     }
-                        //     return null;
-                        //   },
-                        // ),
                         //add post image
                         ElevatedButton(
                           onPressed: _selectImage,
@@ -680,7 +656,7 @@ class _RequestPageState extends State<RequestPage> {
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: startButtonGreen,
-                            side: BorderSide(
+                            side: const BorderSide(
                                 color: Color(0xFF0BFFFF),
                                 width:
                                     2), // Set the background color to 0xFF121312
@@ -699,7 +675,7 @@ class _RequestPageState extends State<RequestPage> {
                               )
                             : Container(), // Optionally display a placeholder if there are no selected images
 
-                        SizedBox(height: 10),
+                        const SizedBox(height: 10),
                         //add gramaniladary
                         ElevatedButton(
                           onPressed: _selectGramaNiladariCertificate,
@@ -715,7 +691,7 @@ class _RequestPageState extends State<RequestPage> {
                           ),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: startButtonGreen,
-                            side: BorderSide(
+                            side: const BorderSide(
                               color: Color(0xFF0BFFFF),
                               width: 2,
                             ),
@@ -734,15 +710,11 @@ class _RequestPageState extends State<RequestPage> {
                               )
                             : Container(), // Optionally display a placeholder if there are no selected images
 
-                        SizedBox(height: 10),
-                        // ElevatedButton(
-                        //   onPressed: _uploadImages,
-                        //   child: const Text('Upload Images'),
-                        // ),
+                        const SizedBox(height: 10),
                         Theme(
                           data: ThemeData(unselectedWidgetColor: Colors.white),
                           child: CheckboxListTile(
-                            title: Text(
+                            title: const Text(
                               'I verify that all the information is correct',
                               style: TextStyle(color: Colors.white),
                             ),
@@ -778,8 +750,8 @@ class _RequestPageState extends State<RequestPage> {
                           style: ElevatedButton.styleFrom(
                             backgroundColor:
                                 startButtonGreen, // Set the background color to 0xFF164356
-                            side:
-                                BorderSide(color: Color(0xFF0BFFFF), width: 2),
+                            side: const BorderSide(
+                                color: Color(0xFF0BFFFF), width: 2),
                           ),
                         ),
                         const SizedBox(height: 10),

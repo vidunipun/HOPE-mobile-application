@@ -161,19 +161,19 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                   tooltip: 'Back',
                 ),
-                Text(
+                const Text(
                   'Add Your Card',
                   style: TextStyle(
                       fontSize: 20,
@@ -182,12 +182,12 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                 ),
               ],
             ),
-            SizedBox(
+            const SizedBox(
               height: 20,
             ),
             TextFormField(
               controller: cardNumberController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Card Number',
                 labelStyle: TextStyle(color: Colors.white),
                 border: OutlineInputBorder(
@@ -196,13 +196,13 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                 hintText: 'Enter your card number',
                 hintStyle: TextStyle(color: Colors.white),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
 
             const SizedBox(height: 16.0),
             TextFormField(
               controller: expDateController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Expiration Date (MM/YY)',
                 labelStyle: TextStyle(color: Colors.white),
                 border: OutlineInputBorder(
@@ -211,13 +211,13 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                 hintText: 'Enter expiration date (MM/YY)',
                 hintStyle: TextStyle(color: Colors.white),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
 
             const SizedBox(height: 16.0),
             TextFormField(
               controller: cvvController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'CVV',
                 labelStyle: TextStyle(color: Colors.white),
                 border: OutlineInputBorder(
@@ -226,7 +226,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                 hintText: 'Enter CVV',
                 hintStyle: TextStyle(color: Colors.white),
               ),
-              style: TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.white),
             ),
 
             const SizedBox(height: 24.0),
@@ -267,11 +267,7 @@ class _CardDetailsPageState extends State<CardDetailsPage> {
                 ),
               ),
             ),
-            // TextField(
-            //   controller: payController,
-            //   decoration: InputDecoration(labelText: 'Pay'),
-            // ),
-            // ElevatedButton(onPressed: paycash, child: Text("Pay"))
+         
           ],
         ),
       ),

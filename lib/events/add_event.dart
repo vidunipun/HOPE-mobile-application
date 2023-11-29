@@ -23,8 +23,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _tagsController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  //final TextEditingController _confirmationController = TextEditingController();
-  //final AuthServices _auth = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser;
 
   String? selectedCountry = '';
@@ -72,7 +70,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
       String description = _descriptionController.text;
       String tags = _tagsController.text;
       String location = _locationController.text;
-      //String confirmation = _confirmationController.text;
 
       if (!_isInformationCorrect) {
         // ignore: use_build_context_synchronously
@@ -114,8 +111,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
             'description': description,
             'tags': tags,
             'location': location,
-            //'confirmation': confirmation,
-            //'timestamp': FieldValue.serverTimestamp(),
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
@@ -149,13 +144,13 @@ class _AddEventsPageState extends State<AddEventsPage> {
           // Data saved successfully
           print('Data saved to Firestore');
 
-          // Reset the form or navigate to another page as needed
+          // Reset the form or navigate to another page
         } else {
-          // User is not authenticated, handle this case
+          // User is not authenticate
           print('User is not authenticated');
         }
       } catch (e) {
-        // Handle errors if data couldn't be saved
+        // if data couldn't be saved
         print('Error saving data to Firestore: $e');
       }
     }
@@ -210,7 +205,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                 margin: const EdgeInsets.all(20),
                 child: CSCPicker(
                   layout: Layout.vertical,
-                  //flagState: CountryFlag.DISABLE,
                   onCountryChanged: (country) {
                     setState(() {
                       selectedCountry = country;
@@ -226,11 +220,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       selectedCity = city;
                     });
                   },
-                  /* countryDropdownLabel: "*Country",
-          stateDropdownLabel: "*State",
-          cityDropdownLabel: "*City",*/
-                  //dropdownDialogRadius: 30,
-                  //searchBarRadius: 30,
                 ),
               ),
               const SizedBox(height: 16.0),
@@ -264,13 +253,13 @@ class _AddEventsPageState extends State<AddEventsPage> {
             Row(
               children: [
                 IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
                   tooltip: 'Back',
                 ),
-                Text(
+                const Text(
                   'ADD Events',
                   style: TextStyle(
                       fontSize: 20,
@@ -279,20 +268,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                 ),
               ],
             ),
-            // // Add your buttons here
-            // ElevatedButton(
-            //   onPressed: () {
-            //     // Handle button click
-            //   },
-            //   child: const Text('Your Button Text'),
-            // ),
-            // // Add your text widget here
-            // const Text(
-            //   'Your Text Here',
-            //   style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
-            // ),
-
-            // Now add the Form with your form fields
             Form(
               key: _formKey,
               child: Column(
@@ -302,14 +277,14 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       Expanded(
                         child: TextFormField(
                           controller: _captionController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Caption',
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           validator: (value) {
@@ -321,7 +296,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.info,
                           color: buttonboarder,
                         ),
@@ -355,14 +330,14 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       Expanded(
                         child: TextFormField(
                           controller: _descriptionController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Description',
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           validator: (value) {
@@ -374,7 +349,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.info,
                           color: buttonboarder,
                         ),
@@ -408,14 +383,14 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       Expanded(
                         child: TextFormField(
                           controller: _tagsController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Tags',
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           validator: (value) {
@@ -427,7 +402,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.info,
                           color: buttonboarder,
                         ),
@@ -461,14 +436,14 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       Expanded(
                         child: TextFormField(
                           controller: _locationController,
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             labelText: 'Location',
                             labelStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white),
                             ),
                           ),
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.white,
                           ),
                           validator: (value) {
@@ -484,7 +459,7 @@ class _AddEventsPageState extends State<AddEventsPage> {
                         ),
                       ),
                       IconButton(
-                        icon: Icon(
+                        icon: const Icon(
                           Icons.info,
                           color: buttonboarder,
                         ),
@@ -528,7 +503,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       ),
                     ),
                   ),
-
                   _selectedImages.isNotEmpty
                       ? Column(
                           children: _selectedImages
@@ -537,14 +511,10 @@ class _AddEventsPageState extends State<AddEventsPage> {
                         )
                       : Container(),
                   const SizedBox(height: 20),
-                  // ElevatedButton(
-                  //   onPressed: _uploadImages,
-                  //   child: const Text('Upload Images'),
-                  // ),
                   Theme(
                     data: ThemeData(unselectedWidgetColor: Colors.white),
                     child: CheckboxListTile(
-                      title: Text(
+                      title: const Text(
                         'I verify that all the information is correct',
                         style: TextStyle(color: Colors.white),
                       ),
@@ -582,7 +552,6 @@ class _AddEventsPageState extends State<AddEventsPage> {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
                 ],
               ),

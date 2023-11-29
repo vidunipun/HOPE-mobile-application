@@ -74,7 +74,6 @@ class ProfilePage extends StatelessWidget {
             GestureDetector(
               onTap: () async {
                 await _auth.signOut();
-                // Optionally, you can perform additional actions after sign-out
               },
               child: const Card(
                 margin: EdgeInsets.all(16.0),

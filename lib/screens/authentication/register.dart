@@ -32,10 +32,7 @@ class _RegisterState extends State<Register> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: buttonbackground,
-      // appBar: AppBar(
-      //   title: const Text("Register Here"),
-      //   backgroundColor: startBackgroundBlack,
-      // ),
+    
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -78,7 +75,7 @@ class _RegisterState extends State<Register> {
                         //email
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Email",
                               hintStyle: TextStyle(color: Colors.white),
                               enabledBorder: UnderlineInputBorder(
@@ -98,7 +95,7 @@ class _RegisterState extends State<Register> {
                         //first name
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "First Name",
                               hintStyle: TextStyle(color: Colors.white),
                               enabledBorder: UnderlineInputBorder(
@@ -119,7 +116,7 @@ class _RegisterState extends State<Register> {
                         //last name
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Last Name",
                               hintStyle: TextStyle(color: Colors.white),
                               enabledBorder: UnderlineInputBorder(
@@ -140,7 +137,7 @@ class _RegisterState extends State<Register> {
                         //id number
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "ID Number",
                               hintStyle: TextStyle(color: Colors.white),
                               enabledBorder: UnderlineInputBorder(
@@ -157,7 +154,7 @@ class _RegisterState extends State<Register> {
                         //mobile number
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Mobile Number",
                               hintStyle: TextStyle(color: Colors.white),
                               enabledBorder: UnderlineInputBorder(
@@ -178,7 +175,7 @@ class _RegisterState extends State<Register> {
                         //address
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                               hintText: "Address",
                               hintStyle: TextStyle(color: Colors.white),
                               enabledBorder: UnderlineInputBorder(
@@ -198,7 +195,7 @@ class _RegisterState extends State<Register> {
                         //password
                         TextFormField(
                           style: const TextStyle(color: Colors.white),
-                          decoration: InputDecoration(
+                          decoration: const InputDecoration(
                             hintText: "Password",
                             hintStyle: TextStyle(color: Colors.white),
                             enabledBorder: UnderlineInputBorder(
@@ -224,48 +221,16 @@ class _RegisterState extends State<Register> {
                           },
                         ),
 
-                        // Divider between password form and social media login
+                    
                         const SizedBox(height: 25),
-                        // const Divider(
-                        //   color: Colors.white,
-                        //   height: 1,
-                        //   thickness: 1,
-                        //   indent: 40,
-                        //   endIndent: 40,
-                        // ),
-                        // Social Media Login
+                   
                         const SizedBox(height: 20),
-                        // const Text(
-                        //   "Login with social accounts",
-                        //   style: signInRegisterText2,
-                        // ),
+                  
                         const SizedBox(height: 1),
-                        Row(
+                        const Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            // GestureDetector(
-                            //   //sign in with Facebook
-                            //   onTap: () {},
-                            //   child: Center(
-                            //     child: Image.asset(
-                            //       'assets/facebook.jpg',
-                            //       height: 50,
-                            //       width: 50,
-                            //     ),
-                            //   ),
-                            // ),
-                            // const SizedBox(width: 15),
-                            // GestureDetector(
-                            //   //sign in with Google
-                            //   onTap: () {},
-                            //   child: Center(
-                            //     child: Image.asset(
-                            //       'assets/google.png',
-                            //       height: 50,
-                            //       width: 50,
-                            //     ),
-                            //   ),
-                            // ),
+                          
                           ],
                         ),
 

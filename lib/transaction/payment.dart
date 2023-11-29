@@ -160,7 +160,7 @@ class _paymentState extends State<payment> {
         // Get the 'points' value from the user's document
         int userPoints = (userSnapshot.data()?['points'] as num?)?.toInt() ?? 0;
 
-        // Implement your logic to assign ranks based on points
+        //  assign ranks based on points
         String rank;
         if (userPoints > 100) {
           rank = 'Gold';
@@ -174,7 +174,7 @@ class _paymentState extends State<payment> {
         transaction.set(
           userDocumentReference,
           {'rank': rank},
-          SetOptions(merge: true), // Use merge option to update existing fields
+          SetOptions(merge: true),
         );
 
         print('Rank assigned or updated successfully: $rank');
@@ -190,8 +190,7 @@ class _paymentState extends State<payment> {
       final DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
           await FirebaseFirestore.instance
               .collection('requests')
-              .doc(
-                  widget.postid) // Assuming postid uniquely identifies the post
+              .doc(widget.postid)
               .get();
 
       if (documentSnapshot.exists) {
@@ -200,7 +199,6 @@ class _paymentState extends State<payment> {
           int? rintAmount = int.tryParse(amountController.text);
 
           if (rintAmount != null) {
-            // Calculate the new to_now value by adding rintAmount to the existing value
             int? currentToNow = requestData['to_now'];
             int newToNow =
                 currentToNow != null ? currentToNow + rintAmount : rintAmount;
@@ -239,9 +237,6 @@ class _paymentState extends State<payment> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: buttonbackground,
-      // appBar: AppBar(
-      //   title: const Text('Payment'),
-      // ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -249,11 +244,11 @@ class _paymentState extends State<payment> {
           children: [
             Row(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 15,
                 ),
                 IconButton(
-                  icon: Icon(Icons.arrow_back, color: Colors.white),
+                  icon: const Icon(Icons.arrow_back, color: Colors.white),
                   onPressed: () {
                     Navigator.of(context).pop();
                   },
@@ -271,7 +266,7 @@ class _paymentState extends State<payment> {
             TextField(
               controller:
                   cardNumberController, // Controller to control the text field's content.
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText:
                     'Card Number', // Label text displayed above the text field.
                 labelStyle:
@@ -282,7 +277,7 @@ class _paymentState extends State<payment> {
                           .white), // Border color when the field is enabled.
                 ),
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white, // Text color of the input.
               ),
             ),
@@ -290,7 +285,7 @@ class _paymentState extends State<payment> {
             TextField(
               controller:
                   amountController, // Controller to control the text field's content.
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText:
                     'Amount', // Label text displayed above the text field.
                 labelStyle:
@@ -301,7 +296,7 @@ class _paymentState extends State<payment> {
                           .white), // Border color when the field is enabled.
                 ),
               ),
-              style: TextStyle(
+              style: const TextStyle(
                 color: Colors.white, // Text color of the input.
               ),
             ),
@@ -344,19 +339,19 @@ class _paymentState extends State<payment> {
                             ),
                           );
                         } else {
-                          // Handle the case where the account balance is insufficient
+                          // if the account balance is insufficient
                           print('Insufficient account balance.');
                         }
                       } else {
-                        // Handle the case where balance or enteredAmount is null
+                        // if balance or enteredAmount is null
                         print('Error parsing balance or entered amount.');
                       }
                     } else {
-                      // Handle the case where the Bank document does not exist
+                      // if the Bank document does not exist
                       print('Bank document not found.');
                     }
                   } else {
-                    // Handle the case where there is no current user
+                    // if there is no current user
                     print('No current user.');
                   }
                 } catch (e) {

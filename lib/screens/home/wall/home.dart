@@ -118,15 +118,7 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         elevation: 0, // Remove the elevation (box around AppBar)
         automaticallyImplyLeading: false, // Remove the back button
-        // actions: [
-        //   ElevatedButton(
-        //     onPressed: () async {
-        //       await _auth.signOut();
-        //     },
-        //     child: const Icon(Icons.logout),
-        //   ),
-        // ],
-        // "HOPE" text as a child of AppBar
+
         title: Row(
           children: [
             Container(
@@ -238,8 +230,8 @@ class _HomeState extends State<Home> {
             children: [
               Expanded(
                 child: Container(
-                  margin: const EdgeInsets.only(
-                      bottom: 12), // Adjust the margin as needed
+                  margin:
+                      const EdgeInsets.only(bottom: 12), // Adjust the margin
                   child: IconButton(
                     onPressed: () {
                       // Handle Home button press

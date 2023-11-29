@@ -197,14 +197,13 @@ class _WallDonationState extends State<WallDonation> {
                 children: widget.imageUrls
                     .map(
                       (imageUrl) => SizedBox(
-                        height: 200, // Set the desired height
-                        width: 200, // Set the desired width
+                        height: 200, // Set the  height
+                        width: 200, // Set the  width
                         child: Image.network(
                           imageUrl,
-                          height: 200, // Set the same height here
-                          width: 200, // Set the same width here
-                          fit:
-                              BoxFit.cover, // Adjust the fit property as needed
+                          height: 200,
+                          width: 200,
+                          fit: BoxFit.cover, // Adjust the fit
                         ),
                       ),
                     )
@@ -263,11 +262,11 @@ class _WallDonationState extends State<WallDonation> {
                             ),
                           );
                         } else {
-                          // Handle the case when card_no is empty
+                          // if card_no is empty
                           print('Card number is empty.');
                         }
                       } else {
-                        // Handle the case when the document does not exist
+                        // if the document does not exist
                         print('Card document not found.');
                       }
                     } catch (e) {
@@ -288,7 +287,6 @@ class _WallDonationState extends State<WallDonation> {
                 children: [
                   LinearProgressIndicator(
                     minHeight: 15,
-                    //borderRadius: const BorderRadius.all(Radius.circular(10)),
                     value: toNow != null && widget.amount != null
                         ? toNow! / double.tryParse(widget.amount!)!
                         : 0.0,
