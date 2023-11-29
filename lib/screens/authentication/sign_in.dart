@@ -182,26 +182,26 @@ class _SingInState extends State<SingIn> {
                                   );
                                 }
                               },
-                              child: GestureDetector(
-                                //method for loggin as guest
-                                onTap: () async {
-                                  await _auth.signInAnonoymously();
-                                },
-                                child: Container(
-                                  height: 40,
-                                  width: 200,
-                                  decoration: BoxDecoration(
-                                      color: startButtonGreen,
-                                      borderRadius: BorderRadius.circular(100),
-                                      border: Border.all(
-                                          width: 3, color: startButtonGreen)),
-                                  child: const Center(
-                                      child: Text(
-                                    "LOG IN AS GUEST",
-                                    style: (startButtonText),
-                                  )),
-                                ),
-                              ),
+                              // child: GestureDetector(
+                              //   //method for loggin as guest
+                              //   onTap: () async {
+                              //     await _auth.signInAnonoymously();
+                              //   },
+                              //   child: Container(
+                              //     height: 40,
+                              //     width: 200,
+                              //     decoration: BoxDecoration(
+                              //         color: startButtonGreen,
+                              //         borderRadius: BorderRadius.circular(100),
+                              //         border: Border.all(
+                              //             width: 3, color: startButtonGreen)),
+                              //     child: const Center(
+                              //         child: Text(
+                              //       "LOG IN AS GUEST",
+                              //       style: (startButtonText),
+                              //     )),
+                              //   ),
+                              // ),
                             ),
                           ],
                         ),
