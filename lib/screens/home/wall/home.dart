@@ -202,6 +202,7 @@ class _HomeState extends State<Home> {
                                     lastName: post.data()['lastName'],
                                     points: post.data()['points'],
                                     rank: rank,
+                                    verified: post.data()['verified'],
                                   );
                                 } else {
                                   return const CircularProgressIndicator();
