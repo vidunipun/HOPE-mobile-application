@@ -118,14 +118,14 @@ class _HomeState extends State<Home> {
         backgroundColor: Colors.white,
         elevation: 0, // Remove the elevation (box around AppBar)
         automaticallyImplyLeading: false, // Remove the back button
-        actions: [
-          ElevatedButton(
-            onPressed: () async {
-              await _auth.signOut();
-            },
-            child: const Icon(Icons.logout),
-          ),
-        ],
+        // actions: [
+        //   ElevatedButton(
+        //     onPressed: () async {
+        //       await _auth.signOut();
+        //     },
+        //     child: const Icon(Icons.logout),
+        //   ),
+        // ],
         // "HOPE" text as a child of AppBar
         title: Row(
           children: [
@@ -202,6 +202,7 @@ class _HomeState extends State<Home> {
                                     lastName: post.data()['lastName'],
                                     points: post.data()['points'],
                                     rank: rank,
+                                    verified: post.data()['verified'],
                                   );
                                 } else {
                                   return const CircularProgressIndicator();

@@ -35,10 +35,12 @@ class _RequestPageState extends State<RequestPage> {
   String? _firstName;
   String? _lastName;
   String? _rank;
+  final bool _verified = false;
 
   User? user;
 
   final List<File> _selectedImages = [];
+  final List<File> _gramaniladaaryCertificateImage = [];
   final List<String> _uploadedFileUrls = [];
 
   File? imagepath;
@@ -145,6 +147,7 @@ class _RequestPageState extends State<RequestPage> {
       }
       await uploadimage();
       await _uploadImages();
+      await _uploadGramaNiladariCertificate();
       try {
         // Get the authenticated user
         final user = FirebaseAuth.instance.currentUser;
@@ -169,6 +172,7 @@ class _RequestPageState extends State<RequestPage> {
             'amount': amount,
             'to_now': 0,
             'rank': _rank,
+            'verified': _verified,
             // 'Likes': [],
           });
           FirebaseFirestore.instance.collection('requests').add({'Likes': []});
@@ -234,6 +238,43 @@ class _RequestPageState extends State<RequestPage> {
       // Add the download URL to the list of uploaded file URLs
       setState(() {
         _uploadedFileUrls.add(downloadURL);
+      });
+    }
+  }
+
+  Future<void> _selectGramaNiladariCertificate() async {
+    final ImagePicker _picker = ImagePicker();
+    final XFile? certificateImage =
+        await _picker.pickImage(source: ImageSource.gallery);
+
+    if (certificateImage != null) {
+      setState(() {
+        _gramaniladaaryCertificateImage.add(File(certificateImage.path));
+      });
+    }
+  }
+
+  Future<void> _uploadGramaNiladariCertificate() async {
+    String currentUserUid = FirebaseAuth.instance.currentUser!.uid;
+
+    for (File image in _gramaniladaaryCertificateImage) {
+      String imageName = image.path.split('/').last;
+      firebase_storage.Reference storageRef = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('gramaniladaary_certificates')
+          .child(imageName);
+      await storageRef.putFile(image);
+      String downloadURL = await storageRef.getDownloadURL();
+      print('Grama Niladari Certificate uploaded: $downloadURL');
+
+      DocumentReference certificateDocRef = FirebaseFirestore.instance
+          .collection('gramaniladaary_certificates')
+          .doc();
+      await certificateDocRef.set({
+        'type': 'gramaniladaary_certificate',
+        'url': downloadURL,
+        'userUid': currentUserUid,
       });
     }
   }
@@ -624,6 +665,7 @@ class _RequestPageState extends State<RequestPage> {
                         //     return null;
                         //   },
                         // ),
+                        //add post image
                         ElevatedButton(
                           onPressed: _selectImage,
                           child: const Text(
@@ -647,6 +689,41 @@ class _RequestPageState extends State<RequestPage> {
                         _selectedImages.isNotEmpty
                             ? Column(
                                 children: _selectedImages
+                                    .map((image) => Container(
+                                          width: 100,
+                                          height: 100,
+                                          child: Image.file(image,
+                                              fit: BoxFit.cover),
+                                        ))
+                                    .toList(),
+                              )
+                            : Container(), // Optionally display a placeholder if there are no selected images
+
+                        SizedBox(height: 10),
+                        //add gramaniladary
+                        ElevatedButton(
+                          onPressed: _selectGramaNiladariCertificate,
+                          child: const Text(
+                            'Add Gramaniladary Certificate',
+                            style: TextStyle(
+                              color: buttonbackground,
+                              fontSize: 20,
+                              fontFamily: 'Otomanopee One',
+                              fontWeight: FontWeight.w400,
+                              height: 0,
+                            ),
+                          ),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: startButtonGreen,
+                            side: BorderSide(
+                              color: Color(0xFF0BFFFF),
+                              width: 2,
+                            ),
+                          ),
+                        ),
+                        _gramaniladaaryCertificateImage.isNotEmpty
+                            ? Column(
+                                children: _gramaniladaaryCertificateImage
                                     .map((image) => Container(
                                           width: 100,
                                           height: 100,

@@ -23,6 +23,7 @@ class WallPost extends StatefulWidget {
   final String lastName;
   final String? points;
   final String? rank;
+  final bool verified;
 
   const WallPost({
     Key? key,
@@ -40,6 +41,7 @@ class WallPost extends StatefulWidget {
     required this.lastName,
     required this.points,
     required this.rank,
+    required this.verified,
   }) : super(key: key);
 
   @override
@@ -170,339 +172,345 @@ class _WallPostState extends State<WallPost> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
-      padding: const EdgeInsets.all(16.0),
-      margin: const EdgeInsets.symmetric(vertical: 8.0),
-      decoration: const BoxDecoration(
-        color: Color.fromARGB(255, 255, 255, 255),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Row(
-            children: [
-              // Display the user's profile picture
-              if (widget.profilePictureURL != null &&
-                  widget.profilePictureURL!.isNotEmpty)
-                CircleAvatar(
-                  radius: 24, //   size
-                  backgroundImage: NetworkImage(widget.profilePictureURL!),
-                ),
-              if (widget.profilePictureURL != null &&
-                  widget.profilePictureURL!.isNotEmpty)
-                const SizedBox(width: 8),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Row(
-                      children: [
-                        Text(
-                          widget.firstName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                        SizedBox(width: 5),
-                        Text(
-                          widget.lastName,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16.0,
-                          ),
-                        ),
-                      ],
-                    ),
+    return Visibility(
+      visible: widget.verified == true,
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        decoration: const BoxDecoration(
+          color: Color.fromARGB(255, 255, 255, 255),
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Row(
+              children: [
+                // Display the user's profile picture
+                if (widget.profilePictureURL != null &&
+                    widget.profilePictureURL!.isNotEmpty)
+                  CircleAvatar(
+                    radius: 24, //   size
+                    backgroundImage: NetworkImage(widget.profilePictureURL!),
                   ),
-                  SizedBox(height: 10), // Add some vertical spacing
-                  Container(
-                    decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(8.0),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.grey.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 5,
-                          offset: Offset(0, 4),
-                        ),
-                      ],
-                    ),
-                    child: Text(
-                      ' ${widget.rank ?? "No Rank"}',
-                      style: const TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16.0,
+                if (widget.profilePictureURL != null &&
+                    widget.profilePictureURL!.isNotEmpty)
+                  const SizedBox(width: 8),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Row(
+                        children: [
+                          Text(
+                            widget.firstName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                          SizedBox(width: 5),
+                          Text(
+                            widget.lastName,
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16.0,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
-                  ),
-                ],
-              ),
-
-              Builder(
-                builder: (BuildContext context) {
-                  print('Rank: ${widget.rank ?? "No Rank"}');
-                  return Container(); // Return an empty container to avoid UI issues
-                },
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 8.0),
-          Container(
-            width: double.infinity,
-            child: Container(
-              padding: EdgeInsets.all(16.0),
-              margin: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(12.0),
-                border: Border.all(
-                  //color: Colors.grey[300],
-                  width: 1.0,
-                ),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 3),
-                  ),
-                ],
-              ),
-              child: Column(
-                crossAxisAlignment:
-                    CrossAxisAlignment.start, // Align children to the left
-                children: [
-                  Text(
-                    " ${widget.caption}",
-                    style: const TextStyle(
-                      fontSize: 18.0,
-                      fontWeight: FontWeight.bold,
+                    SizedBox(height: 10), // Add some vertical spacing
+                    Container(
+                      decoration: BoxDecoration(
+                        color: Colors.grey[200],
+                        borderRadius: BorderRadius.circular(8.0),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.grey.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 5,
+                            offset: Offset(0, 4),
+                          ),
+                        ],
+                      ),
+                      child: Text(
+                        ' ${widget.rank ?? "No Rank"}',
+                        style: const TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 16.0,
+                        ),
+                      ),
                     ),
-                    textAlign: TextAlign.center,
+                  ],
+                ),
+
+                Builder(
+                  builder: (BuildContext context) {
+                    print('Rank: ${widget.rank ?? "No Rank"}');
+                    return Container(); // Return an empty container to avoid UI issues
+                  },
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8.0),
+            Container(
+              width: double.infinity,
+              child: Container(
+                padding: EdgeInsets.all(16.0),
+                margin: EdgeInsets.all(8.0),
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(12.0),
+                  border: Border.all(
+                    //color: Colors.grey[300],
+                    width: 1.0,
                   ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
-                    "${widget.description}",
-                    style: const TextStyle(fontSize: 16.0),
-                    textAlign: TextAlign.left,
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Visibility(
-                    visible: widget.amount != null,
-                    child: Text(
-                      "Need Rs ${widget.amount}",
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.grey.withOpacity(0.3),
+                      spreadRadius: 2,
+                      blurRadius: 5,
+                      offset: Offset(0, 3),
+                    ),
+                  ],
+                ),
+                child: Column(
+                  crossAxisAlignment:
+                      CrossAxisAlignment.start, // Align children to the left
+                  children: [
+                    Text(
+                      " ${widget.caption}",
+                      style: const TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Text(
+                      "${widget.description}",
+                      style: const TextStyle(fontSize: 16.0),
+                      textAlign: TextAlign.left,
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Visibility(
+                      visible: widget.amount != null,
+                      child: Text(
+                        "Need Rs ${widget.amount}",
+                        style: const TextStyle(fontSize: 16.0),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 5,
+            ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.location_on,
+                  color: Colors.blue,
+                  size: 28, // Set your desired icon color
+                ),
+                SizedBox(width: 10),
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Location:",
+                      style: const TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    Text(
+                      "${widget.location}",
                       style: const TextStyle(fontSize: 16.0),
                     ),
-                  ),
-                ],
-              ),
+                  ],
+                ),
+              ],
             ),
-          ),
 
-          SizedBox(
-            height: 5,
-          ),
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Icon(
-                Icons.location_on,
-                color: Colors.blue,
-                size: 28, // Set your desired icon color
-              ),
-              SizedBox(width: 10),
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    "Location:",
-                    style: const TextStyle(
-                      fontSize: 16.0,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  Text(
-                    "${widget.location}",
-                    style: const TextStyle(fontSize: 16.0),
-                  ),
-                ],
-              ),
-            ],
-          ),
-
-          const SizedBox(height: 16.0),
-          if (widget.imageUrls.isNotEmpty)
-            Center(
-              child: Column(
-                children: widget.imageUrls
-                    .map(
-                      (imageUrl) => SizedBox(
-                        height: screenHeight * 0.5, // Set the desired height
-                        width: screenWidth, // Set the desired width
-                        child: Image.network(
-                          imageUrl,
+            const SizedBox(height: 16.0),
+            if (widget.imageUrls.isNotEmpty)
+              Center(
+                child: Column(
+                  children: widget.imageUrls
+                      .map(
+                        (imageUrl) => SizedBox(
                           height: screenHeight * 0.5, // Set the desired height
-                          width: screenWidth, // Set the same width here
-                          fit:
-                              BoxFit.cover, // Adjust the fit property as needed
+                          width: screenWidth, // Set the desired width
+                          child: Image.network(
+                            imageUrl,
+                            height:
+                                screenHeight * 0.5, // Set the desired height
+                            width: screenWidth, // Set the same width here
+                            fit: BoxFit
+                                .cover, // Adjust the fit property as needed
+                          ),
                         ),
-                      ),
-                    )
-                    .toList(),
+                      )
+                      .toList(),
+                ),
               ),
-            ),
-          const SizedBox(height: 10.0),
-          Text(likeCount.toString()), // Display the like count
+            const SizedBox(height: 10.0),
+            Text(likeCount.toString()), // Display the like count
 
-          Row(
-            children: [
-              LikeButton(isliked: isliked, onTap: toggleLike),
-              const SizedBox(width: 8.0),
-              const Text(
-                'Like',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              const SizedBox(width: 100.0),
-              const Icon(
-                Icons.comment_outlined,
-                size: 24.0,
-              ),
-              const SizedBox(width: 8.0),
-              const Text(
-                'Comment',
-                style: TextStyle(fontSize: 16.0),
-              ),
-              SizedBox(
-                width: 17,
-              ),
-              Visibility(
-                visible: widget.amount != null && toNow != null,
-                child: ElevatedButton(
-                  onPressed: () async {
-                    try {
-                      // Get the current user
-                      User? currentUser = FirebaseAuth.instance.currentUser;
+            Row(
+              children: [
+                LikeButton(isliked: isliked, onTap: toggleLike),
+                const SizedBox(width: 8.0),
+                const Text(
+                  'Like',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                const SizedBox(width: 100.0),
+                const Icon(
+                  Icons.comment_outlined,
+                  size: 24.0,
+                ),
+                const SizedBox(width: 8.0),
+                const Text(
+                  'Comment',
+                  style: TextStyle(fontSize: 16.0),
+                ),
+                SizedBox(
+                  width: 17,
+                ),
+                Visibility(
+                  visible: widget.amount != null && toNow != null,
+                  child: ElevatedButton(
+                    onPressed: () async {
+                      try {
+                        // Get the current user
+                        User? currentUser = FirebaseAuth.instance.currentUser;
 
-                      if (currentUser != null) {
-                        // Check if the card document exists
-                        DocumentSnapshot<Map<String, dynamic>>
-                            cardDocumentSnapshot = await FirebaseFirestore
-                                .instance
-                                .collection('cards')
-                                .doc(currentUser.uid)
-                                .get();
-
-                        if (cardDocumentSnapshot.exists) {
-                          // Card document exists, proceed to payment page
-                          final DocumentSnapshot<Map<String, dynamic>>
-                              documentSnapshot = await FirebaseFirestore
+                        if (currentUser != null) {
+                          // Check if the card document exists
+                          DocumentSnapshot<Map<String, dynamic>>
+                              cardDocumentSnapshot = await FirebaseFirestore
                                   .instance
-                                  .collection('Bank')
-                                  .doc(widget.uid)
+                                  .collection('cards')
+                                  .doc(currentUser.uid)
                                   .get();
 
-                          if (documentSnapshot.exists) {
-                            final String cardNo =
-                                documentSnapshot.data()?['card_number'] ?? '';
+                          if (cardDocumentSnapshot.exists) {
+                            // Card document exists, proceed to payment page
+                            final DocumentSnapshot<Map<String, dynamic>>
+                                documentSnapshot = await FirebaseFirestore
+                                    .instance
+                                    .collection('Bank')
+                                    .doc(widget.uid)
+                                    .get();
 
-                            if (cardNo.isNotEmpty) {
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => payment(
-                                    postid: widget.postid,
-                                    cardNo: cardNo,
-                                    uid: widget.uid,
+                            if (documentSnapshot.exists) {
+                              final String cardNo =
+                                  documentSnapshot.data()?['card_number'] ?? '';
+
+                              if (cardNo.isNotEmpty) {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => payment(
+                                      postid: widget.postid,
+                                      cardNo: cardNo,
+                                      uid: widget.uid,
+                                    ),
                                   ),
-                                ),
-                              );
+                                );
+                              } else {
+                                // Handle the case when card_no is empty
+                                print('Card number is empty.');
+                              }
                             } else {
-                              // Handle the case when card_no is empty
-                              print('Card number is empty.');
+                              // Handle the case when the document does not exist
+                              print('Card document not found.');
                             }
                           } else {
-                            // Handle the case when the document does not exist
+                            // Handle the case when the card document does not exist
                             print('Card document not found.');
                           }
                         } else {
-                          // Handle the case when the card document does not exist
-                          print('Card document not found.');
+                          // Handle the case when there is no current user
+                          print('No current user.');
                         }
-                      } else {
-                        // Handle the case when there is no current user
-                        print('No current user.');
+                      } catch (e) {
+                        print('Error retrieving card details: $e');
                       }
-                    } catch (e) {
-                      print('Error retrieving card details: $e');
-                    }
-                  },
-                  style: ElevatedButton.styleFrom(
-                    primary: buttonbackground, // Set your desired button color
+                    },
+                    style: ElevatedButton.styleFrom(
+                      primary:
+                          buttonbackground, // Set your desired button color
+                    ),
+                    child: Text('Payment'),
                   ),
-                  child: Text('Payment'),
+                ),
+
+                // Display images if available
+              ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Visibility(
+                visible: widget.amount != null && toNow != null,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    LinearProgressIndicator(
+                      backgroundColor:
+                          buttonbackground, // Set the background color
+                      valueColor:
+                          AlwaysStoppedAnimation<Color>(startButtonGreen),
+                      minHeight: 15,
+                      borderRadius: const BorderRadius.all(Radius.circular(5)),
+                      value: toNow != null && widget.amount != null
+                          ? toNow! / double.tryParse(widget.amount!)!
+                          : 0.0,
+                    ),
+                    const SizedBox(
+                      height: 1.0,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text(
+                          'To fill Rs. ${widget.amount != null && toNow != null ? (double.tryParse(widget.amount!)! - toNow!).toStringAsFixed(2) : '0.00'}',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                        Text(
+                          'Percentage: ${widget.amount != null && toNow != null ? ((toNow! / double.tryParse(widget.amount!)!) * 100).toStringAsFixed(2) : '0.00'}%',
+                          style: const TextStyle(fontSize: 16.0),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
               ),
-
-              // Display images if available
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Visibility(
-              visible: widget.amount != null && toNow != null,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  LinearProgressIndicator(
-                    backgroundColor:
-                        buttonbackground, // Set the background color
-                    valueColor: AlwaysStoppedAnimation<Color>(startButtonGreen),
-                    minHeight: 15,
-                    borderRadius: const BorderRadius.all(Radius.circular(5)),
-                    value: toNow != null && widget.amount != null
-                        ? toNow! / double.tryParse(widget.amount!)!
-                        : 0.0,
-                  ),
-                  const SizedBox(
-                    height: 1.0,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'To fill Rs. ${widget.amount != null && toNow != null ? (double.tryParse(widget.amount!)! - toNow!).toStringAsFixed(2) : '0.00'}',
-                        style: const TextStyle(fontSize: 16.0),
-                      ),
-                      Text(
-                        'Percentage: ${widget.amount != null && toNow != null ? ((toNow! / double.tryParse(widget.amount!)!) * 100).toStringAsFixed(2) : '0.00'}%',
-                        style: const TextStyle(fontSize: 16.0),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
