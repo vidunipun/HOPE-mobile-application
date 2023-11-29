@@ -158,7 +158,7 @@ class _EventWallPostState extends State<EventWallPost> {
                       color: Colors.grey.withOpacity(0.5),
                       spreadRadius: 2,
                       blurRadius: 5,
-                      offset: Offset(0, 4),
+                      offset: const Offset(0, 4),
                     ),
                   ],
                 ),
@@ -170,7 +170,7 @@ class _EventWallPostState extends State<EventWallPost> {
                   fontSize: 16.0,
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                 width: 5,
               ),
               Text(
@@ -187,13 +187,12 @@ class _EventWallPostState extends State<EventWallPost> {
           Container(
             width: double.infinity,
             child: Container(
-              padding: EdgeInsets.all(16.0),
-              margin: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(16.0),
+              margin: const EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(12.0),
                 border: Border.all(
-                  //color: Colors.grey[300],
                   width: 1.0,
                 ),
                 boxShadow: [
@@ -201,7 +200,7 @@ class _EventWallPostState extends State<EventWallPost> {
                     color: Colors.grey.withOpacity(0.3),
                     spreadRadius: 2,
                     blurRadius: 5,
-                    offset: Offset(0, 3),
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
@@ -217,46 +216,46 @@ class _EventWallPostState extends State<EventWallPost> {
                     ),
                     textAlign: TextAlign.center,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                   Text(
-                    "${widget.description}",
+                    widget.description,
                     style: const TextStyle(fontSize: 16.0),
                     textAlign: TextAlign.left,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 10,
                   ),
                 ],
               ),
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 5,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.location_on,
                 color: Colors.blue,
-                size: 28, // Set your desired icon color
+                size: 28, // Set icon color
               ),
-              SizedBox(width: 10),
+              const SizedBox(width: 10),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       "Location:",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
                     Text(
-                      "${widget.location}",
+                      widget.location,
                       style: const TextStyle(fontSize: 16.0),
                     ),
                   ],
@@ -272,9 +271,8 @@ class _EventWallPostState extends State<EventWallPost> {
                 children: widget.imageUrls
                     .map(
                       (imageUrl) => SizedBox(
-                        height:
-                            screenHeight * 0.5, // Adjust the height as needed
-                        width: screenWidth, // Adjust the width as needed
+                        height: screenHeight * 0.5, // Adjust the height
+                        width: screenWidth, // Adjust the width
                         child: Image.network(
                           imageUrl,
                           fit: BoxFit.cover,

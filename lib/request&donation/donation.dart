@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 import 'package:auth/constants/colors.dart';
-import 'package:auth/constants/colors.dart';
 import 'package:auth/screens/home/wall/home.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -25,9 +24,7 @@ class _DonationPageState extends State<DonationPage> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _contacController = TextEditingController();
   final TextEditingController _locationController = TextEditingController();
-  //final TextEditingController _confirmationController = TextEditingController();
   final TextEditingController _amountController = TextEditingController();
-  //final AuthServices _auth = AuthServices();
   final currentUser = FirebaseAuth.instance.currentUser;
 
   String? selectedCountry = '';
@@ -139,8 +136,6 @@ class _DonationPageState extends State<DonationPage> {
             'description': description,
             'conatct': contact,
             'location': location,
-            //'confirmation': confirmation,
-            //'timestamp': FieldValue.serverTimestamp(),
             'tick': tick,
             'UserEmail': currentUser?.email,
             'firstName': _firstName,
@@ -148,7 +143,7 @@ class _DonationPageState extends State<DonationPage> {
             'TimeStamp': FieldValue.serverTimestamp(),
             'amount': amount,
             'to_now': 0,
-            // 'Likes': [],
+           
           });
           FirebaseFirestore.instance.collection('requests').add({'Likes': []});
 
@@ -177,13 +172,13 @@ class _DonationPageState extends State<DonationPage> {
           // Data saved successfully
           print('Data saved to Firestore');
 
-          // Reset the form or navigate to another page as needed
+          // Reset the form or navigate to another page 
         } else {
-          // User is not authenticated, handle this case
+          // if User is not authenticated
           print('User is not authenticated');
         }
       } catch (e) {
-        // Handle errors if data couldn't be saved
+        //  if data couldn't be saved
         print('Error saving data to Firestore: $e');
       }
     }
@@ -234,14 +229,12 @@ class _DonationPageState extends State<DonationPage> {
                 ),
               ),
               const SizedBox(height: 16.0),
-              // Your custom model content goes here
-              // You can add buttons, text fields, or any other widgets to select the location
-              // For example, you can use a TextFormField or a DropdownButtonFormField
+      
               Container(
                 margin: const EdgeInsets.all(20),
                 child: CSCPicker(
                   layout: Layout.vertical,
-                  //flagState: CountryFlag.DISABLE,
+      
                   onCountryChanged: (country) {
                     setState(() {
                       selectedCountry = country;
@@ -284,9 +277,7 @@ class _DonationPageState extends State<DonationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: buttonbackground,
-      // appBar: AppBar(
-      //   title: const Text('Donation Page'),
-      // ),
+    
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -296,13 +287,13 @@ class _DonationPageState extends State<DonationPage> {
               Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.arrow_back, color: Colors.white),
+                    icon: const Icon(Icons.arrow_back, color: Colors.white),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
                     tooltip: 'Back',
                   ),
-                  Text(
+                  const Text(
                     'Donations',
                     style: TextStyle(
                         fontSize: 20,
@@ -316,12 +307,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _captionController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Caption',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -333,7 +324,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -366,12 +357,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _descriptionController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Description',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -383,7 +374,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -416,12 +407,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _contacController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Contact',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -433,7 +424,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -467,12 +458,12 @@ class _DonationPageState extends State<DonationPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _locationController,
-                      decoration: InputDecoration(
+                      decoration: const InputDecoration(
                           labelText: 'Location',
                           labelStyle: TextStyle(color: Colors.white),
                           enabledBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.white))),
-                      style: TextStyle(
+                      style: const TextStyle(
                         color: Colors.white,
                       ),
                       validator: (value) {
@@ -487,7 +478,7 @@ class _DonationPageState extends State<DonationPage> {
                     ),
                   ),
                   IconButton(
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.info,
                       color: buttonboarder,
                     ),
@@ -515,7 +506,7 @@ class _DonationPageState extends State<DonationPage> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 15,
               ),
               imagepath != null
@@ -524,7 +515,7 @@ class _DonationPageState extends State<DonationPage> {
                       height: 100,
                       child: Image.file(imagepath!),
                     )
-                  : Text(
+                  : const Text(
                       "Image not chosen yet",
                       style: TextStyle(color: Colors.white),
                     ),
@@ -536,7 +527,7 @@ class _DonationPageState extends State<DonationPage> {
                 style: ElevatedButton.styleFrom(
                   primary: buttonboarder, // Set the button color to #0BFFFF
                 ),
-                child: Text(
+                child: const Text(
                   ' Add Post Image',
                   style: TextStyle(
                     color: buttonbackground,
@@ -564,7 +555,7 @@ class _DonationPageState extends State<DonationPage> {
               Theme(
                 data: ThemeData(unselectedWidgetColor: Colors.white),
                 child: CheckboxListTile(
-                  title: Text(
+                  title: const Text(
                     'I verify that all the information is correct',
                     style: TextStyle(color: Colors.white),
                   ),
@@ -590,7 +581,7 @@ class _DonationPageState extends State<DonationPage> {
                  style: ElevatedButton.styleFrom(
                  primary: buttonboarder, // Set the button color to #0BFFFF
                 ),
-                child: Text(
+                child: const Text(
                   ' Submit',
                   style: TextStyle(
                     color: buttonbackground,

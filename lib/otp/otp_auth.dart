@@ -58,20 +58,18 @@ class _EmailOTPPageState extends State<EmailOTPPage> {
     return null;
   }
 
-Future<void> sendOTP(String emailAddress) async {
-  // Create an instance of the EmailAuth class.
-  var emailAuth = EmailAuth(sessionName: 'test');
+  Future<void> sendOTP(String emailAddress) async {
+    // Create an instance of the EmailAuth class.
+    var emailAuth = EmailAuth(sessionName: 'test');
 
-  // Send the OTP.
-  var res = await emailAuth.sendOtp(
-    recipientMail: emailAddress,
-    otpLength: 6, // You can adjust the OTP length as needed
-  );
-}
-
-  void verifyOTP() {
-    // Implement the logic to verify the entered OTP here
+    // Send the OTP.
+    var res = await emailAuth.sendOtp(
+      recipientMail: emailAddress,
+      otpLength: 6, //  adjust the OTP length as needed
+    );
   }
+
+  void verifyOTP() {}
 
   @override
   Widget build(BuildContext context) {
@@ -97,17 +95,15 @@ Future<void> sendOTP(String emailAddress) async {
                   },
                 ),
               ),
-              //readOnly: true,
             ),
             const SizedBox(height: 16.0),
-
-              TextField(
-                controller: otpController,
-                keyboardType: TextInputType.number,
-                decoration: const InputDecoration(
-                  labelText: 'Enter OTP',
-                ),
+            TextField(
+              controller: otpController,
+              keyboardType: TextInputType.number,
+              decoration: const InputDecoration(
+                labelText: 'Enter OTP',
               ),
+            ),
             const SizedBox(height: 16.0),
             if (otpSent)
               ElevatedButton(

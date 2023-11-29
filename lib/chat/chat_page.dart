@@ -1,4 +1,3 @@
-//import 'package:auth/components/my_texfield.dart';
 import 'package:auth/chat/chat_bubble.dart';
 import 'package:auth/chat/chat_service.dart';
 import 'package:auth/constants/colors.dart';
@@ -70,7 +69,7 @@ class _ChatPageState extends State<ChatPage> {
         if (snapshot.hasError) {
           return Text('Error${snapshot.error}');
         } else if (snapshot.data == null) {
-          return Text('No messages available');
+          return const Text('No messages available');
         } else {
           // Print messages in the debug console
           for (var doc in snapshot.data!.docs) {
@@ -97,9 +96,9 @@ class _ChatPageState extends State<ChatPage> {
     var alignment = (data['senderId'] == _firebaseAuth.currentUser!.uid)
         ? Alignment.centerRight
         : Alignment.centerLeft;
-    print(data['senderId']);
-    print('abc');
-    print(_firebaseAuth.currentUser!.uid);
+    //print(data['senderId']);
+    //print('abc');
+    //print(_firebaseAuth.currentUser!.uid);
     return Container(
       alignment: alignment,
       child: Padding(
@@ -114,10 +113,6 @@ class _ChatPageState extends State<ChatPage> {
                   ? MainAxisAlignment.end
                   : MainAxisAlignment.start,
           children: [
-            // Text(
-            //   data['senderEmail'],
-            //   style: TextStyle(color: Colors.black),
-            // ),
             const SizedBox(height: 5),
             ChatBubble(message: data['message']),
           ],
@@ -142,7 +137,7 @@ class _ChatPageState extends State<ChatPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 10.0),
                 child: TextField(
                   controller: _messageController,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: 'Enter message',
                     border: InputBorder.none,
                   ),

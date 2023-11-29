@@ -27,12 +27,6 @@ class _SingInState extends State<SingIn> {
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: buttonbackground,
-        // appBar: AppBar(
-        //     title: const Text(
-        //       "Sign In Here",
-        //       style: TextStyle(color: signInRegisterbackgroundWhite),
-        //     ),
-        //     backgroundColor: startBackgroundBlack),
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.all(16),
@@ -48,15 +42,10 @@ class _SingInState extends State<SingIn> {
                     const Padding(
                       padding: EdgeInsets.only(top: 8),
                       child: Text(
-                        "Sign In",
+                        "Log In",
                         style: signInRegisterText3,
                       ),
                     ),
-                    //description
-                    // const Text(
-                    //   "Sign In",
-                    //   style: signInRegisterText,
-                    // ),
                     Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Form(
@@ -66,7 +55,7 @@ class _SingInState extends State<SingIn> {
                             //email
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText: "email",
                                   hintStyle: TextStyle(color: Colors.white),
                                   enabledBorder: UnderlineInputBorder(
@@ -87,7 +76,7 @@ class _SingInState extends State<SingIn> {
                             ),
                             TextFormField(
                               style: const TextStyle(color: Colors.white),
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   hintText: 'password',
                                   hintStyle: TextStyle(color: Colors.white),
                                   enabledBorder: UnderlineInputBorder(
@@ -113,47 +102,6 @@ class _SingInState extends State<SingIn> {
                               error,
                               style: const TextStyle(color: Colors.red),
                             ),
-                            // const Text(
-                            //   "Login with socila accounts",
-                            //   style: signInRegisterText,
-                            // ),
-                            // const Divider(
-                            //   color: Colors.white,
-                            //   height: 20,
-                            //   thickness: 1,
-                            //   indent: 40,
-                            //   endIndent: 40,
-                            // ),
-                            // Row(
-                            //   mainAxisAlignment: MainAxisAlignment.center,
-                            //   children: [
-                            //     GestureDetector(
-                            //       //sign in with google
-                            //       onTap: () {},
-                            //       child: Center(
-                            //         child: Image.asset(
-                            //           'assets/facebook.jpg',
-                            //           height: 50,
-                            //           width: 50,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //     const SizedBox(
-                            //       width: 15,
-                            //     ),
-                            //     GestureDetector(
-                            //       //sign in with google
-                            //       onTap: () {},
-                            //       child: Center(
-                            //         child: Image.asset(
-                            //           'assets/google.png',
-                            //           height: 50,
-                            //           width: 50,
-                            //         ),
-                            //       ),
-                            //     ),
-                            //   ],
-                            // ),
 
                             //register page
                             const SizedBox(
@@ -255,7 +203,6 @@ class _SingInState extends State<SingIn> {
                                 ),
                               ),
                             ),
-                            //anonymous
                           ],
                         ),
                       ),
@@ -268,17 +215,3 @@ class _SingInState extends State<SingIn> {
         ));
   }
 }
-
-
-      // ElevatedButton(
-      //   child: const Text("Sign In Anonyously"),
-      //   onPressed: () async {
-      //     dynamic result = await _auth.signInAnonoymously();
-      //     if (result == Null) {
-      //       print("Error In Signing");
-      //     } else {
-      //       print("Sign in anonymous");
-      //       print(result.uid);
-      //     }
-      //   },
-      // ),

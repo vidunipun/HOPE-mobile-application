@@ -38,7 +38,7 @@ class _ChatHomePageState extends State<ChatHomePage> {
                     );
                   },
                 ),
-                Text(
+                const Text(
                   'Chats',
                   style: TextStyle(
                     color: Colors.white,
@@ -85,10 +85,8 @@ class _ChatHomePageState extends State<ChatHomePage> {
     if (_auth.currentUser!.email != data['email']) {
       return ListTile(
         leading: _buildProfilePicture(data['profilePictureURL']),
-        //title: Text(data['email']?.toString() ?? ''),
         title: Text('${data['firstName']} ${data['lastName']}'),
         textColor: Colors.white,
-
         onTap: () {
           Navigator.push(
             context,
