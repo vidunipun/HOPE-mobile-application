@@ -179,6 +179,7 @@ class _HomeState extends State<Home> {
                                     uid: post.data()['userId'],
                                     postid: post.id,
                                     amount: post.data()['amount'],
+                                    to_now: post.data()['to_now'],
                                     description: post.data()['description'],
                                     location: post.data()['location'],
                                     firstName: post.data()['firstName'],
